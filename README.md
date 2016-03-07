@@ -1,5 +1,5 @@
-# Deep-3D-Obj-Recognition
-3D Object Recognition with Deep Networks Project for 3D Vision - ETHZ
+# 3D Object Recognition with Deep Networks
+This is the 3D Object Recognition with Deep Networks Project for the 3D Vision course at ETHZ
   
 ##What is needed:  
 * 3D CAD data to Voxel Data  
