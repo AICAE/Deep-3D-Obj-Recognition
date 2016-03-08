@@ -2,16 +2,35 @@
 This is the 3D Object Recognition with Deep Networks Project for the 3D Vision course at ETHZ
   
 ## What is needed:  
-* 3D CAD data (Object File Format) to Voxel Data
+#####Input Data/Voxel/Occupancy Grid
+* 3D CAD data (Object File Format) to Voxel Data / Occupancy Grid
   * [ModelNet10 - Zip Datei](http://vision.princeton.edu/projects/2014/3DShapeNets/ModelNet10.zip)
   * [ModelNet40 - Zip Datei](http://modelnet.cs.princeton.edu/ModelNet40.zip)
-  * Files can be view in MeshLab
+  * .OFF Files can be view in MeshLab
   * Matlab Function to read .OFF files ([Matlab File](http://vision.princeton.edu/pvt/RenderMe/RenderDepth/offLoader.m)) 
+  * Function in the 3D ShapeNet Source code to transform to occupancy grid is called ...
 * *optional* 2.5D Reconstruction (combine multiple 2.5D Representation into new 3D Representation)
-* *optional* 2.5D & 3D Point Cloud Data to Voxel Data (Project Tango & Extra Training Data Sets)
-* VoxNet  
-  * Convolutional Neural Network
-* 3D Shape Net ([3D ShapeNet - Source Code Matlab - Zip](http://vision.princeton.edu/projects/2014/3DShapeNets/3DShapeNetsCode.zip))
+* *optional* 2.5D & 3D Point Cloud Data to Voxel Data (Project Tango & Extra Training Data Sets)  
+
+##### VoxNet  
+* Convolutional Neural Network
+* Input Data
+  * Rotation Augementation
+  * Multiresolution Input
+* Training: Stoastic Gradient Decent with Momentum
+  * learning rate = 0.0001
+  * momentum parameter = 0.9
+  * batch size = 32
+  * learning rate decrease: 10 per 40000 batches.
+* Dropout Regularization after output of each layer
+* Initialization:
+  * Convolutional Layers: 
+    * forward Propagation: zero mean Gaussian with std.dev = sqrt(2/n_l), n_l = dimension(input array(30x30x30) layer l) * input channels layer l
+    * backward Propagation: zero mean Gaussion with std.dev = sqrt(2/n*_l), n*_l = dimension(input array(30x30x30)layer l) * input channels layer l-1 
+  * Dense Layers: zero-mean Gaussion with std.dev=0.01  
+
+#####3D Shape Net
+* [3D ShapeNet - Source Code Matlab - Zip](http://vision.princeton.edu/projects/2014/3DShapeNets/3DShapeNetsCode.zip)
   * Special Learning Algorithm
   * Convolutional Deep Beliefe Network
 
