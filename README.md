@@ -3,8 +3,9 @@ This is the 3D Object Recognition with Deep Networks Project for the 3D Vision c
   
 ## What is needed:  
 #####Input Data/Voxel/Occupancy Grid
-* 3D CAD data (Object File Format) to Voxel Data / Occupancy Grid
+* read 3D CAD Voxel Data transform to Occupancy Grid
   * [ModelNet10 - Zip Datei](http://vision.princeton.edu/projects/2014/3DShapeNets/ModelNet10.zip)
+    * in VoxNet paper an adapted version is used 
   * [ModelNet40 - Zip Datei](http://modelnet.cs.princeton.edu/ModelNet40.zip)
   * .OFF Files can be view in MeshLab
   * Matlab Function to read .OFF files ([Matlab File](http://vision.princeton.edu/pvt/RenderMe/RenderDepth/offLoader.m)) 
@@ -12,11 +13,16 @@ This is the 3D Object Recognition with Deep Networks Project for the 3D Vision c
 * *optional* 2.5D Reconstruction (combine multiple 2.5D Representation into new 3D Representation)
 * *optional* 2.5D & 3D Point Cloud Data to Voxel Data (Project Tango & Extra Training Data Sets)  
 
-##### VoxNet  
+#####VoxNet
+* [VoxNet Source Code Python - Github](https://github.com/dimatura/voxnet)
 * Convolutional Neural Network
 * Input Data
-  * Rotation Augementation
-  * Multiresolution Input
+  * Rotation Augementation & Voting - Increases Performance when applied
+  * Multiresolution Input (not used on ModelNet)
+  * 3 Grids - Best Results for Density Grid
+    *  Density Grid
+    *  Binary Grid
+    *  Hit Grid
 * Training: Stoastic Gradient Decent with Momentum
   * learning rate = 0.0001
   * momentum parameter = 0.9
@@ -27,7 +33,10 @@ This is the 3D Object Recognition with Deep Networks Project for the 3D Vision c
   * Convolutional Layers: 
     * forward Propagation: zero mean Gaussian with std.dev = sqrt(2/n_l), n_l = dimension(input array(30x30x30) layer l) * input channels layer l
     * backward Propagation: zero mean Gaussion with std.dev = sqrt(2/n*_l), n*_l = dimension(input array(30x30x30)layer l) * input channels layer l-1 
-  * Dense Layers: zero-mean Gaussion with std.dev=0.01  
+  * Dense Layers: zero-mean Gaussion with std.dev=0.01
+* augement training data through randomly pertubed(mirrored/shited) copies
+  * mirror along x and y axis
+  * shift by -2 to 2 voxels along x and y axis
 
 #####3D Shape Net
 * [3D ShapeNet - Source Code Matlab - Zip](http://vision.princeton.edu/projects/2014/3DShapeNets/3DShapeNetsCode.zip)
@@ -36,24 +45,24 @@ This is the 3D Object Recognition with Deep Networks Project for the 3D Vision c
 
 ## Steps:
 1. Get ModelNet 3D CAD Data & Read & Transform *if necessary*
-2. Build VoxNet & 3D ShapeNet
-3. Train, Validate & Tune
+2. Build VoxNet
+3. Build ShapeNet
+4. Train, Validate & Tune
   * Not Sure if *Cross Validation* works with the mix of 3D Training and 2.5D Validation Data, but i guess there is someway
   * Depending on how much parameters are left to tune and how much GPU power we have this might take a while (it took them 2 days for 40 objects on a cluster)
-4. Test on Spare Data and try to recreate Experiment from *Wu et al.* & *Maturana et al.*
-5. *optional* Maybe try to get some Point Cloud Data from Tango Tablet and test Models against that
+5. Test on Spare Data and try to recreate Experiment from *Wu et al.* & *Maturana et al.*
+6. *optional* Maybe try to get some Point Cloud Data from Tango Tablet and test Models against that
 
 
 ## useful:
 #### PCL ([www.pointclouds.org](http://pointclouds.org))
 * [Documentation](http://pointclouds.org/documentation/)
 * [Point Cloud to SuperVoxel](http://pointclouds.org/documentation/tutorials/supervoxel_clustering.php)  
-* [PointCloud Python Support(bad)](http://pointclouds.org/news/2013/02/07/python-bindings-for-the-point-cloud-library/)
-  
+* [PointCloud Python Support(bad)](http://pointclouds.org/news/2013/02/07/python-bindings-for-the-point-cloud-library/)  
+
 #### TensorFlow ([www.tensorflow.org](https://www.tensorflow.org))
 * [API Documentation](https://www.tensorflow.org/versions/r0.7/api_docs/index.html)  
 * [Tutorials](https://www.tensorflow.org/versions/r0.7/tutorials/index.html)  
 * [TensorFlow GitHub](https://github.com/tensorflow/tensorflow)  
 
 #### MeshLab ([http://meshlab.sourceforge.net/](http://meshlab.sourceforge.net/))
-* 
