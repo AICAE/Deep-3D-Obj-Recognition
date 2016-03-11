@@ -41,7 +41,7 @@
 
 The goal of this project is to successfully implement 3D object recognition using a Convolutional Neural Network (CNN) approach \cite{voxnet}. 
 Such networks can be trained to recognize complex 3D shapes and determine the corresponding object class given a volumetric representation.
-This project will mainly use the large-scale 3D CAD model data set called ModelNet \cite{wu}. Conceivably, volumetric data can also originate from 
+This project will mainly use the 3D CAD model data set called ModelNet \cite{wu}. Conceivably, volumetric data can also originate from 
 inexpensive 2.5D depth sensors like Microsoft Kinect, Google Project Tango or Intel RealSense (Fig. \ref{fig:idea}).
 
 
@@ -75,7 +75,9 @@ We begin implementing the VoxNet Convolutional Neural Network architecture \cite
 as a base. Once the basic network is performing well, rotation invariance is added using the approach described in \cite{voxnet}.
 The input to the network is a small voxel volume (30x30x30) and the output is an object class. 
 Part of the ModelNet is already provided in volumetric representation. If necessary, additional CAD models can be converted to a voxel data structure 
-using the Matlab script provided by \cite{wu}. This for example enables the usage of real Google Tango data for object recognition testing.
+using the Matlab script provided by \cite{wu}. 
+
+% This for example enables the usage of real Google Tango data for object recognition testing.
 
 
 % The available data is split into 3 part, namely a training, evaluation and testing set.
@@ -98,7 +100,7 @@ using the Matlab script provided by \cite{wu}. This for example enables the usag
 
 \subsection{Training \& Testing in June}
 After the  successful implementation, we train the deep network with the ModelNet40 data set, which consists of 40 common categories with 
-100 unique CAD models per category (voxel format). The data is split into three parts, namely a training, evaluation and testing set. For the network training only
+100 unique CAD models per category (voxel format). The data is split into two parts, namely a training and testing set. For the network training only
 the training set is used. In this phase we fiddle around with network parameters while constantly evaluating the performance.
 Due to the computationally expensive nature of the training, we expect this process to be time consuming. 
 
