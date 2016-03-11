@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 % Enter the project title and your project supervisor here
 \newcommand{\ProjectTitle}{3D Object Recognition with Deep Networks}
-\newcommand{\ProjectSupervisor}{Moritz Oswald, Pablo Speciale}
+\newcommand{\ProjectSupervisor}{Martin Oswald, Pablo Speciale}
 \newcommand{\DateOfReport}{March 7, 2015}
 
 % Enter the team members' names and path to their photos. Comment / uncomment related definitions if the number of members are different than 2.
@@ -58,10 +58,10 @@ At the end of the month, the team will be able to understand Deep Networks, its 
 The division of work between the 3 project members will then be decided. 
 
 \subsection{Data Preparation \& Modeling in April}
-The first task is to build a data sets for testing and training our deep network. Therefore we need to extract 2.5D single view point data from our large 3D Cad model dataset. This will be done for the a 40-Class Dataset provided by \cite{wu}. Afterwards we can begin reimplementing the papers approaches in Python by starting with the deep learning udacity courses framework. \cite{uda} Therefore we will remodel the given 2D object recognition network into a rotation-invariant 3D recognition network which makes heavily use of  convolution and pooling. 
+Deep Networks heavily depend on big datasets. Therefore we are going to use the ModelNet dataset from \cite{wu}, a CAD dataset of 660 objects. The datasets will transformed into 32x32x32 voxel data and split into a training, valuation and test set. If possible we will use data from the project tango tablet to cross test. We begin reimplementing the VoxNet Deep Convolutional Neural Network approaches in Python by starting with the deep learning udacity courses framework. \cite{uda} Therefore we will remodel the given 2D object recognition network into a rotation-invariant 3D recognition network which makes heavily use of convolution and pooling. The output of the deep network is the the class of object the network thinks it recognized from the input.
 
 \subsection{Training \& Testing in June}
-After successful implementation and testing, we will train the deep network on the hole 40 classes (optional: \cite{wu} offers an even larger data set) on own or universities GPU's.
+After successful implementation and testing, we will train the deep network on a subset of 40 classes called the ModelNet40 (optional: \cite{wu} offers an even larger data set) on own or universities GPU's.
 Due to the computationally expensive training of the Deep Network on the large CAD dataset, we will try to start as soon as possible with this phase of the project.
 \section{Outcomes and Demonstration}
 
