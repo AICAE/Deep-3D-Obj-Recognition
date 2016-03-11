@@ -39,12 +39,18 @@
 
 \section{Description of the project}
 
- The main goal of our project is to enhance object recognition by making use of the recent availability of 2.5D  data through Microsoft Kinect, Google Project Tango, et al. 
-We will follow recent approaches \cite{wu}, \cite{mat} which use convolutional deep neural/belief networks to learn the distribution of complex 3D shapes across different object categories of CAD models. Given 2.5D data of a single view point, we will try to recognise the objects category after an intense training of our deep network on a large scale 3D CAD model dataset. Fig. \ref{fig:idea}
+The goal of this project is to successfully implement 3D object recognition using a Convolutional Neural Network (CNN) approach \cite{mat}. 
+Such networks can be trained to recognize complex 3D shapes and determine the corresponding object class given a volumetric representation.
+This project will mainly use the large-scale 3D CAD model data set called ModelNet \cite{wu}. Conceivably, volumetric data can also originate from 
+inexpensive 2.5D depth sensors like Microsoft Kinect, Google Project Tango or Intel RealSense (Fig. \ref{fig:idea}).
+
+
+% The main goal of our project is to enhance object recognition by making use of the recent availability of 2.5D  data through Microsoft Kinect, Google Project Tango, et al. 
+%We will follow recent approaches \cite{wu}, \cite{mat} which use convolutional deep neural/belief networks to learn the distribution of complex 3D shapes across different object categories of CAD models. Given 2.5D data of a single view point, we will try to recognise the objects category after an intense training of our deep network on a large scale 3D CAD model dataset. Fig. \ref{fig:idea}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{figure.jpg}
-  \caption{}
+  \caption{2.5D object recognition}
   \label{fig:idea}
 \end{figure}
 
@@ -52,21 +58,38 @@ We will follow recent approaches \cite{wu}, \cite{mat} which use convolutional d
 
 \subsection{Prerequisites in March}
 
-The first goal of the team is to fully understand the approaches described in \cite{wu}, \cite{mat}. 
-Therefore the team will work through the Udacity deep learning course \cite{uda} and extract knowledge and hands-on experience with deep networks for object recognition on 2D data.
-At the end of the month, the team will be able to understand Deep Networks, its machine learning theory and TensorFlow (in Python) in order to develop a game plan for the project.
-The division of work between the 3 project members will then be decided. 
+The first goal of the team is to fully understand the approach described in \cite{mat}. Therefore everyone in the team will work through the Udacity
+deep learning course \cite{uda} individually in order to gain knowledge and hands-on experience with deep networks using 2D data.
+Further, we will get familiar with TensorFlow\footnote{open source library for machine intelligence} (in Python), which will be used to implement the network architecture. 
+As a first simple exercise to approach the problem we will reproduce the character recognition example\cite{mnist} using the MNIST data set.
+\newline
+The division of work among the 3 project members will happen after this initial project phase, because at this point in time it is hard to foresee how the the work can be split meaningfully. 
+
 
 \subsection{Data Preparation \& Modeling in April}
-Deep Networks heavily depend on big datasets. Therefore we are going to use the ModelNet dataset from \cite{wu}, a CAD dataset of 660 objects. The datasets will transformed into 32x32x32 voxel data and split into a training, valuation and test set. If possible we will use data from the project tango tablet to cross test. We begin reimplementing the VoxNet Deep Convolutional Neural Network approaches in Python by starting with the deep learning udacity courses framework. \cite{uda} Therefore we will remodel the given 2D object recognition network into a rotation-invariant 3D recognition network which makes heavily use of convolution and pooling. The output of the deep network is the the class of object the network thinks it recognized from the input.
+Deep Networks heavily depend on big datasets. Therefore we are going to use the ModelNet dataset from \cite{wu}, a CAD dataset of 660 objects. The datasets will 
+transformed into 32x32x32 voxel data and split into a training, valuation and test set. If possible we will use data from the project tango tablet to cross test. 
+We begin reimplementing the VoxNet Deep Convolutional Neural Network approaches in Python by starting with the deep learning udacity courses framework. \cite{uda} 
+Therefore we will remodel the given 2D object recognition network into a rotation-invariant 3D recognition network which makes heavily use of convolution and pooling. 
+The output of the deep network is the the class of object the network thinks it recognized from the input.
+
 
 \subsection{Training \& Testing in June}
-After successful implementation and testing, we will train the deep network on a subset of 40 classes called the ModelNet40 (optional: \cite{wu} offers an even larger data set) on own or universities GPU's.
+After successful implementation and testing, we will train the deep network with a subset of 40 classes called the ModelNet40 (optional: \cite{wu} offers an even larger data set).
+
 Due to the computationally expensive training of the Deep Network on the large CAD dataset, we will try to start as soon as possible with this phase of the project.
+
+%tweak paramters and evaluate performance
+
 \section{Outcomes and Demonstration}
 
+% We hope to achieve similar positive object recognition results
+
 Goal of the project is successfully reimplement the papers approaches for 3D Object Recognition and achieve very similar positive object recognition results. In our live demo, we will snapshot random CAD Models and try to recognise the object through our algorithm. 
- 
+
+% possibly use real tango data
+
+
 \vspace{1cm}
 
 {%\singlespace
