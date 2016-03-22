@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="20c6f2c1-da21-4018-825e-09c0c9aea313" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Source/Data/modelnet10_test.tar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Source/Data/modelnet10_train.tar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Source/voxnet" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Source/Data/npytar.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Source/Data/convert_shapenet10.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/Source/Data/mat2npy.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/Source/Data/offReader.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/Source/Data/pointcloud2voxel.py" afterPath="" />
@@ -11,6 +13,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/Source/Data/polygon2voxel.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/Source/Data/polygon2voxel_double.c" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/Source/Data/voxel2npy.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Source/Data/convert_shapenet10.py" afterPath="$PROJECT_DIR$/Source/Data/convertMat2Npy-Modelnet10.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Deep-3D-Obj-Recognition.iws" />
