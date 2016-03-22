@@ -1,165 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="20c6f2c1-da21-4018-825e-09c0c9aea313" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0107.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0108.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0109.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0110.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0111.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0112.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0113.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0114.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0115.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0116.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0117.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0118.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0119.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0120.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0121.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0122.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0123.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0124.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0125.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0126.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0127.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0128.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0129.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0130.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0131.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0132.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0133.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0134.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0135.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0136.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0137.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0138.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0139.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0140.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0141.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0142.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0143.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0144.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0145.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0146.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0147.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0148.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0149.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0150.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0151.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0152.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0153.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0154.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0155.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/test/bathtub_0156.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0001.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0002.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0003.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0004.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0005.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0006.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0007.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0008.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0009.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0010.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0011.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0012.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0013.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0014.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0015.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0016.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0017.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0018.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0019.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0020.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0021.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0022.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0023.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0024.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0025.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0026.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0027.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0028.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0029.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0030.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0031.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0032.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0033.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0034.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0035.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0036.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0037.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0038.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0039.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0040.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0041.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0042.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0043.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0044.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0045.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0046.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0047.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0048.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0049.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0050.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0051.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0052.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0053.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0054.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0055.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0056.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0057.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0058.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0059.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0060.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0061.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0062.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0063.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0064.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0065.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0066.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0067.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0068.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0069.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0070.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0071.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0072.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0073.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0074.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0075.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0076.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0077.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0078.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0079.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0080.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0081.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0082.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0083.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0084.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0085.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0086.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0087.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0088.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0089.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0090.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0091.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0092.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0093.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0094.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0095.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0096.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0097.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0098.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0099.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0100.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0101.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0102.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0103.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0104.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0105.off" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Data/bathtub/train/bathtub_0106.off" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="20c6f2c1-da21-4018-825e-09c0c9aea313" name="Default" comment="" />
     <ignored path="Deep-3D-Obj-Recognition.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -178,7 +20,20 @@
     <favorites_list name="Deep-3D-Obj-Recognition" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="convert_shapenet10.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Source/Data/convert_shapenet10.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.68329716">
+              <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+              <folding>
+                <element signature="e#65#79#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -470,9 +325,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="992" y="52" width="928" height="1028" extended-state="4" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -546,16 +401,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Source/Data/convert_shapenet10.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6182213">
-          <caret line="38" column="9" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="9" />
-          <folding>
-            <element signature="e#65#79#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Source/Data/polygon2voxel.m">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.5134529">
@@ -569,6 +414,16 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/Data/convert_shapenet10.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68329716">
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+          <folding>
+            <element signature="e#65#79#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
