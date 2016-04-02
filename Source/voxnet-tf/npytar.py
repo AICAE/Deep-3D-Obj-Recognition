@@ -55,3 +55,8 @@ class NpyTarReader(object):
     def close(self):
         self.tfile.close()
 
+    def elements(self):
+        n_elem = 0
+        for it, (x, name) in enumerate(self):
+            n_elem += 1
+        return n_elem
