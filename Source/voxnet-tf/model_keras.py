@@ -37,6 +37,7 @@ class model_vt
     def add_data(self):
         #TODO load old weigths
         #TODO improve fit with old weigths
+        self.mdl.fit()
 
     def evaluate(self, X_test, y_test):
         #TODO make sure to use score from modelnet40/10 paper
