@@ -10,7 +10,19 @@ class model_vt
         self.mdl = Sequential()
         #use shape
         #Convolution1
-        self.mdl.add(Convolutional3D())
+        self.mdl.add(Convolutional3D(nb_filter = 32,
+                                    kernel_dim1 = 5, kernel_dim2 = 5, kernel_dim3 = 5,
+                                    init='glorot_uniform',
+                                    activation='linear',
+                                    weights=None,
+                                    border_mode='valid'.
+                                    subsample=(2, 2, 2),
+                                    dim_ordering='th',
+                                    W_regularizer=None,
+                                    b_regularizer=None,
+                                    activity_regularizer=None,
+                                    W_constraint=None,
+                                    b_constraint=None)))
         self.mdl.add(LeakyReLU())
         #Dropout1
         self.mdl.add()
