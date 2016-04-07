@@ -17,19 +17,19 @@ import pdb
 #TODO add for all parameters
 #Find proper Optimizer
 class model_vt (object):
-    #initiate Model according to voxnet paper
+    
     def __init__(self):
-       
+        """initiate Model according to voxnet paper"""
         # Stochastic Gradient Decent (SGD) with momentum
         # lr=0.01 for LiDar dataset
         # lr=0.001 for other datasets
-        # TODO decay, learnrate reduction
+        # TODO decay, learning rate reduction
         self._optimizer = SGD(lr=0.01, momentum=0.9, decay=0.0, nesterov=False)
         
+        #init model
         self._mdl= Sequential()
-        #use shape
-        #Convolution1
 
+        #Convolution1
         self._mdl.add(Convolution3D(input_shape=(1, 32, 32, 32),
                                     nb_filter=32,
                                     kernel_dim1=5,
@@ -72,37 +72,34 @@ class model_vt (object):
                                   strides=None,
                                   border_mode='valid',
                                   dim_ordering='th')) #TODO
-
+        
         #Dropout2
         self._mdl.add(Dropout(p=0.3))
-        
-        
+    
         #Dense1
-        self._mdl.add(Dense(output_dim=128, # TODO not sure ...
-                           init='glorot_uniform', #TODO zero_mean gauss
-                           activation='linear',
-                           weights=None,
-                           W_regularizer=None,
-                           b_regularizer=None,
-                           activity_regularizer=None,
-                           W_constraint=None,
-                           b_constraint=None,
-                           input_dim=None))
+        self._mdl.add(Dense( output_dim=128, # TODO not sure ...
+                               init='normal',  #TODO np.random.normal, K.random_normal
+                               activation='linear',
+                               weights=None,
+                               W_regularizer=None,
+                               b_regularizer=None,
+                               activity_regularizer=None,
+                               W_constraint=None,
+                               b_constraint=None))
         
         #Dropout3
         self._mdl.add(Dropout(p=0.4))
         
         #Dense2
-        self._mdl.add(Dense(output_dim=1, # TODO not sure ...
-                   init='glorot_uniform', #TODO zero_mean gauss
-                   activation='linear',
-                   weights=None,
-                   W_regularizer=None,
-                   b_regularizer=None,
-                   activity_regularizer=None,
-                   W_constraint=None,
-                   b_constraint=None,
-                   input_dim=None))
+        self._mdl.add(Dense( output_dim=1, # TODO not sure ...
+                               init='normal', #TODO np.random.normal, K.random_normal
+                               activation='linear',
+                               weights=None,
+                               W_regularizer=None,
+                               b_regularizer=None,
+                               activity_regularizer=None,
+                               W_constraint=None,
+                               b_constraint=None))
 
         #Compile Model
         self._mdl.compile(loss=self._objective, optimizer=self._optimizer)
