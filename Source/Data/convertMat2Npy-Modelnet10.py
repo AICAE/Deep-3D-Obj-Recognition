@@ -20,7 +20,6 @@ class_id_to_name = {
     "10": "toilet"
 }
 class_name_to_id = { v : k for k, v in class_id_to_name.items() }
-
 class_names = set(class_id_to_name.values())
 
 
