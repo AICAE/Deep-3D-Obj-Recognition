@@ -23,8 +23,8 @@ class model_vt (object):
         # Stochastic Gradient Decent (SGD) with momentum
         # lr=0.01 for LiDar dataset
         # lr=0.001 for other datasets
-        # TODO decay, learning rate reduction
-        self._optimizer = SGD(lr=0.01, momentum=0.9, decay=0.0, nesterov=False)
+        # decay of 0.00016667 approx the same as learning schedule (0:0.001,60000:0.0001,600000:0.00001)
+        self._optimizer = SGD(lr=0.001, momentum=0.9, decay=0.00016667, nesterov=False)
         
         #init model
         self._mdl= Sequential()

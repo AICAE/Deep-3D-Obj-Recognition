@@ -125,14 +125,14 @@ def save_dataset_as_npy(fname_data, fname_save, class_name_to_id):
 
     print("found {0} train datasets and {1} test datasets".format(labels['train'].shape[0],labels['test'].shape[0]))
 
-    f_open = open(fname_save,'w+')
-    np.savez(f_open,
+    outfile = open(fname_save,'wb')
+    np.savez(outfile,
              features_train = features['train'],
              labels_train = labels['train'],
              features_test = features['test'],
-             labels_test = labels['test'],
+             labels_test = labels['test']
              )
-    f_open.close()
+    outfile.close()
 
 
 #####################################################
