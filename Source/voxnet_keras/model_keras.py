@@ -70,7 +70,7 @@ class model_vt (object):
         # Otherwise following error. Exception: You tried to call layer "leakyrelu_1".
         #This layer has no information about its expected input shape, and thus cannot be built.
         #You can build it manually via: `layer.build(batch_input_shape)`
-        model.add(Activation(LeakyReLU()))
+        self._mdl.add(Activation(LeakyReLU()))
         #MaxPool1
         self._mdl.add(MaxPooling3D(pool_size=(2, 2, 2),
                                   strides=None,
