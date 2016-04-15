@@ -106,6 +106,7 @@ def save_dataset_as_npy(fname_data, fname_save, class_name_to_id):
                     labels[set_type] = np.zeros([1,], dtype=np.uint32)
                     labels[set_type][0] = Id
                 else:
+                    #TODO: This takes a lot of time. Just save it as single .npy files
                     labels[set_type] = np.concatenate((labels[set_type],Id), axis = 0)
 
                 #load mat, reshape to 32x32x32 array and add to features
@@ -116,6 +117,7 @@ def save_dataset_as_npy(fname_data, fname_save, class_name_to_id):
                     features[set_type] = np.zeros([1,1,32,32,32], dtype=np.uint8)
                     features[set_type][0,:,:,:,:] = arrpad
                 else:
+                    #TODO: This takes a lot of time. Just save it as single .npy files
                     features[set_type] = np.concatenate((features[set_type],arrpad), axis = 0)
 
     if features['train'].shape[0] is not labels['train'].shape[0]:
@@ -126,6 +128,7 @@ def save_dataset_as_npy(fname_data, fname_save, class_name_to_id):
     print("found {0} train datasets and {1} test datasets".format(labels['train'].shape[0],labels['test'].shape[0]))
 
     outfile = open(fname_save,'wb')
+    #Maybe change it to creating to a single .rar folder for easier transportability
     np.savez(outfile,
              features_train = features['train'],
              labels_train = labels['train'],
@@ -139,7 +142,9 @@ def save_dataset_as_npy(fname_data, fname_save, class_name_to_id):
 #load data from npz file and return features_train,labels_train,features_test,labels_test
 def load_data(fname_data):
     f_open = open(fname_data, 'r')
-
+    
+    #TODO: create loading of single files. turn into class that is able to breate batch output continously. Implement _iter_
+    
     data_npz = np.load(f_open)
     #return features & labels
     return (data_npz['features_train'], data_npz['labels_train'],
