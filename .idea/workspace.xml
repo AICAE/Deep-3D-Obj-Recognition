@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="20c6f2c1-da21-4018-825e-09c0c9aea313" name="Default" comment="" />
+=======
     <list default="true" id="20c6f2c1-da21-4018-825e-09c0c9aea313" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Test/profile_IO.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -8,6 +11,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Source/voxnet_keras/model_keras.py" afterPath="$PROJECT_DIR$/Source/voxnet_keras/model_keras.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/test_IO.py" afterPath="$PROJECT_DIR$/Test/test_IO.py" />
     </list>
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
     <ignored path="Deep-3D-Obj-Recognition.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,6 +30,18 @@
     <favorites_list name="Deep-3D-Obj-Recognition" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="test_IO.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Test/test_IO.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.6174957">
+                  <caret line="24" column="55" selection-start-line="22" selection-start-column="0" selection-end-line="24" selection-end-column="55" />
+                  <folding>
+                    <element signature="e#0#11#0" expanded="true" />
+=======
     <splitter split-orientation="horizontal" split-proportion="0.4931677">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -36,17 +52,29 @@
                   <caret line="140" column="32" selection-start-line="140" selection-start-column="32" selection-end-line="140" selection-end-column="32" />
                   <folding>
                     <element signature="e#0#37#0" expanded="true" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
+<<<<<<< HEAD
+          <file leaf-file-name="run_voxnet_keras.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Test/run_voxnet_keras.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+                  <folding>
+                    <element signature="e#0#36#0" expanded="true" />
+                  </folding>
+=======
           <file leaf-file-name="convertMat2Npy-Modelnet10.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Source/Data/convertMat2Npy-Modelnet10.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
                   <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="21" />
                   <folding />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
                 </state>
               </provider>
             </entry>
@@ -54,6 +82,16 @@
         </leaf>
       </split-first>
       <split-second>
+<<<<<<< HEAD
+        <leaf>
+          <file leaf-file-name="lib_IO_hdf5.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/lib_IO_hdf5.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
+                  <folding>
+                    <element signature="e#0#37#0" expanded="true" />
+=======
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="test_IO.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Test/test_IO.py">
@@ -62,11 +100,19 @@
                   <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
+<<<<<<< HEAD
+          <file leaf-file-name="model_keras.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/model_keras.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-2.341338">
+                  <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+=======
           <file leaf-file-name="profile_IO.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Test/profile_IO.py">
               <provider selected="true" editor-type-id="text-editor">
@@ -94,6 +140,7 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
                   <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
                   <folding />
                 </state>
               </provider>
@@ -145,10 +192,21 @@
         <option value="$PROJECT_DIR$/Source/voxnet-tf/config/__init__.py" />
         <option value="$PROJECT_DIR$/Source/__init__.py" />
         <option value="$PROJECT_DIR$/Source/voxnet_keras/config/model_cfg.py" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/Source/voxnet_keras/model_keras.py" />
+        <option value="$PROJECT_DIR$/Test/profile_IO.py" />
+        <option value="$PROJECT_DIR$/Source/voxnet_keras/lib_IO.py" />
+        <option value="$PROJECT_DIR$/Source/voxnet_keras/lib_IO_hdf5.py" />
+        <option value="$PROJECT_DIR$/Test/test_IO.py" />
+        <option value="$PROJECT_DIR$/Source/voxnet_keras/run_obj_rec.py" />
+        <option value="$PROJECT_DIR$/Source/voxnet_keras/run_voxnet_keras.py" />
+        <option value="$PROJECT_DIR$/Test/run_voxnet_keras.py" />
+=======
         <option value="$PROJECT_DIR$/Source/voxnet_keras/lib_IO.py" />
         <option value="$PROJECT_DIR$/Source/voxnet_keras/model_keras.py" />
         <option value="$PROJECT_DIR$/Test/test_IO.py" />
         <option value="$PROJECT_DIR$/Test/profile_IO.py" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
       </list>
     </option>
   </component>
@@ -157,6 +215,7 @@
     <option name="y" value="27" />
     <option name="width" value="1920" />
     <option name="height" value="1053" />
+<<<<<<< HEAD
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -174,6 +233,25 @@
       </profile-state>
     </entry>
   </component>
+=======
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Buildout</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
@@ -199,7 +277,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -262,6 +339,8 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="voxnet_keras" />
+<<<<<<< HEAD
+=======
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -298,6 +377,7 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Source" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -307,15 +387,31 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
+=======
     <property name="settings.editor.selected.configurable" value="Errors" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Test/profile_IO.py" />
   </component>
   <component name="RecentsManager">
+<<<<<<< HEAD
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Source/voxnet_keras" />
+      <recent name="$PROJECT_DIR$/Source/voxnet-tf" />
+      <recent name="$PROJECT_DIR$/Source/Data" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Test" />
+      <recent name="$PROJECT_DIR$/Source/voxnet_keras/old_vs" />
+=======
+    <key name="MoveFile.RECENT_KEYS">
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
       <recent name="$PROJECT_DIR$/Source/voxnet-tf/config" />
       <recent name="$PROJECT_DIR$/Source/voxnet-tf/Tar-data" />
       <recent name="$PROJECT_DIR$/Source/voxnet-tf/udacity" />
@@ -326,7 +422,202 @@
       <recent name="$PROJECT_DIR$/Source/Data" />
     </key>
   </component>
+<<<<<<< HEAD
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/lib_IO.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/model_keras.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Midterm Presentation/präsi.pptx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__pycache__/__init__.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__pycache__/activations.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__pycache__/callbacks.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__pycache__/constraints.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__pycache__/initializations.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__pycache__/metrics.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__pycache__/models.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__pycache__/objectives.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__pycache__/optimizers.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/__pycache__/regularizers.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/activations.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/backend/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/backend/__pycache__/__init__.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/backend/__pycache__/common.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/backend/__pycache__/theano_backend.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/backend/common.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/backend/tensorflow_backend.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/backend/theano_backend.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/callbacks.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/constraints.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/datasets/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/datasets/cifar.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/datasets/cifar10.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/datasets/cifar100.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/datasets/data_utils.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/datasets/imdb.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/datasets/mnist.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/datasets/reuters.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/engine/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/engine/__pycache__/__init__.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/engine/__pycache__/topology.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/engine/__pycache__/training.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/engine/topology.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/engine/training.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/initializations.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/__pycache__/__init__.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/__pycache__/advanced_activations.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/__pycache__/convolutional.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/__pycache__/core.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/__pycache__/embeddings.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/__pycache__/noise.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/__pycache__/normalization.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/__pycache__/recurrent.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/__pycache__/wrappers.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/advanced_activations.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/convolutional.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/core.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/embeddings.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/noise.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/normalization.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/recurrent.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/layers/wrappers.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/legacy/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/legacy/__pycache__/__init__.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/legacy/__pycache__/models.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/legacy/models.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/metrics.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/models.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/objectives.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/optimizers.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/preprocessing/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/preprocessing/image.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/preprocessing/sequence.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/preprocessing/text.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/regularizers.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/utils/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/utils/__pycache__/__init__.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/utils/__pycache__/generic_utils.cpython-34.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/utils/data_utils.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/utils/generic_utils.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/utils/io_utils.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/utils/layer_utils.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/utils/np_utils.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/utils/test_utils.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/utils/visualize_util.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/wrappers/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Source/voxnet_keras/keras/wrappers/scikit_learn.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
+  </component>
+  <component name="RunManager" selected="Python.test_IO">
+=======
   <component name="RunManager" selected="Python.profile_IO">
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
     <configuration default="false" name="test_IO" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -566,14 +857,50 @@
       <option name="number" value="00010" />
       <option name="project" value="LOCAL" />
       <updated>1460443437380</updated>
+<<<<<<< HEAD
+    </task>
+    <task id="LOCAL-00011" summary="blabla">
+      <created>1460499795259</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1460499795259</updated>
+    </task>
+    <task id="LOCAL-00012" summary="minor changes">
+      <created>1460739783007</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1460739783007</updated>
+    </task>
+    <task id="LOCAL-00013" summary="minor changes">
+      <created>1460739908530</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1460739908530</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+=======
     </task>
     <option name="localTasksCounter" value="11" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13995726" sideWeight="0.46341464" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1036" y="1" width="884" height="539" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286026" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286026" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13995726" sideWeight="0.5365854" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="1034" y="540" width="886" height="531" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15189873" sideWeight="0.50437635" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39847162" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+=======
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14155982" sideWeight="0.4699187" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -584,6 +911,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="1034" y="540" width="886" height="531" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15189873" sideWeight="0.50437635" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39934355" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -635,7 +963,13 @@
     <MESSAGE value="added __init__" />
     <MESSAGE value="added test_IO" />
     <MESSAGE value="changed IO" />
+<<<<<<< HEAD
+    <MESSAGE value="blabla" />
+    <MESSAGE value="minor changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
+=======
     <option name="LAST_COMMIT_MESSAGE" value="changed IO" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -648,7 +982,11 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
+<<<<<<< HEAD
+      <option name="time" value="14" />
+=======
       <option name="time" value="13" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -658,21 +996,33 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/old_vs/lib_IO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="18" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
+=======
     <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/lib_IO.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="127" column="33" selection-start-line="127" selection-start-column="33" selection-end-line="127" selection-end-column="33" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/old_vs/convertMat2Npy-Modelnet10.py">
+=======
     <entry file="file://$PROJECT_DIR$/Source/Data/convertMat2Npy-Modelnet10.py">
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="21" />
           <folding />
+<<<<<<< HEAD
         </state>
       </provider>
     </entry>
@@ -681,7 +1031,57 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/model_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/config/model_cfg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/old_vs/lib_IO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="127" column="33" selection-start-line="127" selection-start-column="33" selection-end-line="127" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#37#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/old_vs/convertMat2Npy-Modelnet10.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+=======
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
+    <entry file="file://$PROJECT_DIR$/Test/test_IO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+<<<<<<< HEAD
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -702,16 +1102,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Source/Data/convertMat2Npy-Modelnet10.py">
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/old_vs/convertMat2Npy-Modelnet10.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Source/Data/npytar.py">
+    <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/-1247972723/__builtin__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.2176871">
+          <caret line="871" column="8" selection-start-line="871" selection-start-column="8" selection-end-line="871" selection-end-column="8" />
+=======
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/config/model_cfg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/tarfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
+          <caret line="519" column="0" selection-start-line="519" selection-start-column="0" selection-end-line="519" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/config/voxnet_tf_cfg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="8" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/config/model_cfg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/old_vs/convertMat2Npy-Modelnet10.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.025728988">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/old_vs/npytar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
           <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
         </state>
       </provider>
@@ -755,10 +1230,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="21" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/old_vs/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.15780446">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#37#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/old_vs/lib_IO.py.bak">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -771,10 +1263,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="8" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="8" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/old_vs/lib_IO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.23499142">
+          <caret line="215" column="19" selection-start-line="215" selection-start-column="19" selection-end-line="215" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#37#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/lib_IO_hdf5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
+=======
     <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/config/model_cfg.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -795,12 +1304,39 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/model_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.341338">
+          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/run_voxnet_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/test_IO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6174957">
+          <caret line="24" column="55" selection-start-line="22" selection-start-column="0" selection-end-line="24" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+=======
     <entry file="file://$PROJECT_DIR$/Test/profile_IO.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.69468266">
@@ -817,6 +1353,7 @@
           <caret line="140" column="32" selection-start-line="140" selection-start-column="32" selection-end-line="140" selection-end-column="32" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
+>>>>>>> 2f35585a8a85a37050d32b70dc41702cb58b5fac
           </folding>
         </state>
       </provider>
