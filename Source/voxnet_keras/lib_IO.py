@@ -75,21 +75,53 @@ class NpyTarReader(object):
 ####################################################
 #load CAD data Mat files and save as npy Files
 #take labelnames from class_names, class names_to_id has to be a directory['name':'1']
-def save_dataset_as_npy(fname_data, fname_save, class_name_to_id):
+def save_dataset_as_npy(dirname_data, dirname_save, class_name_to_id):
     #iterate through all .mat files with CAD data
-    features = {'train': 0,
-                'test': 0}
-    labels = {'train': 0,
-              'test': 0}
     classnames = set(class_name_to_id.keys())
-    for dirpaths, dirs, fnames  in os.walk(fname_data):
+    for dirpaths, dirs, fnames  in os.walk(dirname_data):
         for fname in fnames:
             if fname.endswith('.mat'):
                 pos1 = fname.find('_')
                 #the correct files have a _ after the class name
                 if pos1 is -1:
                     continue
+                
+                #check if loaded class is one of the required classes
+                classname = fname[:pos1]
+                if classname not in classnames:
+                    continue
 
+                pos2 = dirpaths.rfind('/')
+                set_type = dirpaths[pos2+1:]
+                
+                Id = int(class_name_to_id[classname])
+                fname_save = dirpaths + set_type + "/" +  "{:3d}_".format(Id) + fname 
+
+                #load mat, reshape to 32x32x32 array and add to save to .npy file
+                arr = scipy.io.loadmat(os.path.join(dirpaths,fname))['instance'].astype(np.uint8)
+                arrpad = np.zeros([1,1,32,32,32], dtype=np.uint8)
+                arrpad[0,0,1:-1,1:-1,1:-1] = arr
+                features = np.zeros([1,1,32,32,32], dtype=np.uint8)
+                features [0,0,:,:,:] = arrpad
+                outfile = open(fname_save,'wb')
+                np.save(outfile, features[set_type])
+                outfile.close()
+
+def save_dataset_as_npz(dirname_data, dirname_save, class_name_to_id):
+    #iterate through all .mat files with CAD data
+    features = {'train': 0,
+                'test': 0}
+    labels = {'train': 0,
+              'test': 0}
+    classnames = set(class_name_to_id.keys())
+    for dirpaths, dirs, fnames  in os.walk(dirname_data):
+        for fname in fnames:
+            if fname.endswith('.mat'):
+                pos1 = fname.find('_')
+                #the correct files have a _ after the class name
+                if pos1 is -1:
+                    continue
+                
                 #check if loaded class is one of the required classes
                 classname = fname[:pos1]
                 if classname not in classnames:
@@ -98,17 +130,17 @@ def save_dataset_as_npy(fname_data, fname_save, class_name_to_id):
                 pos2 = dirpaths.rfind('/')
                 set_type = dirpaths[pos2+1:]
 
-                #encode class and add to labels
+                encode class and add to labels
                 Id = np.zeros([1,], dtype=np.uint32)
                 Id[-1] = int(class_name_to_id[classname])
-
+                
                 if labels[set_type] is 0:
                     labels[set_type] = np.zeros([1,], dtype=np.uint32)
                     labels[set_type][0] = Id
                 else:
                     labels[set_type] = np.concatenate((labels[set_type],Id), axis = 0)
 
-                #load mat, reshape to 32x32x32 array and add to features
+                #load mat, reshape to 32x32x32 array and add to save to .npy file
                 arr = scipy.io.loadmat(os.path.join(dirpaths,fname))['instance'].astype(np.uint8)
                 arrpad = np.zeros([1,1,32,32,32], dtype=np.uint8)
                 arrpad[0,0,1:-1,1:-1,1:-1] = arr
@@ -118,14 +150,10 @@ def save_dataset_as_npy(fname_data, fname_save, class_name_to_id):
                 else:
                     features[set_type] = np.concatenate((features[set_type],arrpad), axis = 0)
 
-    if features['train'].shape[0] is not labels['train'].shape[0]:
-        print("train went wrong {0} : {1}".format(features['train'].shape[0],labels['train'].shape[0]))
-    if features['test'].shape[0] is not labels['test'].shape[0]:
-        print("test went wrong{0} : {1}".format(features['test'].shape[0],labels['test'].shape[0]))
-
     print("found {0} train datasets and {1} test datasets".format(labels['train'].shape[0],labels['test'].shape[0]))
 
     outfile = open(fname_save,'wb')
+    #Maybe change it to creating to a single .rar folder for easier transportability
     np.savez(outfile,
              features_train = features['train'],
              labels_train = labels['train'],
@@ -134,10 +162,9 @@ def save_dataset_as_npy(fname_data, fname_save, class_name_to_id):
              )
     outfile.close()
 
-
 #####################################################
 #load data from npz file and return features_train,labels_train,features_test,labels_test
-def load_data(fname_data):
+def load_data_npz(fname_data):
     f_open = open(fname_data, 'r')
 
     data_npz = np.load(f_open)
@@ -145,6 +172,54 @@ def load_data(fname_data):
     return (data_npz['features_train'], data_npz['labels_train'],
             data_npz['features_test'], data_npz['labels_test'])
 
+
+class Loader_npy(object):
+    def __init__(self, dirname, class_name_to_id, batch_size, num_batch = None, set_type = None):
+        self._walker = os.walk(dirname,topdown = True, onerror = None, fellowlinks = False)
+        self._features = np.zeros([batch_size, 1, 32, 32, 32], dtype = np.uint8)
+        self._labels = np.zeros([batch_size,], dtype= np.uint32)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return self.next()
+
+    def next(self):
+        for it in range(0,batch_size)
+            dirpath, dirnames, fnames = self._walker.next()
+            #TODO find what os.walk returns on StopIteration
+            if dirpath is None:
+                raise StopIteration()
+            if set_type is not None
+                ...
+            openfile = open(dirpath + fname, 'rb')
+            self._features[it,:,:,:,:] = np.load(openfile, dtype=np.uint8)
+            pos1 = fname.find('_')
+            self._labels[it] = int(fname[:pos1])
+            
+        
+        return self._features, self._labels
+
+def load_data_npy(dirname_data, batch_size, class_name_to_id, set_type = None):
+    
+    classnames = set(class_name_to_id.keys())
+    if set_type is not None
+        dirname_data = dirname_dat + "/" + set_type
+    for dirpaths, dirs, fnames  in os.walk(dirname_data):
+        for fname in fnames:
+            pos1 = fname.find('_')
+                #the correct files have a _ after the class name
+                if pos1 is -1:
+                    continue
+                
+                #check if loaded class is one of the required classes
+                classname = fname[:pos1]
+                if classname not in classnames:
+                    continue
+                
+                np.load(fname)
+                
 # use only if cross-validation not possible
 def train_valid_split(dataset, labels, valid_size):
     data_train, data_valid, label_train, label_valid = train_test_split(dataset, labels, test_size= valid_size)
