@@ -11,15 +11,30 @@ from keras.layers import Convolution3D, MaxPooling3D
 from keras.layers.core import Activation, Dense, Dropout, Flatten
 from keras.layers.advanced_activations import LeakyReLU
 from keras.regularizers import l2
+from keras.engine.training import batch_shuffle
 
 from keras.optimizers import SGD
 
 import logging
 import pdb
+import h5py
+
+
+# TODO add shuffle, np.random.shuffle(index_array) or index_array = batch_shuffle(index_array, batch_size)
+def FitGenerator(file, batch_size):
+    f = h5py.File(file)
+    it = 0
+    while 1:
+        X_train = f["train/features_train"][it * batch_size:(it + 1) * batch_size]
+        y_train = f["train/labels_train"][it * batch_size:(it + 1) * batch_size]
+        it += 1
+        yield (X_train, y_train)
+    f.close()
 
 
 class model_vt (object):
 
+    # TODO l2(0.001) for EVERY single layer required or sufficient if applied to last layer ?
     def __init__(self):
         """initiate Model according to voxnet paper"""
         # Stochastic Gradient Decent (SGD) with momentum
@@ -120,6 +135,7 @@ class model_vt (object):
         self._mdl.add(Activation("softmax"))
 
         # compile model
+        # TODO possible add arguement metrics=["accuracy"]
         self._mdl.compile(loss=self._objective, optimizer=self._optimizer)
         logging.debug("Model compiled!")
 
@@ -127,31 +143,46 @@ class model_vt (object):
         # TODO might need to use np_utils.to_categorical(y, nb_classes=None)
         return K.mean(K.categorical_crossentropy(y_pred, y_true), axis=-1)
 
-    def fit(self, generator, samples_per_epoch, nb_epoch):
+    def fit(self, generator=FitGenerator(file="data/modelnet10.hdf5",  batch_size=32), samples_per_epoch=2048, nb_epoch=80):
         # TODO add cross-validation
         # TODO where does the batch size come in ??? (generator?)
         self._mdl.fit_generator(generator=generator,
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
                                 verbose=1,
-                                show_accuracy=False,
                                 callbacks=[],
                                 validation_data=None,
                                 nb_val_samples=None,
-                                class_weight=None,
-                                nb_worker=1,
-                                nb_val_worker=None)
+                                class_weight=None)
 
+        # TODO more sophisticated filename
+        self._mdl.save_weights("weights", False)
+
+    # for testing only
+    def _fit(self, X_train, y_train, batch_size=32, nb_epoch=80):
+        self._mdl.fit(X_train=X_train,
+                      y_train=y_train,
+                      nb_epoch=nb_epoch,
+                      batch_size=batch_size,
+                      shuffle=True,
+                      verbose=1)
+
+        self._mdl.save_weights("weights", False)
+
+    # TODO use evaluate_generator instead ?
     def evaluate(self, X_test, y_test):
         # TODO make sure to use score from modelnet40/10 paper
         self._score = self._mdl.evaluate(x=X_test,
                                          y=y_test,
-                                         verbose=0)
-        print("Test score:", self.score[0])
+                                         verbose=1)
+        print("Test score:", self._score)
+
+    def load_weights(self, file):
+        self._mdl.load_weights(file)
 
     def predict(self, X_predict):
         # TODO add prediction from PointCloud
-        self.mdl.predict(X_predict)
+        self._mdl.predict(X_predict)
 
     def get_score(self):
         # TODO might change to tuble(self._score), not sure it's tuple
@@ -162,4 +193,9 @@ class model_vt (object):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    model_vt()
+    v = model_vt()
+    v.fit(generator=FitGenerator(file="data/modelnet10.hdf5", batch_size=16), samples_per_epoch=45488, nb_epoch=2)
+    f = h5py.File("data/3modelnet10.hdf5")
+    X_test = f["test/features_test"]
+    y_test = f["test/labels_test"]
+    v.evaluate(X_test, y_test)
