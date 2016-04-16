@@ -59,6 +59,14 @@ class_id_to_name_modelnet40 = {
 class_name_to_id_modelnet40 = { v : k for k, v in class_id_to_name_modelnet40.items() }
 class_names_modelnet40 = set(class_id_to_name_modelnet40.values())
 
+class_id_to_name_testing = {
+    "1": "piano",
+    "2": "lamp",
+}
+class_name_to_id_testing = { v : k for k, v in class_id_to_name_testing.items() }
+class_names_testing = set(class_id_to_name_testing.values())
+
+
 
 lr_schedule = { 0: 0.001,
                 60000: 0.0001,
