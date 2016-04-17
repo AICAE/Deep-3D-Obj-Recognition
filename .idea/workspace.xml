@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6a34a31a-82a4-49dd-a18e-5c2afdeffc88" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Test/debug.log" />
+    <list default="true" id="6a34a31a-82a4-49dd-a18e-5c2afdeffc88" name="Default" comment="added loader_hdf5.generator, and inserted into model_keras &amp; test_model_keras">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Source/voxnet_keras/lib_IO_hdf5.py" afterPath="$PROJECT_DIR$/Source/voxnet_keras/lib_IO_hdf5.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Source/voxnet_keras/model_keras.py" afterPath="$PROJECT_DIR$/Source/voxnet_keras/model_keras.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/debug.log" afterPath="$PROJECT_DIR$/Test/debug.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/run_voxnet_keras.py" afterPath="$PROJECT_DIR$/Test/run_voxnet_keras.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/test_IO.py" afterPath="$PROJECT_DIR$/Test/test_IO.py" />
     </list>
     <ignored path="Deep-3D-Obj-Recognition.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,23 +29,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="test_IO.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Test/test_IO.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="42" column="47" selection-start-line="42" selection-start-column="47" selection-end-line="42" selection-end-column="47" />
-                  <folding>
-                    <element signature="e#0#11#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="run_voxnet_keras.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="run_voxnet_keras.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Test/run_voxnet_keras.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.43001688">
-                  <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
                   <folding>
                     <element signature="e#0#43#0" expanded="true" />
                   </folding>
@@ -54,11 +41,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="model_keras.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="model_keras.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/model_keras.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+                <state vertical-scroll-proportion="-0.5311973">
+                  <caret line="48" column="59" selection-start-line="48" selection-start-column="59" selection-end-line="48" selection-end-column="59" />
                   <folding />
                 </state>
               </provider>
@@ -68,11 +55,21 @@
       </split-first>
       <split-second>
         <leaf>
+          <file leaf-file-name="model_keras.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/model_keras.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="lib_IO_hdf5.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/lib_IO_hdf5.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.7470489">
-                  <caret line="294" column="29" selection-start-line="294" selection-start-column="29" selection-end-line="294" selection-end-column="29" />
+                <state vertical-scroll-proportion="0.36762226">
+                  <caret line="289" column="19" selection-start-line="289" selection-start-column="19" selection-end-line="289" selection-end-column="19" />
                   <folding>
                     <element signature="e#0#37#0" expanded="true" />
                   </folding>
@@ -80,21 +77,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="training.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/keras/engine/training.py">
+          <file leaf-file-name="model_cfg.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/config/model_cfg.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="397" column="0" selection-start-line="397" selection-start-column="0" selection-end-line="397" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="fit_generator.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/samples/fit_generator.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+                  <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -124,9 +111,9 @@
         <option value="$PROJECT_DIR$/Test/_init_.py" />
         <option value="$PROJECT_DIR$/Source/_init_.py" />
         <option value="$PROJECT_DIR$/Test/test_IO.py" />
-        <option value="$PROJECT_DIR$/Source/voxnet_keras/model_keras.py" />
-        <option value="$PROJECT_DIR$/Test/run_voxnet_keras.py" />
         <option value="$PROJECT_DIR$/Source/voxnet_keras/lib_IO_hdf5.py" />
+        <option value="$PROJECT_DIR$/Test/run_voxnet_keras.py" />
+        <option value="$PROJECT_DIR$/Source/voxnet_keras/model_keras.py" />
       </list>
     </option>
   </component>
@@ -616,7 +603,13 @@
       <option name="project" value="LOCAL" />
       <updated>1460894145792</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added loader_hdf5.generator, and inserted into model_keras &amp; test_model_keras">
+      <created>1460902096984</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1460902096984</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -630,15 +623,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15770042" sideWeight="0.534202" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15770042" sideWeight="0.46579805" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="963" y="0" width="957" height="583" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="963" y="0" width="957" height="583" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3176856" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3176856" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32964134" sideWeight="0.5043668" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -667,7 +660,8 @@
     <MESSAGE value="irgendwie ist in meinem git das chaos augebrochen, nun hoffentlich hier der fix&#10;" />
     <MESSAGE value="loader klasse jetzt inklusive shuffle und validation_split. fit generator auf loader klasse angepasst" />
     <MESSAGE value="kleine aenderung model_keras.fitgenerator" />
-    <option name="LAST_COMMIT_MESSAGE" value="kleine aenderung model_keras.fitgenerator" />
+    <MESSAGE value="added loader_hdf5.generator, and inserted into model_keras &amp; test_model_keras" />
+    <option name="LAST_COMMIT_MESSAGE" value="added loader_hdf5.generator, and inserted into model_keras &amp; test_model_keras" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -809,14 +803,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/config/model_cfg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test/debug.log">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -867,47 +853,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/model_keras.py">
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/keras/engine/training.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.2900506">
+          <caret line="397" column="0" selection-start-line="397" selection-start-column="0" selection-end-line="397" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/run_voxnet_keras.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43001688">
-          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/samples/fit_generator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.3035413">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/keras/engine/training.py">
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/config/model_cfg.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="397" column="0" selection-start-line="397" selection-start-column="0" selection-end-line="397" selection-end-column="0" />
+          <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/lib_IO_hdf5.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7470489">
-          <caret line="294" column="29" selection-start-line="294" selection-start-column="29" selection-end-line="294" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.36762226">
+          <caret line="289" column="19" selection-start-line="289" selection-start-column="19" selection-end-line="289" selection-end-column="19" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/run_voxnet_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/voxnet_keras/model_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5311973">
+          <caret line="48" column="59" selection-start-line="48" selection-start-column="59" selection-end-line="48" selection-end-column="59" />
+          <folding />
         </state>
       </provider>
     </entry>

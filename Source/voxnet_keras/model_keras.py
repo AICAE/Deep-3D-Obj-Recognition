@@ -18,17 +18,7 @@ from keras.optimizers import SGD
 from Source.voxnet_keras import lib_IO_hdf5
 
 import logging
-import pdb
-import h5py
 
-
-def FitGenerator(loader):
-    for feat, lab in loader:
-        yield (feat, lab)
-
-def evalGenerator(loader):
-    for feat, lab in loader:
-        yield (feat, lab)
 
 class model_vt (object):
 
@@ -55,8 +45,8 @@ class model_vt (object):
                                     border_mode='valid',
                                     subsample=(2, 2, 2),
                                     dim_ordering='th',
-                                    W_regularizer=None,
-                                    b_regularizer=None,
+                                    W_regularizer=l2(0.001),
+                                    b_regularizer=l2(0.001),
                                     activity_regularizer=None,
                                     W_constraint=None,
                                     b_constraint=None))
@@ -77,8 +67,8 @@ class model_vt (object):
                                     border_mode='valid',
                                     subsample=(1, 1, 1),
                                     dim_ordering='th',
-                                    W_regularizer=None,
-                                    b_regularizer=None,
+                                    W_regularizer=l2(0.001),
+                                    b_regularizer=l2(0.001),
                                     activity_regularizer=None,
                                     W_constraint=None,
                                     b_constraint=None))
@@ -105,8 +95,8 @@ class model_vt (object):
                             init='normal',  # TODO np.random.normal, K.random_normal
                             activation='linear',
                             weights=None,
-                            W_regularizer=None,
-                            b_regularizer=None,
+                            W_regularizer=l2(0.001),
+                            b_regularizer=l2(0.001),
                             activity_regularizer=None,
                             W_constraint=None,
                             b_constraint=None))
@@ -133,22 +123,22 @@ class model_vt (object):
         self._mdl.add(Activation("softmax"))
 
         # compile model
-        # TODO possible add arguement metrics=["accuracy"]
-        self._mdl.compile(loss=self._objective, optimizer=self._optimizer)
+        self._mdl.compile(loss=self._objective, optimizer=self._optimizer, metrics=["accuracy"])
         logging.info("Model compiled!")
 
     def _objective(self, y_true, y_pred):
         # TODO might need to use np_utils.to_categorical(y, nb_classes=None)
         return K.categorical_crossentropy(y_pred, y_true)
 
-    def fit(self, generator, samples_per_epoch, nb_epoch):
+    def fit(self, generator, samples_per_epoch,
+            nb_epoch, valid_generator, nb_valid_samples):
         self._mdl.fit_generator(generator=generator,
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
                                 verbose=1,
                                 callbacks=[],
-                                validation_data=None,
-                                nb_val_samples=None,
+                                validation_data=valid_generator,
+                                nb_val_samples=nb_valid_samples,
                                 class_weight=None)
 
         # TODO more sophisticated filename
@@ -194,13 +184,14 @@ if __name__ == "__main__":
     loader = lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/testing.hdf5",
                                      set_type= "train",
                                      batch_size= 12,
-                                     num_batches=10,
                                      shuffle=True,
                                      valid_split=0.15,
                                      mode="train")
-    v.fit(generator=loader.generator(),
-          samples_per_epoch=loader.return_samples_per_epoche(),
-          nb_epoch=40)
+    v.fit(generator=loader.train_generator(),
+          samples_per_epoch=loader.return_num_train_samples(),
+          nb_epoch=2,
+          valid_generator= loader.valid_generator(),
+          nb_valid_samples = loader.return_num_valid_samples())
     # v.load_weights("weightsm")
-    loader.change_mode("valid")
+
     #v.evaluate(generator = evalGenerator(loader = loader))

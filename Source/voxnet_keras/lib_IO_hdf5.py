@@ -206,9 +206,6 @@ class Loader_hdf5:
 
         return features, labels
 
-    def change_set_type(self,set_type):
-        self._set_type = set_type
-
     def change_batch_size(self,batch_size):
         self._batch_size = batch_size
 
@@ -278,23 +275,34 @@ class Loader_hdf5:
     def return_pos(self):
         return self._pos
 
-    def generator(self):
+    def train_generator(self):
+        self.change_mode("train")
         while 1:
-            if self._mode == "train":
-                features = self._features_train[self._pos:self._pos+self._batch_size,:,:,:,:]
-                labels = self._labels_train[self._pos:self._pos+self._batch_size]
-            elif self._mode == "valid":
-                features = self._features_valid[self._pos:self._pos+self._batch_size,:,:,:,:]
-                labels = self._labels_valid[self._pos:self._pos+self._batch_size]
-            else:
-                features = None
-                labels = None
+
+            features = self._features_train[self._pos:self._pos+self._batch_size,:,:,:,:]
+            labels = self._labels_train[self._pos:self._pos+self._batch_size]
 
             self._pos += self._batch_size
             if self._pos > self._max_pos:
                 self._pos = 0
-            print("war hier at {0}".format(self._pos))
             yield features, labels
 
-    def return_samples_per_epoche(self):
-        return self._batch_size * self._num_batches
+    def return_num_train_samples(self):
+        self.change_mode("train")
+        return self._max_pos
+
+    def valid_generator(self):
+        self.change_mode("valid")
+        while 1:
+
+            features = self._features_train[self._pos:self._pos+self._batch_size,:,:,:,:]
+            labels = self._labels_train[self._pos:self._pos+self._batch_size]
+
+            self._pos += self._batch_size
+            if self._pos > self._max_pos:
+                self._pos = 0
+            yield features, labels
+
+    def return_num_valid_samples(self):
+        self.change_mode("valid")
+        return self._max_pos
