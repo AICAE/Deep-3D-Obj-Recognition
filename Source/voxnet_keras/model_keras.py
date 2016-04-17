@@ -137,7 +137,7 @@ class model_vt (object):
         # compile model
         # TODO possible add arguement metrics=["accuracy"]
         self._mdl.compile(loss=self._objective, optimizer=self._optimizer)
-        logging.debug("Model compiled!")
+        logging.info("Model compiled!")
 
     def _objective(self, y_true, y_pred):
         # TODO might need to use np_utils.to_categorical(y, nb_classes=None)
@@ -167,7 +167,7 @@ class model_vt (object):
                       shuffle=True,
                       verbose=1)
 
-        self._mdl.save_weights("weights", False)
+        self._mdl.save_weights("weights", overwrite=False)
 
     # TODO use evaluate_generator instead ?
     def evaluate(self, X_test, y_test):
@@ -178,6 +178,7 @@ class model_vt (object):
         print("Test score:", self._score)
 
     def load_weights(self, file):
+        logging.info("Loading model weights from file '{0}'".format(file))
         self._mdl.load_weights(file)
 
     def predict(self, X_predict):
@@ -194,8 +195,9 @@ class model_vt (object):
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     v = model_vt()
-    v.fit(generator=FitGenerator(file="data/modelnet10.hdf5", batch_size=16), samples_per_epoch=45488, nb_epoch=2)
-    f = h5py.File("data/3modelnet10.hdf5")
+    v.fit(generator=FitGenerator(file="data/testing.hdf5", batch_size=16), samples_per_epoch=16 * 266, nb_epoch=40)
+    # v.load_weights("weightsm")
+    f = h5py.File("data/testing.hdf5")
     X_test = f["test/features_test"]
     y_test = f["test/labels_test"]
     v.evaluate(X_test, y_test)
