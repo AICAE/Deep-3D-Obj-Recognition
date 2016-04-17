@@ -133,7 +133,8 @@ def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
 class Loader_hdf5:
     def __init__(self, fname, set_type = "train",
                  batch_size = 12*128, num_batches = None,
-                 shuffle = False, valid_split = None):
+                 shuffle = False, valid_split = None,
+                 mode = "train"):
         openfile = h5py.File(fname)
 
         lab = openfile[set_type + "/labels_" + set_type]
@@ -157,11 +158,7 @@ class Loader_hdf5:
         self._batch_size = batch_size
         self._pos = 0
         self._set_type = set_type
-
-        if num_batches is not None and num_batches*batch_size < self._labels.shape[0]:
-            self._max_pos = num_batches*batch_size
-        else:
-            self._max_pos = self._labels.shape[0]
+        self._num_batches = num_batches
 
         self.sort_by_rotations()
 
@@ -175,6 +172,13 @@ class Loader_hdf5:
             self._features_train = self._features
             self._labels_train = self._labels
 
+        if mode == "train":
+            self._mode = "train"
+        elif mode == "valid":
+            self._mode = "valid"
+
+        self.define_max_pos()
+
         self._features = None
         self._labels = None
 
@@ -186,12 +190,20 @@ class Loader_hdf5:
         return self.next()
 
     def next(self):
-        if self._pos >= self._max_pos:
-            raise StopIteration
-        features = self._features_train[self._pos:self._pos+self._batch_size,:,:,:,:]
-        labels = self._labels_train[self._pos:self._pos+self._batch_size]
+        if self._mode == "train":
+            features = self._features_train[self._pos:self._pos+self._batch_size,:,:,:,:]
+            labels = self._labels_train[self._pos:self._pos+self._batch_size]
+        elif self._mode == "valid":
+            features = self._features_valid[self._pos:self._pos+self._batch_size,:,:,:,:]
+            labels = self._labels_valid[self._pos:self._pos+self._batch_size]
+        else:
+            features = None
+            labels = None
 
         self._pos += self._batch_size
+        if self._pos >= self._max_pos:
+            raise StopIteration
+
         return features, labels
 
     def change_set_type(self,set_type):
@@ -243,6 +255,22 @@ class Loader_hdf5:
         self._info = self._info[sort_scheme,:]
         self._features = self._features[sort_scheme,:,:,:,:]
         self._labels = self._labels[sort_scheme]
+
+    def define_max_pos(self):
+        if self._mode == "train":
+            shape = self._labels_train.shape[0]
+        elif self._mode == "valid":
+            shape = self._labels_valid.shape[0]
+        else:
+            shape = 0
+        if self._num_batches is not None and self._num_batches*self._batch_size < shape:
+            self._max_pos = self._num_batches* self._batch_size
+        else:
+            self._max_pos = shape
+
+    def change_mode(self,mode):
+        self._mode = mode
+        self.define_max_pos()
 
     def return_valid_set(self):
         return self._features_valid, self._labels_valid

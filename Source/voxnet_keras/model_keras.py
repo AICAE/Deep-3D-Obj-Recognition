@@ -22,8 +22,11 @@ import pdb
 import h5py
 
 
-# TODO add shuffle, np.random.shuffle(index_array) or index_array = batch_shuffle(index_array, batch_size)
 def FitGenerator(loader):
+    for feat, lab in loader:
+        yield (feat, lab)
+
+def evalGenerator(loader):
     for feat, lab in loader:
         yield (feat, lab)
 
@@ -138,9 +141,14 @@ class model_vt (object):
         # TODO might need to use np_utils.to_categorical(y, nb_classes=None)
         return K.mean(K.categorical_crossentropy(y_pred, y_true), axis=-1)
 
-    def fit(self, generator=FitGenerator(file="data/modelnet10.hdf5",  batch_size=32), samples_per_epoch=2048, nb_epoch=80):
-        # TODO add cross-validation
-        # TODO where does the batch size come in ??? (generator?)
+    def fit(self, generator=FitGenerator(lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/testing.hdf5",
+                                                                 set_type= "train",
+                                                                 batch_size= 12,
+                                                                 num_batches=20,
+                                                                 shuffle=True,
+                                                                 valid_split=0.15,
+                                                                 mode="train"))
+            , samples_per_epoch=2048, nb_epoch=80):
         self._mdl.fit_generator(generator=generator,
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
@@ -193,10 +201,11 @@ if __name__ == "__main__":
     loader = lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/testing.hdf5",
                                      set_type= "train",
                                      batch_size= 12,
-                                     num_batches=2,
+                                     num_batches=20,
                                      shuffle=True,
-                                     valid_split=0.15)
+                                     valid_split=0.15,
+                                     mode="train")
     v.fit(generator=FitGenerator(loader = loader), samples_per_epoch=16 * 266, nb_epoch=40)
     # v.load_weights("weightsm")
-    feature_valid, labels_valid = loader.return_valid_set()
-    v.evaluate(feature_valid, labels_valid)
+    loader.change_mode("valid")
+    v.evaluate(generator = evalGenerator(loader = loader))
