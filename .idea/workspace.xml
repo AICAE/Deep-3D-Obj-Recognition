@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6a34a31a-82a4-49dd-a18e-5c2afdeffc88" name="Default" comment="added loader_hdf5.generator, and inserted into model_keras &amp; test_model_keras">
+    <list default="true" id="6a34a31a-82a4-49dd-a18e-5c2afdeffc88" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Source/voxnet_keras/lib_IO_hdf5.py" afterPath="$PROJECT_DIR$/Source/voxnet_keras/lib_IO_hdf5.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Source/voxnet_keras/model_keras.py" afterPath="$PROJECT_DIR$/Source/voxnet_keras/model_keras.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/debug.log" afterPath="$PROJECT_DIR$/Test/debug.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Test/run_voxnet_keras.py" afterPath="$PROJECT_DIR$/Test/run_voxnet_keras.py" />
     </list>
     <ignored path="Deep-3D-Obj-Recognition.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -609,7 +605,13 @@
       <option name="project" value="LOCAL" />
       <updated>1460902096984</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added validation_generator to loader-hdf5 and added accuarcy metric for validation to model_keras">
+      <created>1460905386239</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1460905386239</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -623,7 +625,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15770042" sideWeight="0.534202" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15770042" sideWeight="0.46579805" order="3" side_tool="true" content_ui="tabs" />
@@ -661,7 +663,8 @@
     <MESSAGE value="loader klasse jetzt inklusive shuffle und validation_split. fit generator auf loader klasse angepasst" />
     <MESSAGE value="kleine aenderung model_keras.fitgenerator" />
     <MESSAGE value="added loader_hdf5.generator, and inserted into model_keras &amp; test_model_keras" />
-    <option name="LAST_COMMIT_MESSAGE" value="added loader_hdf5.generator, and inserted into model_keras &amp; test_model_keras" />
+    <MESSAGE value="added validation_generator to loader-hdf5 and added accuarcy metric for validation to model_keras" />
+    <option name="LAST_COMMIT_MESSAGE" value="added validation_generator to loader-hdf5 and added accuarcy metric for validation to model_keras" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
