@@ -137,18 +137,34 @@ class Loader_hdf5:
                  mode = "train"):
         openfile = h5py.File(fname)
 
-        lab = openfile[set_type + "/labels_" + set_type]
+        lab = openfile["train/labels_train"]
         self._labels = np.zeros(lab.shape,dtype=np.uint32)
         lab.read_direct(self._labels)
 
-        feat = openfile[set_type + "/features_" + set_type]
+        feat = openfile["train/features_train"]
         self._features = np.zeros(feat.shape,dtype=np.uint8)
         feat.read_direct(self._features)
 
         try:
-            info = openfile[set_type + "/info_" + set_type]
+            info = openfile["train/info_train"]
             self._info = np.zeros(info.shape,dtype=np.uint32)
             info.read_direct(self._info)
+            self._has_rot = True
+        except IOError:
+            self._has_rot = False
+
+        lab_test = openfile["test/labels_test"]
+        self._labels_test = np.zeros(lab_test.shape,dtype=np.uint32)
+        lab_test.read_direct(self._labels_test)
+
+        feat_test = openfile["test/features_test"]
+        self._features_test = np.zeros(feat_test.shape,dtype=np.uint8)
+        feat_test.read_direct(self._features_test)
+
+        try:
+            info_test = openfile["test/info_test"]
+            self._info_test = np.zeros(info_test.shape,dtype=np.uint32)
+            info_test.read_direct(self._info_test)
             self._has_rot = True
         except IOError:
             self._has_rot = False
@@ -176,6 +192,8 @@ class Loader_hdf5:
             self._mode = "train"
         elif mode == "valid":
             self._mode = "valid"
+        elif mode == "test":
+            self._mode = "test"
 
         self.define_max_pos()
 
@@ -196,6 +214,9 @@ class Loader_hdf5:
         elif self._mode == "valid":
             features = self._features_valid[self._pos:self._pos+self._batch_size,:,:,:,:]
             labels = self._labels_valid[self._pos:self._pos+self._batch_size]
+        elif self._mode == "test":
+            features = self._features_test[self._pos:self._pos+self._batch_size,:,:,:,:]
+            labels = self._labels_test[self._pos:self._pos+self._batch_size]
         else:
             features = None
             labels = None
@@ -258,8 +279,11 @@ class Loader_hdf5:
             shape = self._labels_train.shape[0]
         elif self._mode == "valid":
             shape = self._labels_valid.shape[0]
+        elif self._mode == "test":
+            shape = self._labels_test.shape[0]
         else:
             shape = 0
+
         if self._num_batches is not None and self._num_batches*self._batch_size < shape:
             self._max_pos = self._num_batches* self._batch_size
         else:
@@ -295,8 +319,8 @@ class Loader_hdf5:
         self.change_mode("valid")
         while 1:
 
-            features = self._features_train[self._pos:self._pos+self._batch_size,:,:,:,:]
-            labels = self._labels_train[self._pos:self._pos+self._batch_size]
+            features = self._features_valid[self._pos:self._pos+self._batch_size,:,:,:,:]
+            labels = self._labels_valid[self._pos:self._pos+self._batch_size]
 
             self._pos += self._batch_size
             if self._pos > self._max_pos:
@@ -305,4 +329,19 @@ class Loader_hdf5:
 
     def return_num_valid_samples(self):
         self.change_mode("valid")
+        return self._max_pos
+
+    def evaluate_generator(self):
+        self.change_mode("test")
+        while 1:
+            features = self._features_test[self._pos:self._pos+self._batch_size,:,:,:,:]
+            labels = self._labels_test[self._pos:self._pos+self._batch_size]
+
+            self._pos += self._batch_size
+            if self._pos > self._max_pos:
+                self._pos = 0
+            yield features, labels
+
+    def return_num_evaluation_samples(self):
+        self.change_mode("test")
         return self._max_pos

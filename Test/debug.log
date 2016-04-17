@@ -110,3 +110,17 @@ DEBUG:root:Layer5:Flatten shape=(None, 6912)
 DEBUG:root:Layer6:Dense shape=(None, 128)
 DEBUG:root:Layer8:Dense shape=(None, 1)
 INFO:root:Model compiled!
+DEBUG:root:Layer1:Conv3D shape=(None, 32, 14, 14, 14)
+DEBUG:root:Layer3:Conv3D shape=(None, 32, 12, 12, 12)
+DEBUG:root:Layer4:MaxPool3D shape=(None, 32, 6, 6, 6)
+DEBUG:root:Layer5:Flatten shape=(None, 6912)
+DEBUG:root:Layer6:Dense shape=(None, 128)
+DEBUG:root:Layer8:Dense shape=(None, 1)
+INFO:root:Model compiled!
+DEBUG:root:Layer1:Conv3D shape=(None, 32, 14, 14, 14)
+DEBUG:root:Layer3:Conv3D shape=(None, 32, 12, 12, 12)
+DEBUG:root:Layer4:MaxPool3D shape=(None, 32, 6, 6, 6)
+DEBUG:root:Layer5:Flatten shape=(None, 6912)
+DEBUG:root:Layer6:Dense shape=(None, 128)
+DEBUG:root:Layer8:Dense shape=(None, 1)
+INFO:root:Model compiled!

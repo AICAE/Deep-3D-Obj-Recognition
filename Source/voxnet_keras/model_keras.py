@@ -155,12 +155,10 @@ class model_vt (object):
 
         self._mdl.save_weights("weights", overwrite=False)
 
-    # TODO use evaluate_generator instead ?
-    def evaluate(self, X_test, y_test):
-        # TODO make sure to use score from modelnet40/10 paper
-        self._score = self._mdl.evaluate(x=X_test,
-                                         y=y_test,
-                                         verbose=1)
+    def evaluate(self, evaluation_generator, num_eval_samples):
+        self._score = self._mdl.evaluate_generator(
+                                         generator=evaluation_generator,
+                                         val_samples=num_eval_samples)
         print("Test score:", self._score)
 
     def load_weights(self, file):
@@ -194,4 +192,5 @@ if __name__ == "__main__":
           nb_valid_samples = loader.return_num_valid_samples())
     # v.load_weights("weightsm")
 
-    #v.evaluate(generator = evalGenerator(loader = loader))
+    v.evaluate(evaluation_generator = loader.evaluate_generator(),
+               num_eval_samples=loader.return_num_evaluation_samples())
