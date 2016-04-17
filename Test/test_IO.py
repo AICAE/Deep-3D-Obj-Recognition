@@ -15,16 +15,16 @@ from Source.voxnet_keras.config import model_cfg
 #f = h5py.File("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/modelnet10.hdf5")
 
 
-it = 0
-for feat, lab in lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/modelnet10.hdf5",
-                                 set_type= "train",
-                                 batch_size= 12,
-                                 num_batches=20,
-                                 shuffle=True,
-                                 valid_split=0.15):
-    print("for the {0}. batch the shape is {1}".format(it,feat.shape))
-
-    it +=1
+# it = 0
+# for feat, lab in lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/modelnet10.hdf5",
+#                                  set_type= "train",
+#                                  batch_size= 12,
+#                                  num_batches=20,
+#                                  shuffle=True,
+#                                  valid_split=0.15):
+#     print("for the {0}. batch the shape is {1}".format(it,feat.shape))
+#
+#     it +=1
 
 
 # it = 0
@@ -37,10 +37,14 @@ for feat, lab in lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognit
 #     print("for the {0}. batch the shape is {1}".format(it,feat.shape))
 #     it +=1
 #
-# b = lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/modelnet10.hdf5",
-#                                  set_type= "train",
-#                                  batch_size= 12 * 64,
-#                                  num_batches=2,
-#                                  shuffle=True,
-#                                  valid_split=0.15)
+b = lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/modelnet10.hdf5",
+                                 set_type= "train",
+                                 batch_size= 12,
+                                 num_batches=20,
+                                 shuffle=True,
+                                 valid_split=0.15)
 
+it = 0
+for feat, lab in b:
+    print("for the {0}. batch the shape is {1}".format(it,feat.shape))
+    it +=1

@@ -139,16 +139,9 @@ class model_vt (object):
 
     def _objective(self, y_true, y_pred):
         # TODO might need to use np_utils.to_categorical(y, nb_classes=None)
-        return K.mean(K.categorical_crossentropy(y_pred, y_true), axis=-1)
+        return K.categorical_crossentropy(y_pred, y_true)
 
-    def fit(self, generator=FitGenerator(lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/testing.hdf5",
-                                                                 set_type= "train",
-                                                                 batch_size= 12,
-                                                                 num_batches=20,
-                                                                 shuffle=True,
-                                                                 valid_split=0.15,
-                                                                 mode="train"))
-            , samples_per_epoch=2048, nb_epoch=80):
+    def fit(self, generator, samples_per_epoch, nb_epoch):
         self._mdl.fit_generator(generator=generator,
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
@@ -201,11 +194,13 @@ if __name__ == "__main__":
     loader = lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/testing.hdf5",
                                      set_type= "train",
                                      batch_size= 12,
-                                     num_batches=20,
+                                     num_batches=10,
                                      shuffle=True,
                                      valid_split=0.15,
                                      mode="train")
-    v.fit(generator=FitGenerator(loader = loader), samples_per_epoch=16 * 266, nb_epoch=40)
+    v.fit(generator=loader.generator(),
+          samples_per_epoch=loader.return_samples_per_epoche(),
+          nb_epoch=40)
     # v.load_weights("weightsm")
     loader.change_mode("valid")
-    v.evaluate(generator = evalGenerator(loader = loader))
+    #v.evaluate(generator = evalGenerator(loader = loader))

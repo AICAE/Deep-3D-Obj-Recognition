@@ -201,7 +201,7 @@ class Loader_hdf5:
             labels = None
 
         self._pos += self._batch_size
-        if self._pos >= self._max_pos:
+        if self._pos > self._max_pos:
             raise StopIteration
 
         return features, labels
@@ -278,3 +278,23 @@ class Loader_hdf5:
     def return_pos(self):
         return self._pos
 
+    def generator(self):
+        while 1:
+            if self._mode == "train":
+                features = self._features_train[self._pos:self._pos+self._batch_size,:,:,:,:]
+                labels = self._labels_train[self._pos:self._pos+self._batch_size]
+            elif self._mode == "valid":
+                features = self._features_valid[self._pos:self._pos+self._batch_size,:,:,:,:]
+                labels = self._labels_valid[self._pos:self._pos+self._batch_size]
+            else:
+                features = None
+                labels = None
+
+            self._pos += self._batch_size
+            if self._pos > self._max_pos:
+                self._pos = 0
+            print("war hier at {0}".format(self._pos))
+            yield features, labels
+
+    def return_samples_per_epoche(self):
+        return self._batch_size * self._num_batches
