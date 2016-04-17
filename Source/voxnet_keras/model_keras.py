@@ -15,22 +15,17 @@ from keras.engine.training import batch_shuffle
 
 from keras.optimizers import SGD
 
+from Source.voxnet_keras import lib_IO_hdf5
+
 import logging
 import pdb
 import h5py
 
 
 # TODO add shuffle, np.random.shuffle(index_array) or index_array = batch_shuffle(index_array, batch_size)
-def FitGenerator(file, batch_size):
-    f = h5py.File(file)
-    it = 0
-    while 1:
-        X_train = f["train/features_train"][it * batch_size:(it + 1) * batch_size]
-        y_train = f["train/labels_train"][it * batch_size:(it + 1) * batch_size]
-        it += 1
-        yield (X_train, y_train)
-    f.close()
-
+def FitGenerator(loader):
+    for feat, lab in loader:
+        yield (feat, lab)
 
 class model_vt (object):
 
@@ -195,9 +190,13 @@ class model_vt (object):
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     v = model_vt()
-    v.fit(generator=FitGenerator(file="data/testing.hdf5", batch_size=16), samples_per_epoch=16 * 266, nb_epoch=40)
+    loader = lib_IO_hdf5.Loader_hdf5("/home/tg/Projects/Deep-3D-Obj-Recognition/Source/Data/testing.hdf5",
+                                     set_type= "train",
+                                     batch_size= 12,
+                                     num_batches=2,
+                                     shuffle=True,
+                                     valid_split=0.15)
+    v.fit(generator=FitGenerator(loader = loader), samples_per_epoch=16 * 266, nb_epoch=40)
     # v.load_weights("weightsm")
-    f = h5py.File("data/testing.hdf5")
-    X_test = f["test/features_test"]
-    y_test = f["test/labels_test"]
-    v.evaluate(X_test, y_test)
+    feature_valid, labels_valid = loader.return_valid_set()
+    v.evaluate(feature_valid, labels_valid)
