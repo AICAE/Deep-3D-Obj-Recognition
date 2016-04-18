@@ -4,6 +4,9 @@ import model_keras
 import logging
 import numpy as np
 import sys
+import time
+
+tic = time.time()
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
@@ -22,6 +25,9 @@ voxnet.fit(generator=loader.train_generator(),
 
 voxnet.evaluate(evaluation_generator = loader.evaluate_generator(),
                num_eval_samples=loader.return_num_evaluation_samples())
+
+tictoc = time.time() - tic
+print("the run_keras run took {0} seconds".format(tictoc))
 
 # def gen():
 #     while 1:
