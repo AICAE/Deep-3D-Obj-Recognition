@@ -14,6 +14,7 @@ voxnet = model_keras.model_vt()
 with lib_IO_hdf5_test.Loader_hdf5("data/testing.hdf5",
                                  batch_size= 12,
                                  shuffle=True,
+                                 has_rot= True,
                                  valid_split=0.15,
                                  mode="train") as loader:
     voxnet.fit(generator=loader.train_generator(),

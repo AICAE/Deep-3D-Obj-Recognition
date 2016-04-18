@@ -15,6 +15,7 @@ class Loader_hdf5:
 
     def __init__(self, fname,
                  batch_size=12 * 128, num_batches=None,
+                 has_rot = False,
                  shuffle=False, valid_split=None,
                  mode="train"):
 
@@ -32,7 +33,10 @@ class Loader_hdf5:
 
         try:
             self._info = self._openfile["train/info_train"]
-            self._has_rot = True
+            if has_rot is False:
+                self._has_rot = False
+            else:
+                self._has_rot = True
         except:
             self._has_rot = False
 
@@ -56,6 +60,7 @@ class Loader_hdf5:
         self._min_pos_valid = None
         self._max_pos_test = None
         self._pos_train_indizes = None
+        self._num_rot = None
 
         self.define_max_pos()
 
@@ -108,25 +113,25 @@ class Loader_hdf5:
 
     def shuffle_data(self):
         if self._has_rot is True:
-            step_size = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
+            self._num_rot = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
         else:
-            step_size = 1
+            self._num_rot = 1
         # Fisher-Yatest shuffle assuming that rotations of one obj are together
-        for fy_i in range(self._labels.shape[0] - 1, 1 + step_size, -1 * step_size):
-            fy_j = np.random.randint(1, int((fy_i + 1) / step_size) + 1) * step_size - 1
-            if fy_j - step_size < 0:
-                self._pos_train_indizes[fy_i:fy_i - step_size:-1], self._pos_train_indizes[fy_j::-1] =\
-                    self._pos_train_indizes[fy_j::-1], self._pos_train_indizes[fy_i:fy_i - step_size:-1]
+        for fy_i in range(self._labels.shape[0] - 1, 1 + self._num_rot, -1 * self._num_rot):
+            fy_j = np.random.randint(1, int((fy_i + 1) / self._num_rot) + 1) * self._num_rot - 1
+            if fy_j - self._num_rot < 0:
+                self._pos_train_indizes[fy_i:fy_i - self._num_rot:-1], self._pos_train_indizes[fy_j::-1] =\
+                    self._pos_train_indizes[fy_j::-1], self._pos_train_indizes[fy_i:fy_i - self._num_rot:-1]
             else:
-                self._pos_train_indizes[fy_i:fy_i - step_size:-1], self._pos_train_indizes[fy_j:fy_j - step_size:-1] =\
-                    self._pos_train_indizes[fy_j:fy_j - step_size:-1], self._pos_train_indizes[fy_i:fy_i - step_size:-1]
+                self._pos_train_indizes[fy_i:fy_i - self._num_rot:-1], self._pos_train_indizes[fy_j:fy_j - self._num_rot:-1] =\
+                    self._pos_train_indizes[fy_j:fy_j - self._num_rot:-1], self._pos_train_indizes[fy_i:fy_i - self._num_rot:-1]
 
     def validation_split(self):
         if self._has_rot is True:
-            step_size = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
+            self._num_rot = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
         else:
-            step_size = 1
-        split_pos = int(int((self._labels.shape[0] / step_size) * (1 - self._valid_size)) * step_size)
+            self._num_rot = 1
+        split_pos = int(int((self._labels.shape[0] / self._num_rot) * (1 - self._valid_size)) * self._num_rot)
         self._max_pos_valid = self._max_pos_train
         self._min_pos_valid = split_pos
         self._max_pos_train = split_pos

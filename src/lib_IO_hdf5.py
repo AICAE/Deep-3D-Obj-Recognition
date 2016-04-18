@@ -134,7 +134,8 @@ def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
 class Loader_hdf5:
 
     def __init__(self, fname,
-                 batch_size=12 * 128, num_batches=None,
+                 batch_size=128, num_batches=None,
+                 has_rot = False,
                  shuffle=False, valid_split=None,
                  mode="train"):
 
@@ -153,7 +154,10 @@ class Loader_hdf5:
             info = openfile["train/info_train"]
             self._info = np.zeros(info.shape, dtype=np.uint32)
             info.read_direct(self._info)
-            self._has_rot = True
+            if has_rot is False:
+                self._has_rot = False
+            else:
+                self._has_rot = True
         except IOError:
             self._has_rot = False
 
@@ -169,7 +173,10 @@ class Loader_hdf5:
             info_test = openfile["test/info_test"]
             self._info_test = np.zeros(info_test.shape, dtype=np.uint32)
             info_test.read_direct(self._info_test)
-            self._has_rot = True
+            if has_rot is False:
+                self._has_rot = False
+            else:
+                self._has_rot = True
         except IOError:
             self._has_rot = False
 
@@ -183,6 +190,7 @@ class Loader_hdf5:
         self._max_pos_train = None
         self._max_pos_valid = None
         self._max_pos_test = None
+        self._num_rot = None
 
         self.sort_by_rotations()
 
@@ -210,45 +218,45 @@ class Loader_hdf5:
 
         logging.info("Done loading dataset.".format(fname))
 
-    def shuffle_data(self):
-        if self._has_rot is True:
-            step_size = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
-        else:
-            step_size = 1
-        # Fisher-Yatest shuffle assuming that rotations of one obj are together
-        for fy_i in range(self._labels.shape[0] - 1, 1 + step_size, -1 * step_size):
-            fy_j = np.random.randint(1, int((fy_i + 1) / step_size) + 1) * step_size - 1
-            if fy_j - step_size < 0:
-                self._features[fy_i:fy_i - step_size:-1], self._features[fy_j::-1] =\
-                    self._features[fy_j::-1], self._features[fy_i:fy_i - step_size:-1].copy()
-                self._labels[fy_i:fy_i - step_size:-1], self._labels[fy_j::-1] =\
-                    self._labels[fy_j::-1], self._labels[fy_i:fy_i - step_size:-1].copy()
-                self._info[fy_i:fy_i - step_size:-1], self._info[fy_j::-1] =\
-                    self._info[fy_j::-1], self._info[fy_i:fy_i - step_size:-1].copy()
-            else:
-                self._features[fy_i:fy_i - step_size:-1], self._features[fy_j:fy_j - step_size:-1] =\
-                    self._features[fy_j:fy_j - step_size:-1], self._features[fy_i:fy_i - step_size:-1].copy()
-                self._labels[fy_i:fy_i - step_size:-1], self._labels[fy_j:fy_j - step_size:-1] =\
-                    self._labels[fy_j:fy_j - step_size:-1], self._labels[fy_i:fy_i - step_size:-1].copy()
-                self._info[fy_i:fy_i - step_size:-1], self._info[fy_j:fy_j - step_size:-1] =\
-                    self._info[fy_j:fy_j - step_size:-1], self._info[fy_i:fy_i - step_size:-1].copy()
-
-    def validation_split(self):
-        if self._has_rot is True:
-            step_size = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
-        else:
-            step_size = 1
-        split_pos = int(int((self._labels.shape[0] / step_size) * (1 - self._valid_size)) * step_size)
-        self._features_train = self._features[:split_pos]
-        self._labels_train = self._labels[:split_pos]
-        self._features_valid = self._features[split_pos:]
-        self._labels_valid = self._labels[split_pos:]
-
     def sort_by_rotations(self):
         sort_scheme = np.argsort(self._info[:, 1], axis=0)
         self._info = self._info[sort_scheme]
         self._features = self._features[sort_scheme]
         self._labels = self._labels[sort_scheme]
+
+    def shuffle_data(self):
+        if self._has_rot is True:
+            self._num_rot = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
+        else:
+            self._num_rot = 1
+        # Fisher-Yatest shuffle assuming that rotations of one obj are together
+        for fy_i in range(self._labels.shape[0] - 1, 1 + self._num_rot, -1 * self._num_rot):
+            fy_j = np.random.randint(1, int((fy_i + 1) / self._num_rot) + 1) * self._num_rot - 1
+            if fy_j - self._num_rot < 0:
+                self._features[fy_i:fy_i - self._num_rot:-1], self._features[fy_j::-1] =\
+                    self._features[fy_j::-1], self._features[fy_i:fy_i - self._num_rot:-1].copy()
+                self._labels[fy_i:fy_i - self._num_rot:-1], self._labels[fy_j::-1] =\
+                    self._labels[fy_j::-1], self._labels[fy_i:fy_i - self._num_rot:-1].copy()
+                self._info[fy_i:fy_i - self._num_rot:-1], self._info[fy_j::-1] =\
+                    self._info[fy_j::-1], self._info[fy_i:fy_i - self._num_rot:-1].copy()
+            else:
+                self._features[fy_i:fy_i - self._num_rot:-1], self._features[fy_j:fy_j - self._num_rot:-1] =\
+                    self._features[fy_j:fy_j - self._num_rot:-1], self._features[fy_i:fy_i - self._num_rot:-1].copy()
+                self._labels[fy_i:fy_i - self._num_rot:-1], self._labels[fy_j:fy_j - self._num_rot:-1] =\
+                    self._labels[fy_j:fy_j - self._num_rot:-1], self._labels[fy_i:fy_i - self._num_rot:-1].copy()
+                self._info[fy_i:fy_i - self._num_rot:-1], self._info[fy_j:fy_j - self._num_rot:-1] =\
+                    self._info[fy_j:fy_j - self._num_rot:-1], self._info[fy_i:fy_i - self._num_rot:-1].copy()
+
+    def validation_split(self):
+        if self._has_rot is True:
+            self._num_rot = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
+        else:
+            self._num_rot = 1
+        split_pos = int(int((self._labels.shape[0] / self._num_rot) * (1 - self._valid_size)) * self._num_rot)
+        self._features_train = self._features[:split_pos]
+        self._labels_train = self._labels[:split_pos]
+        self._features_valid = self._features[split_pos:]
+        self._labels_valid = self._labels[split_pos:]
 
     def define_max_pos(self):
         # if self._mode == "train":

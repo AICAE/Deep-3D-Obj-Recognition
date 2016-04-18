@@ -42,6 +42,7 @@ tic = time.time()
 
 b = lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
                                  batch_size= 12,
+                                 has_rot= True,
                                  shuffle=True,
                                  valid_split=0.15)
 
