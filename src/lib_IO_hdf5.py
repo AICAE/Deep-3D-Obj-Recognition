@@ -285,7 +285,7 @@ class Loader_hdf5:
             labels = self._labels_train[self._pos_train:self._pos_train + self._batch_size]
 
             self._pos_train += self._batch_size
-            if self._pos_train > self._max_pos_train:
+            if self._pos_train >= self._max_pos_train:
                 self._pos_train = 0
 
             assert features.shape[0] == self._batch_size, \
@@ -311,7 +311,7 @@ class Loader_hdf5:
             labels = self._labels_valid[self._pos_valid:self._pos_valid + self._batch_size]
 
             self._pos_valid += self._batch_size
-            if self._pos_valid > self._max_pos_valid:
+            if self._pos_valid >= self._max_pos_valid:
                 self._pos_valid = 0
 
             assert features.shape[0] == self._batch_size,\
@@ -336,7 +336,7 @@ class Loader_hdf5:
             labels = self._labels_test[self._pos_test:self._pos_test + self._batch_size]
 
             self._pos_test += self._batch_size
-            if self._pos_test > self._max_pos_test:
+            if self._pos_test >= self._max_pos_test:
                 self._pos_test = 0
 
             assert features.shape[0] == self._batch_size, \

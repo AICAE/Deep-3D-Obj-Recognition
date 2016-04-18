@@ -11,20 +11,20 @@ tic = time.time()
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 voxnet = model_keras.model_vt()
-loader = lib_IO_hdf5_test.Loader_hdf5("data/testing.hdf5",
+with lib_IO_hdf5_test.Loader_hdf5("data/testing.hdf5",
                                  batch_size= 12,
                                  shuffle=True,
                                  valid_split=0.15,
-                                 mode="train")
-voxnet.fit(generator=loader.train_generator(),
-          samples_per_epoch=loader.return_num_train_samples(),
-          nb_epoch=2,
-          valid_generator= loader.valid_generator(),
-          nb_valid_samples = loader.return_num_valid_samples())
+                                 mode="train") as loader:
+    voxnet.fit(generator=loader.train_generator(),
+              samples_per_epoch=loader.return_num_train_samples(),
+              nb_epoch=2,
+              valid_generator= loader.valid_generator(),
+              nb_valid_samples = loader.return_num_valid_samples())
 
 
-voxnet.evaluate(evaluation_generator = loader.evaluate_generator(),
-               num_eval_samples=loader.return_num_evaluation_samples())
+    voxnet.evaluate(evaluation_generator = loader.evaluate_generator(),
+                   num_eval_samples=loader.return_num_evaluation_samples())
 
 tictoc = time.time() - tic
 print("the run_keras_test run took {0} seconds".format(tictoc))

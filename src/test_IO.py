@@ -42,35 +42,31 @@ tic = time.time()
 
 b = lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
                                  batch_size= 12,
-                                 num_batches=20,
                                  shuffle=True,
                                  valid_split=0.15)
 
 print("-----------")
 it = 0
 for feat, label in b.train_generator():
-    print(feat.shape)
-    print(label.shape)
+    print("it: {0} ---- feat: {1} ---- label: {2}".format(it, feat.shape,label.shape))
     it += 1
-    if it >= 3:
+    if it >= 1000:
         break
 
 print("-----------")
 it = 0
 for feat, label in b.valid_generator():
-    print(feat.shape)
-    print(label.shape)
+    print("it: {0} ---- feat: {1} ---- label: {2}".format(it, feat.shape,label.shape))
     it += 1
-    if it >= 3:
+    if it >= 1000:
         break
 
 print("-----------")
 it = 0
 for feat, label in b.evaluate_generator():
-    print(feat.shape)
-    print(label.shape)
+    print("it: {0} ---- feat: {1} ---- label: {2}".format(it, feat.shape,label.shape))
     it += 1
-    if it >= 3:
+    if it >= 1000:
         break
 
 print("-----------")
