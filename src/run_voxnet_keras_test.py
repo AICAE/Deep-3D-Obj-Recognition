@@ -1,4 +1,4 @@
-import lib_IO_hdf5
+import lib_IO_hdf5_test
 from config import model_cfg
 import model_keras
 import logging
@@ -8,7 +8,7 @@ import sys
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 voxnet = model_keras.model_vt()
-loader = lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
+loader = lib_IO_hdf5_test.Loader_hdf5("data/testing.hdf5",
                                  batch_size= 12,
                                  shuffle=True,
                                  valid_split=0.15,

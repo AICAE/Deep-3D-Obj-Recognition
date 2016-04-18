@@ -1,7 +1,7 @@
 import h5py
 import time
 
-import lib_IO_hdf5
+import lib_IO_hdf5_test
 from config import model_cfg
 
 ##############test-saving####################################################
@@ -40,7 +40,8 @@ from config import model_cfg
 #
 tic = time.time()
 
-b = lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
+
+b = lib_IO_hdf5_test.Loader_hdf5("data/testing.hdf5",
                                  batch_size= 12,
                                  num_batches=20,
                                  shuffle=True,
@@ -75,7 +76,8 @@ for feat, label in b.evaluate_generator():
 
 print("-----------")
 for it in range(0,121,12):
-    print(b._info[it*12:(it+1)*12,1])
+    print(b._info[sorted(b._pos_train_indizes[it*12:12*(it+1)]),1])
+
 
 tictoc = time.time() - tic
 print("the test_IO run took {0} seconds".format(tictoc))
