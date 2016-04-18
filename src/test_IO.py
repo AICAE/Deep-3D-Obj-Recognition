@@ -40,7 +40,7 @@ from config import model_cfg
 #
 tic = time.time()
 
-b = lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
+b = lib_IO_hdf5.Loader_hdf5_Convert_Np("data/testing.hdf5",
                                  batch_size= 12,
                                  has_rot= True,
                                  shuffle=True,
@@ -75,4 +75,45 @@ for it in range(0,121,12):
     print(b._info[it*12:(it+1)*12,1])
 
 tictoc = time.time() - tic
-print("the test_IO run took {0} seconds".format(tictoc))
+print("the test_IO with Convert to Numpy took {0} seconds".format(tictoc))
+
+tic = time.time()
+
+
+with lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
+                                 batch_size= 12,
+                                 has_rot= True,
+                                 shuffle=True,
+                                 valid_split=0.15) as b:
+
+    print("-----------")
+    it = 0
+    for feat, label in b.train_generator():
+        print("it: {0} ---- feat: {1} ---- label: {2}".format(it, feat.shape,label.shape))
+        it += 1
+        if it >= 1000:
+            break
+
+    print("-----------")
+    it = 0
+    for feat, label in b.valid_generator():
+        print("it: {0} ---- feat: {1} ---- label: {2}".format(it, feat.shape,label.shape))
+        it += 1
+        if it >= 1000:
+            break
+
+    print("-----------")
+    it = 0
+    for feat, label in b.evaluate_generator():
+        print("it: {0} ---- feat: {1} ---- label: {2}".format(it, feat.shape,label.shape))
+        it += 1
+        if it >= 1000:
+            break
+
+    print("-----------")
+    for it in range(0,121,12):
+        print(b._info[sorted(b._pos_train_indizes[it*12:12*(it+1)]),1])
+
+
+tictoc = time.time() - tic
+print("the test_IO without Conversion to Numpy run took {0} seconds".format(tictoc))
