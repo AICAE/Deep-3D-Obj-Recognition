@@ -8,7 +8,35 @@ import logging
 
 
 def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
+    """ 
+    Args:
+        dirname_data: the directory name where the volumetric data (from ModelNet40 - Princeton) is stored
+        fname_save: the filename and including path that you want to use to save the hdf5 dataset
+        class_name_to_id: the classname to ID encoding file from the configfile
 
+    Returns:
+        Nothing - But it Saves a HDF5 Dataset at the given location with two subgroups "test" and "training" and the 
+        corresponding files:
+                test/features_test - Features Dataset of size [Num. Found TestFiles , 1 , 32 , 32 , 32]
+                test/labels_test - Labels Dataset of size [Num. Found TestFiles ,]
+                test/info_test - Info Dataset (LabelID, Object ID, Rotation ID) of size [Num. Found TestFiles , 3]
+                train/features_train - Features Dataset of size [Num. Found trainFiles , 1 , 32 , 32 , 32]
+                train/labels_train - Labels Dataset of size [Num. Found trainFiles ,]
+                train/info_train - Info Dataset (LabelID, Object ID, Rotation ID) of size [Num. Found trainFiles , 3]
+
+    Procedure:
+        1.) Scan Directory for all .mat files that match the requirements in class_name_to_id and count training & test
+            files
+        2.) Create six Numpy Arrays (feat_test, feat-train, label_test, label_train, info_test, info_train) that are
+            big enough to store all information
+        3.) iterate through all .mat files load and save data in features, extract the classID, objectID, rotationID
+            from the filename of the .mat file and save the information in the labels and info matrix
+        4.) create HDF5 file with corresponding data structure and save numpy arrays in corresponding dataset
+
+    Examples:
+        save-dataset_as_hdf5("data/volumetric_data","data/modelnet10.hdf5",class_name_to_id_modelnet10)
+
+    """
     classnames = set(class_name_to_id.keys())
 
     # find out how many files for test and train exist. Speed Reasons
@@ -127,17 +155,31 @@ def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
                         data=info_test)
     openfile.close()
 
-# loader needs a HDF file with a subgroup of name set_type
-#  which holds a "labels_"+set_type and "features_"+set_type dataset
-
-
 class Loader_hdf5_Convert_Np:
+    """
 
+    """
     def __init__(self, fname,
-                 batch_size=128, num_batches=None,
+                 batch_size=128,
+                 num_batches=None,
                  has_rot = False,
-                 shuffle=False, valid_split=None,
+                 shuffle=False,
+                 valid_split=None,
                  mode="train"):
+        """
+
+        Args:
+            fname:
+            batch_size:
+            num_batches:
+            has_rot:
+            shuffle:
+            valid_split:
+            mode:
+
+        Returns:
+
+        """
 
         logging.info("Loading dataset '{0}'".format(fname))
         openfile = h5py.File(fname)
@@ -219,12 +261,22 @@ class Loader_hdf5_Convert_Np:
         logging.info("Done loading dataset.".format(fname))
 
     def sort_by_rotations(self):
+        """
+
+        Returns:
+
+        """
         sort_scheme = np.argsort(self._info[:, 1], axis=0)
         self._info = self._info[sort_scheme]
         self._features = self._features[sort_scheme]
         self._labels = self._labels[sort_scheme]
 
     def shuffle_data(self):
+        """
+
+        Returns:
+
+        """
         if self._has_rot is True:
             self._num_rot = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
         else:
@@ -248,6 +300,11 @@ class Loader_hdf5_Convert_Np:
                     self._info[fy_j:fy_j - self._num_rot:-1], self._info[fy_i:fy_i - self._num_rot:-1].copy()
 
     def validation_split(self):
+        """
+
+        Returns:
+
+        """
         if self._has_rot is True:
             self._num_rot = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
         else:
@@ -259,6 +316,11 @@ class Loader_hdf5_Convert_Np:
         self._labels_valid = self._labels[split_pos:]
 
     def define_max_pos(self):
+        """
+
+        Returns:
+
+        """
         # if self._mode == "train":
         #     shape = self._labels_train.shape[0]
         # elif self._mode == "valid":
@@ -285,6 +347,11 @@ class Loader_hdf5_Convert_Np:
             self._max_pos_test = shape
 
     def train_generator(self):
+        """
+
+        Returns:
+
+        """
         logging.info("Initialize Train Generator")
         self.change_mode("train")
         self._pos_train = 0
@@ -306,10 +373,20 @@ class Loader_hdf5_Convert_Np:
             yield features, labels
 
     def return_num_train_samples(self):
+        """
+
+        Returns:
+
+        """
         self.change_mode("train")
         return self._max_pos_train
 
     def valid_generator(self):
+        """
+
+        Returns:
+
+        """
         logging.info("Initialize Valid Generator")
         self.change_mode("valid")
         self._pos_valid = 0
@@ -332,10 +409,20 @@ class Loader_hdf5_Convert_Np:
             yield features, labels
 
     def return_num_valid_samples(self):
+        """
+
+        Returns:
+
+        """
         self.change_mode("valid")
         return self._max_pos_valid
 
     def evaluate_generator(self):
+        """
+
+        Returns:
+
+        """
         logging.info("Initialize Evaluation Generator")
         self.change_mode("test")
         self._pos_test = 0
@@ -357,20 +444,54 @@ class Loader_hdf5_Convert_Np:
             yield features, labels
 
     def return_num_evaluation_samples(self):
+        """
+
+        Returns:
+
+        """
         self.change_mode("test")
         return self._max_pos_test
 
     def change_mode(self, mode):
+        """
+
+        Args:
+            mode:
+
+        Returns:
+
+        """
         self._mode = mode
         self.define_max_pos()
 
     def return_valid_set(self):
+        """
+
+        Returns:
+
+        """
         return self._features_valid, self._labels_valid
 
     def change_batch_size(self, batch_size):
+        """
+
+        Args:
+            batch_size:
+
+        Returns:
+
+        """
         self._batch_size = batch_size
 
     def change_validation_size(self, valid_split):
+        """
+
+        Args:
+            valid_split:
+
+        Returns:
+
+        """
         self._valid_size = valid_split
         self.validation_split()
 
@@ -405,13 +526,30 @@ class Loader_hdf5_Convert_Np:
     ##-----------------------------------------------------------
 
 class Loader_hdf5:
+    """
 
+    """
     def __init__(self, fname,
-                 batch_size=12 * 128, num_batches=None,
+                 batch_size=128,
+                 num_batches=None,
                  has_rot = False,
-                 shuffle=False, valid_split=None,
+                 shuffle=False,
+                 valid_split=None,
                  mode="train"):
+        """
 
+        Args:
+            fname:
+            batch_size:
+            num_batches:
+            has_rot:
+            shuffle:
+            valid_split:
+            mode:
+
+        Returns:
+
+        """
         logging.info("Loading dataset '{0}'".format(fname))
 
         try:
@@ -482,6 +620,11 @@ class Loader_hdf5:
         self._openfile.close()
 
     def define_max_pos(self):
+        """
+
+        Returns:
+
+        """
         # if self._mode == "train":
         #     shape = self._labels_train.shape[0]
         # elif self._mode == "valid":
@@ -502,9 +645,19 @@ class Loader_hdf5:
             self._max_pos_test = shape
 
     def sort_by_rotations(self):
+        """
+
+        Returns:
+
+        """
         self._pos_train_indizes = list(np.argsort(self._info[:, 1], axis=0))
 
     def shuffle_data(self):
+        """
+
+        Returns:
+
+        """
         if self._has_rot is True:
             self._num_rot = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
         else:
@@ -520,6 +673,11 @@ class Loader_hdf5:
                     self._pos_train_indizes[fy_j:fy_j - self._num_rot:-1], self._pos_train_indizes[fy_i:fy_i - self._num_rot:-1]
 
     def validation_split(self):
+        """
+
+        Returns:
+
+        """
         if self._has_rot is True:
             self._num_rot = np.amax(self._info[:, 2]) - np.amin(self._info[:, 2]) + 1
         else:
@@ -530,6 +688,11 @@ class Loader_hdf5:
         self._max_pos_train = split_pos
 
     def train_generator(self):
+        """
+
+        Returns:
+
+        """
         self.change_mode("train")
         self.shuffle_data()
         self.validation_split()
@@ -555,10 +718,20 @@ class Loader_hdf5:
             yield features, labels
 
     def return_num_train_samples(self):
+        """
+
+        Returns:
+
+        """
         self.change_mode("train")
         return self._max_pos_train
 
     def valid_generator(self):
+        """
+
+        Returns:
+
+        """
         self.change_mode("valid")
         self.shuffle_data()
         self.validation_split()
@@ -586,10 +759,20 @@ class Loader_hdf5:
             yield features, labels
 
     def return_num_valid_samples(self):
+        """
+
+        Returns:
+
+        """
         self.change_mode("valid")
         return self._max_pos_valid
 
     def evaluate_generator(self):
+        """
+
+        Returns:
+
+        """
         self.change_mode("test")
         while 1:
             features = self._features_test[self._pos_test:self._pos_test + self._batch_size]
@@ -609,6 +792,11 @@ class Loader_hdf5:
             yield features, labels
 
     def return_num_evaluation_samples(self):
+        """
+
+        Returns:
+
+        """
         self.change_mode("test")
         return self._max_pos_test
 
