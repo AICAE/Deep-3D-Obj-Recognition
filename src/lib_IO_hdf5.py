@@ -476,7 +476,7 @@ class Loader_hdf5_Convert_Np:
         """
 
         Returns:
-            _max_pos_valid = Integer - Is the number of  training samples which will be returned
+            _max_pos_valid = Integer - Is the number of  validation  samples which will be returned
             by the generator in one run
 
         """
@@ -523,8 +523,8 @@ class Loader_hdf5_Convert_Np:
         """
 
         Returns:
-            _max_pos_test = Integer - Is the number of  training samples which will be returned
-            by the generator in one run
+            _max_pos_test = Integer - Is the number of Evaluation samples which will be returned
+            by the generator in one run.
 
         """
         self.change_mode("test")
@@ -715,7 +715,13 @@ class Loader_hdf5:
     def define_max_pos(self):
         """
 
-        Returns:
+        This functions determines the size of all arrays and sets the point where the iteration of the generator
+        will be reset to the start, based on if there is a number of batches given.
+
+        Procedure:
+            1.) Determine Shape of array
+            2.) if number of batches if given and number of batches times batch size is smaller than shape set
+                maximum iteration position to number of batches times batch size otherwise to length of array
 
         """
         # if self._mode == "train":
@@ -740,7 +746,10 @@ class Loader_hdf5:
     def sort_by_rotations(self):
         """
 
-        Returns:
+        This function sorts all Indizes of the Arrays based on the Object ID of the Info Array
+
+        Procedure:
+            1.) Define Sort Indizes based on Info Array
 
         """
         self._pos_train_indizes = list(np.argsort(self._info[:, 1], axis=0))
@@ -748,7 +757,13 @@ class Loader_hdf5:
     def shuffle_data(self):
         """
 
-        Returns:
+        This Function Shuffles the Indizes of the Arrays, if has_rot is enabled it will do a batch shuffle
+        and shuffle Indizes of objects with the same ObjectID from Info(:,1) together.
+        Otherwise it performs normal elementwise shuffle
+
+        Procedure:
+            1.) Figure out number of Rotations if has_rot is set, other wise elementwise
+            2.) Perform Fisher-Yates shuffle on Indizes
 
         """
         if self._has_rot is True:
@@ -768,7 +783,13 @@ class Loader_hdf5:
     def validation_split(self):
         """
 
-        Returns:
+        This functions defines the split position for the feature and label array. The size of the validation Array
+        is determined by self_valid_size. If rotations are present the split will be set after the last Rotation of
+        one Object
+
+        Procedure:
+            1.) Figure out number of Rotations if has_rot is set, other wise elementwise
+            2.) Determine Split Position and set min and max values for train and valid accordingly
 
         """
         if self._has_rot is True:
@@ -782,8 +803,19 @@ class Loader_hdf5:
 
     def train_generator(self):
         """
+        This it the generator for the training data.
 
-        Returns:
+        Yields:
+            features - Array of size [batch_size, 1 , 32 , 32 , 32]
+            labels - Array of size [batch-size,]
+
+
+        Procedure:
+            1.) Reset position of iterator and redefine maximum position of iterator
+            x.1) indefinetly extract the features & labels at the current position of the iterator for the indizes,
+                 by loading the samples for the according Indizes form the HDF5 file into a Numpy Array and yield it
+            x.2) if the maximum position of the iterator is reached reset iterator to 0 and shuffle Indizes before next
+                 Iteration cycle
 
         """
         self.change_mode("train")
@@ -803,6 +835,7 @@ class Loader_hdf5:
             self._pos_train += self._batch_size
             if self._pos_train >= self._max_pos_train:
                 self._pos_train = 0
+                self.shuffle_data()
 
             assert features.shape[0] == self._batch_size, \
                 "in Train Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
@@ -817,6 +850,8 @@ class Loader_hdf5:
         """
 
         Returns:
+            _max_pos_test = Integer - Is the number of Training samples which will be returned
+            by the generator in one run.
 
         """
         self.change_mode("train")
@@ -824,8 +859,18 @@ class Loader_hdf5:
 
     def valid_generator(self):
         """
+        This it the generator for the validation data.
 
-        Returns:
+        Yields:
+            features - Array of size [batch_size, 1 , 32 , 32 , 32]
+            labels - Array of size [batch-size,]
+
+
+        Procedure:
+            1.) Reset position of iterator and redefine maximum position of iterator
+            x.1) indefinetly extract the features & labels at the current position of the iterator for the indizes,
+                 by loading the samples for the according Indizes form the HDF5 file into a Numpy Array and yield it
+            x.2) if the maximum position of the iterator is reached reset iterator to 0
 
         """
         self.change_mode("valid")
@@ -861,6 +906,8 @@ class Loader_hdf5:
         """
 
         Returns:
+            _max_pos_va =lid Integer - Is the number of validation samples which will be returned
+            by the generator in one run.
 
         """
         self.change_mode("valid")
@@ -868,8 +915,18 @@ class Loader_hdf5:
 
     def evaluate_generator(self):
         """
+        This it the generator for the evaluation data.
 
-        Returns:
+        Yields:
+            features - Array of size [batch_size, 1 , 32 , 32 , 32]
+            labels - Array of size [batch-size,]
+
+
+        Procedure:
+            1.) Reset position of iterator and redefine maximum position of iterator
+            x.1) indefinetly extract the features & labels at the current position of the iterator for the batch_size,
+                 by loading the samples for the according Indizes form the HDF5 file into a Numpy Array and yield it
+            x.2) if the maximum position of the iterator is reached reset iterator to 0
 
         """
         self.change_mode("test")
@@ -898,6 +955,8 @@ class Loader_hdf5:
         """
 
         Returns:
+            _max_pos_test = Integer - Is the number of Evaluation samples which will be returned
+            by the generator in one run.
 
         """
         self.change_mode("test")
