@@ -10,9 +10,9 @@ import logging
 def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
     """ 
     Args:
-        dirname_data: the directory name where the volumetric data (from ModelNet40 - Princeton) is stored
-        fname_save: the filename and including path that you want to use to save the hdf5 dataset
-        class_name_to_id: the classname to ID encoding file from the configfile
+        dirname_data: string - the directory name where the volumetric data (from ModelNet40 - Princeton) is stored
+        fname_save: string - the filename and including path that you want to use to save the hdf5 dataset
+        class_name_to_id: dictonary - the classname to ID encoding file from the configfile
 
     Returns:
         Nothing - But it Saves a HDF5 Dataset at the given location with two subgroups "test" and "training" and the 
@@ -157,6 +157,10 @@ def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
 
 class Loader_hdf5_Convert_Np:
     """
+        This is the loader class that loads the hdf5 file and converts it to a numpy array.
+        All Operations are than performed on the Numpy Arrays.
+
+        This class needs more RAM but will be a lot faster.
 
     """
     def __init__(self, fname,
@@ -169,15 +173,27 @@ class Loader_hdf5_Convert_Np:
         """
 
         Args:
-            fname:
-            batch_size:
-            num_batches:
-            has_rot:
-            shuffle:
-            valid_split:
-            mode:
+            fname: string -> HDF5 file - filename of the Dataset
+            batch_size: Integer - The batch_size that should be  returned by the generators
+            num_batches: Integer - the number of batches that should be returned by the generators - Integer
+            has_rot: Boolean - with this option you can decide whether the class should search for rotations or not
+                                rotations can only be found if there is an info file
+            shuffle: Boolean - option to mark if set should be shuffled
+            valid_split: float in range (0,1) or None - if a float is given the class will spplit the training set into
+                                                        a training and validation set
+            mode: "train, valid, test" - mode to show which type of set si returned currently
 
         Returns:
+            self: ClassObject
+
+        Procedure:
+            1.) Load the HDF5 file
+            2.) load all Dataset and save them in Numpy Arrays
+            3.) Close HDF5 file
+            4.) Sort by Rotations
+            5.) Shuffle Data
+            6.) Create Validation Set
+            7.) Define Size of Train, Validation & Test Array
 
         """
 
@@ -234,6 +250,7 @@ class Loader_hdf5_Convert_Np:
         self._max_pos_test = None
         self._num_rot = None
 
+
         self.sort_by_rotations()
 
         if shuffle is True:
@@ -263,18 +280,28 @@ class Loader_hdf5_Convert_Np:
     def sort_by_rotations(self):
         """
 
-        Returns:
+        This function sorts all arrays based on the Object ID of the Info Array
+
+        Procedure:
+            1.) Define Sort Indizes based on Info Array
+            2.) Sort all arrays using Sort Indizes
 
         """
-        sort_scheme = np.argsort(self._info[:, 1], axis=0)
-        self._info = self._info[sort_scheme]
-        self._features = self._features[sort_scheme]
-        self._labels = self._labels[sort_scheme]
+        if self._has_rot:
+            sort_scheme = np.argsort(self._info[:, 1], axis=0)
+            self._info = self._info[sort_scheme]
+            self._features = self._features[sort_scheme]
+            self._labels = self._labels[sort_scheme]
 
     def shuffle_data(self):
         """
 
-        Returns:
+        This Function Shuffles the Arrays, if has_rot is enabled it will do a batch shuffle and shuffle objects with
+        the same ObjectID from Info(:,1) together. Otherwise it performs normal elementwise shuffle
+
+        Procedure:
+            1.) Figure out number of Rotations if has_rot is set, other wise elementwise
+            2.) Perform Fisher-Yates shuffle directly on Array
 
         """
         if self._has_rot is True:
@@ -302,7 +329,15 @@ class Loader_hdf5_Convert_Np:
     def validation_split(self):
         """
 
-        Returns:
+        This functions performs a Validation split on the feature and label array, it will therefore split the array
+        into fou new arrays features_train labels_train features_valid labels_valid. The size of the validation Array
+        is determined by self_valid_size. If rotations are present the split will be set after the last Rotation of
+        one Object
+
+        Procedure:
+            1.) Figure out number of Rotations if has_rot is set, other wise elementwise
+            2.) Determine Split Position
+            3.) Split features and labels into four new arrays
 
         """
         if self._has_rot is True:
@@ -318,7 +353,14 @@ class Loader_hdf5_Convert_Np:
     def define_max_pos(self):
         """
 
-        Returns:
+        This functions determines the size of all arrays and sets the point where the iteration of the generator
+        will be reset to the start, based on if there is a number of batches given.
+
+        Procedure:
+            1.) Determine Shape of array
+            2.) if number of batches if given and number of batches times batch size is smaller than shape set
+                maximum iteration position to number of batches times batch size otherwise to length of array
+
 
         """
         # if self._mode == "train":
@@ -349,7 +391,17 @@ class Loader_hdf5_Convert_Np:
     def train_generator(self):
         """
 
-        Returns:
+        This it the generator for the training data.
+
+        Yields:
+            features - Array of size [batch_size, 1 , 32 , 32 , 32]
+            labels - Array of size [batch-size,]
+
+
+        Procedure:
+            1.) Reset position of iterator and redefine maximum position of iterator
+            x.) indefinetly extract the features & labels at the current position of the iterator, of size batch_size
+                if the maximum position of the iterator is reached reset iterator to 0
 
         """
         logging.info("Initialize Train Generator")
@@ -376,6 +428,8 @@ class Loader_hdf5_Convert_Np:
         """
 
         Returns:
+            _max_pos_train = Integer - Is the number of  training samples which will be returned
+            by the generator in one run
 
         """
         self.change_mode("train")
@@ -384,7 +438,17 @@ class Loader_hdf5_Convert_Np:
     def valid_generator(self):
         """
 
-        Returns:
+        This it the generator for the validation data.
+
+        Yields:
+            features - Array of size [batch_size, 1 , 32 , 32 , 32]
+            labels - Array of size [batch-size,]
+
+
+        Procedure:
+            1.) Reset position of iterator and redefine maximum position of iterator
+            x.) indefinetly extract the features & labels at the current position of the iterator, of size batch_size
+                if the maximum position of the iterator is reached reset iterator to 0
 
         """
         logging.info("Initialize Valid Generator")
@@ -412,6 +476,8 @@ class Loader_hdf5_Convert_Np:
         """
 
         Returns:
+            _max_pos_valid = Integer - Is the number of  training samples which will be returned
+            by the generator in one run
 
         """
         self.change_mode("valid")
@@ -420,7 +486,17 @@ class Loader_hdf5_Convert_Np:
     def evaluate_generator(self):
         """
 
-        Returns:
+        This it the generator for the test data.
+
+        Yields:
+            features - Array of size [batch_size, 1 , 32 , 32 , 32]
+            labels - Array of size [batch-size,]
+
+
+        Procedure:
+            1.) Reset position of iterator and redefine maximum position of iterator
+            x.) indefinetly extract the features & labels at the current position of the iterator, of size batch_size
+                if the maximum position of the iterator is reached reset iterator to 0
 
         """
         logging.info("Initialize Evaluation Generator")
@@ -447,6 +523,8 @@ class Loader_hdf5_Convert_Np:
         """
 
         Returns:
+            _max_pos_test = Integer - Is the number of  training samples which will be returned
+            by the generator in one run
 
         """
         self.change_mode("test")
@@ -528,6 +606,11 @@ class Loader_hdf5_Convert_Np:
 class Loader_hdf5:
     """
 
+    This loader only opens the HDF5 file and only loads the pieces from the HDF5 file that are passed during iteration
+    of the generator. All shuffle, split, etc. options are performed on Indizes solely.
+
+    This class should use less RAM but will be a lot slower
+
     """
     def __init__(self, fname,
                  batch_size=128,
@@ -539,15 +622,25 @@ class Loader_hdf5:
         """
 
         Args:
-            fname:
-            batch_size:
-            num_batches:
-            has_rot:
-            shuffle:
-            valid_split:
-            mode:
+            fname: string -> HDF5 file - filename of the Dataset
+            batch_size: Integer - The batch_size that should be  returned by the generators
+            num_batches: Integer - the number of batches that should be returned by the generators - Integer
+            has_rot: Boolean - with this option you can decide whether the class should search for rotations or not
+                                rotations can only be found if there is an info file
+            shuffle: Boolean - option to mark if set should be shuffled
+            valid_split: float in range (0,1) or None - if a float is given the class will spplit the training set into
+                                                        a training and validation set
+            mode: "train, valid, test" - mode to show which type of set si returned currently
 
         Returns:
+            self: ClassObject
+
+        Procedure:
+            1.) Load the HDF5 file
+            2.) Define Size of Arrays
+            3.) Sort by Rotations
+            4.) Shuffle Data
+            5.) Create Validation Set
 
         """
         logging.info("Loading dataset '{0}'".format(fname))
@@ -699,10 +792,13 @@ class Loader_hdf5:
         self._pos_train = 0
         while 1:
 
-            features = self._features[sorted(self._pos_train_indizes[
-                                      self._pos_train:self._pos_train + self._batch_size])]
+            features = np.zeros(list(self._batch_size) + self._features.shape[1:4], dtype=np.uint8)
+            self._features[sorted(self._pos_train_indizes[
+                                  self._pos_train:self._pos_train + self._batch_size])].read_direct(features)
+
+            labels = np.zeros(list(self._batch_size) + self._features.shape[1:4], dtype=np.uint32)
             labels = self._labels[sorted(self._pos_train_indizes[
-                self._pos_train:self._pos_train + self._batch_size])]
+                                         self._pos_train:self._pos_train + self._batch_size])].read_direct(labels)
 
             self._pos_train += self._batch_size
             if self._pos_train >= self._max_pos_train:
@@ -737,10 +833,13 @@ class Loader_hdf5:
         self.validation_split()
         while 1:
 
-            features = self._features[sorted(self._pos_train_indizes[
-                                      self._pos_valid:self._pos_valid + self._batch_size])]
-            labels = self._labels[sorted(self._pos_train_indizes[
-                                         self._pos_valid:self._pos_valid + self._batch_size])]
+            features = np.zeros(list(self._batch_size) + self._features.shape[1:4], dtype=np.uint8)
+            self._features[sorted(self._pos_train_indizes[
+                                  self._pos_valid:self._pos_valid + self._batch_size])].read_direct(features)
+
+            labels = np.zeros(list(self._batch_size) + self._features.shape[1:4], dtype=np.uint32)
+            self._labels[sorted(self._pos_train_indizes[
+                                self._pos_valid:self._pos_valid + self._batch_size])].read_direct(labels)
 
             self._pos_valid += self._batch_size
             if self._pos_valid >= self._max_pos_valid:
@@ -775,8 +874,12 @@ class Loader_hdf5:
         """
         self.change_mode("test")
         while 1:
-            features = self._features_test[self._pos_test:self._pos_test + self._batch_size]
-            labels = self._labels_test[self._pos_test:self._pos_test + self._batch_size]
+
+            features = np.zeros(list(self._batch_size) + self._features.shape[1:4], dtype=np.uint8)
+            self._features_test[self._pos_test:self._pos_test + self._batch_size].read_direct(features)
+
+            labels = np.zeros(list(self._batch_size) + self._features.shape[1:4], dtype=np.uint32)
+            self._labels_test[self._pos_test:self._pos_test + self._batch_size].read_direct(labels)
 
             self._pos_test += self._batch_size
             if self._pos_test >= self._max_pos_test:
