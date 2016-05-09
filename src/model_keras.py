@@ -131,6 +131,7 @@ class model_vt (object):
 
     def fit(self, generator, samples_per_epoch,
             nb_epoch, valid_generator, nb_valid_samples):
+        logging.info("Start training")
         self._mdl.fit_generator(generator=generator,
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
