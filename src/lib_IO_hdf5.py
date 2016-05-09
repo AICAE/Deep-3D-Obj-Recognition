@@ -117,10 +117,10 @@ def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
                     info_test[test_it, :] = [label, obj_id, rot_id]
                     test_it += 1
 
-    print("found {0} train datasets and {1} test datasets".format(lab_train.shape, lab_test.shape))
+    print("extracted {0} train datasets and {1} test datasets".format(lab_train.shape[0], lab_test.shape[0]))
 
     # create hdf5 dataset storage and iterate through all files and save them. FileSize Reason
-    openfile = h5py.File(fname_save, "w")
+    openfile = h5py.File(fname_save,'w')
     train = openfile.create_group("train")
     train.create_dataset("features_train", [train_size, 1, 32, 32, 32],
                          dtype=np.uint8,
@@ -154,6 +154,8 @@ def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
                         compression="gzip",
                         data=info_test)
     openfile.close()
+    print("saved datasets as hdf at {0}".format(fname_save))
+
 
 class Loader_hdf5_Convert_Np:
     """
