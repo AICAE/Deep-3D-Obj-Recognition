@@ -10,7 +10,7 @@ tic = time.time()
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-loader = lib_IO_hdf5.Loader_hdf5_Convert_Np("data/testing.hdf5",
+loader = lib_IO_hdf5.Loader_hdf5_Convert_Np("data/modelnet40.hdf5",
                                             batch_size= 32,
                                             shuffle=True,
                                             has_rot= False,
