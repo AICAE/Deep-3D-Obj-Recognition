@@ -1,16 +1,19 @@
 import h5py
 import time
+import logging
+import sys
 
 import lib_IO_hdf5
 from config import model_cfg
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 
 ##############test-saving####################################################
-#
-#
-# lib_IO_hdf5.save_dataset_as_hdf5("/home/tg/Downloads/volumetric_data/",
-#                            "/home/tg/Projects/Deep-3D-Obj-Recognition/src/data/modelnet40.hdf5",
-#                           model_cfg.class_name_to_id_modelnet40)
+
+
+lib_IO_hdf5.save_dataset_as_hdf5("/home/tg/Downloads/volumetric_data/",
+                           "/home/tg/Projects/Deep-3D-Obj-Recognition/src/data/testing.hdf5",
+                          model_cfg.class_name_to_id_testing)
 
 #################test_loading##########################################
 
@@ -38,14 +41,16 @@ from config import model_cfg
 #                                  valid_split=0.15):
 #     print("for the {0}. batch the shape is {1}".format(it,feat.shape))
 #     it +=1
-#
+
 # tic = time.time()
 #
-# b = lib_IO_hdf5.Loader_hdf5_Convert_Np("data/testing.hdf5",
-#                                  batch_size= 12,
-#                                  has_rot= True,
+# b = lib_IO_hdf5.Loader_hdf5_Convert_Np("data/modelnet40.hdf5",
+#                                  batch_size= 32,
+#                                  has_rot= False,
 #                                  shuffle=True,
 #                                  valid_split=0.15)
+#
+# print(b.return_nb_classes())
 #
 # print("-----------")
 # it = 0
@@ -77,15 +82,15 @@ from config import model_cfg
 #
 # tictoc = time.time() - tic
 # print("the test_IO with Convert to Numpy took {0} seconds".format(tictoc))
-#
+
+
+
 # tic = time.time()
-#
-#
-# with lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
-#                                  batch_size= 12,
-#                                  has_rot= True,
+# with lib_IO_hdf5.Loader_hdf5("data/modelnet40.hdf5",
+#                                  batch_size= 32*64,
+#                                  has_rot= False,
 #                                  shuffle=True,
-#                                  valid_split=0.15) as b:
+#                                  valid_split=0.10) as b:
 #
 #     print("-----------")
 #     it = 0

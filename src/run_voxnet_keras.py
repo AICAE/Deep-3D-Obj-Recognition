@@ -10,16 +10,18 @@ tic = time.time()
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-voxnet = model_keras.model_vt()
 loader = lib_IO_hdf5.Loader_hdf5_Convert_Np("data/testing.hdf5",
-                                 batch_size= 12,
-                                 shuffle=True,
-                                 has_rot= False,
-                                 valid_split=0.15,
-                                 mode="train")
+                                            batch_size= 32,
+                                            shuffle=True,
+                                            has_rot= False,
+                                            valid_split=0.15,
+                                            )
+
+voxnet = model_keras.model_vt(nb_classes=loader.return_nb_classes())
+
 voxnet.fit(generator=loader.train_generator(),
           samples_per_epoch=loader.return_num_train_samples(),
-          nb_epoch=2,
+          nb_epoch=80,
           valid_generator= loader.valid_generator(),
           nb_valid_samples = loader.return_num_valid_samples())
 
@@ -32,27 +34,29 @@ print("the run_keras with Conversion to Numpy took {0} seconds".format(tictoc))
 
 tic = time.time()
 
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-
-voxnet = model_keras.model_vt()
-with lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
-                                 batch_size= 12,
-                                 shuffle=True,
-                                 has_rot= False,
-                                 valid_split=0.15,
-                                 mode="train") as loader:
-    voxnet.fit(generator=loader.train_generator(),
-              samples_per_epoch=loader.return_num_train_samples(),
-              nb_epoch=2,
-              valid_generator= loader.valid_generator(),
-              nb_valid_samples = loader.return_num_valid_samples())
+# logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 
-    voxnet.evaluate(evaluation_generator = loader.evaluate_generator(),
-                   num_eval_samples=loader.return_num_evaluation_samples())
-
-tictoc = time.time() - tic
-print("the run_keras without Conversion to Numpy run took {0} seconds".format(tictoc))
+# with lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
+#                                  batch_size= 12,
+#                                  shuffle=True,
+#                                  has_rot= False,
+#                                  valid_split=0.15,
+#                             ) as loader:
+#     #Initiate Model
+#     voxnet = model_keras.model_vt(nb_classes=loader.return_nb_classes())
+#     #train model
+#     voxnet.fit(generator=loader.train_generator(),
+#               samples_per_epoch=loader.return_num_train_samples(),
+#               nb_epoch=2,
+#               valid_generator= loader.valid_generator(),
+#               nb_valid_samples = loader.return_num_valid_samples())
+#     #evaluate model
+#     voxnet.evaluate(evaluation_generator = loader.evaluate_generator(),
+#                    num_eval_samples=loader.return_num_evaluation_samples())
+#
+# tictoc = time.time() - tic
+# print("the run_keras without Conversion to Numpy run took {0} seconds".format(tictoc))
 
 
 # def gen():

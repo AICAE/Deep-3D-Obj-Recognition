@@ -11,6 +11,7 @@ from keras.layers import Convolution3D, MaxPooling3D
 from keras.layers.core import Activation, Dense, Dropout, Flatten
 from keras.layers.advanced_activations import LeakyReLU
 from keras.regularizers import l2
+from keras.callbacks import LearningRateScheduler
 from keras.engine.training import batch_shuffle
 
 from keras.optimizers import SGD
@@ -18,18 +19,30 @@ from keras.optimizers import SGD
 import lib_IO_hdf5
 
 import logging
+import datetime
 
+
+
+def learningRateSchedule(epoch):
+    if epoch >= 60000:
+        return 0.0001
+    elif epoch >= 400000:
+        return 0.00005,
+    elif epoch >= 600000:
+        return 0.00001
+    else:
+        return 0.001
 
 class model_vt (object):
-
-    # TODO l2(0.001) for EVERY single layer required or sufficient if applied to last layer ?
-    def __init__(self):
+    def __init__(self,nb_classes):
         """initiate Model according to voxnet paper"""
         # Stochastic Gradient Decent (SGD) with momentum
         # lr=0.01 for LiDar dataset
         # lr=0.001 for other datasets
         # decay of 0.00016667 approx the same as learning schedule (0:0.001,60000:0.0001,600000:0.00001)
-        self._optimizer = SGD(lr=0.001, momentum=0.9, decay=0.00016667, nesterov=False)
+        # use callbacks learingrate_schedule instead
+        self._optimizer = SGD(lr=0.001, momentum=0.9, decay=0.0, nesterov=False)
+        self._lr_schedule = LearningRateScheduler(learningRateSchedule)
 
         # init model
         self._mdl = Sequential()
@@ -40,16 +53,13 @@ class model_vt (object):
                                     kernel_dim1=5,
                                     kernel_dim2=5,
                                     kernel_dim3=5,
-                                    init='normal',  # TODO
-                                    weights=None,  # TODO
+                                    init='normal',
                                     border_mode='valid',
                                     subsample=(2, 2, 2),
                                     dim_ordering='th',
                                     W_regularizer=l2(0.001),
                                     b_regularizer=l2(0.001),
-                                    activity_regularizer=None,
-                                    W_constraint=None,
-                                    b_constraint=None))
+                                    ))
 
         logging.debug("Layer1:Conv3D shape={0}".format(self._mdl.output_shape))
         self._mdl.add(Activation(LeakyReLU(alpha=0.1)))
@@ -62,16 +72,13 @@ class model_vt (object):
                                     kernel_dim1=3,
                                     kernel_dim2=3,
                                     kernel_dim3=3,
-                                    init='normal',  # TODO
-                                    weights=None,  # TODO
+                                    init='normal',
                                     border_mode='valid',
                                     subsample=(1, 1, 1),
                                     dim_ordering='th',
                                     W_regularizer=l2(0.001),
                                     b_regularizer=l2(0.001),
-                                    activity_regularizer=None,
-                                    W_constraint=None,
-                                    b_constraint=None))
+                                    ))
 
         logging.debug("Layer3:Conv3D shape={0}".format(self._mdl.output_shape))
         self._mdl.add(Activation(LeakyReLU(alpha=0.1)))
@@ -92,14 +99,11 @@ class model_vt (object):
         logging.debug("Layer5:Flatten shape={0}".format(self._mdl.output_shape))
 
         self._mdl.add(Dense(output_dim=128,
-                            init='normal',  # TODO np.random.normal, K.random_normal
+                            init='normal',
                             activation='linear',
-                            weights=None,
                             W_regularizer=l2(0.001),
                             b_regularizer=l2(0.001),
-                            activity_regularizer=None,
-                            W_constraint=None,
-                            b_constraint=None))
+                            ))
 
         logging.debug("Layer6:Dense shape={0}".format(self._mdl.output_shape))
 
@@ -107,19 +111,15 @@ class model_vt (object):
         self._mdl.add(Dropout(p=0.4))
 
         # dense 2 (fully connected layer)
-        self._mdl.add(Dense(output_dim=1,
-                            init='normal',  # TODO np.random.normal, K.random_normal
+        self._mdl.add(Dense(output_dim=nb_classes,
+                            init='normal',
                             activation='linear',
-                            weights=None,
                             W_regularizer=l2(0.001),
                             b_regularizer=l2(0.001),
-                            activity_regularizer=None,
-                            W_constraint=None,
-                            b_constraint=None))
+                            ))
 
         logging.debug("Layer8:Dense shape={0}".format(self._mdl.output_shape))
 
-        # TODO softmax needed ?
         self._mdl.add(Activation("softmax"))
 
         # compile model
@@ -127,7 +127,6 @@ class model_vt (object):
         logging.info("Model compiled!")
 
     def _objective(self, y_true, y_pred):
-        # TODO might need to use np_utils.to_categorical(y, nb_classes=None)
         return K.categorical_crossentropy(y_pred, y_true)
 
     def fit(self, generator, samples_per_epoch,
@@ -136,13 +135,16 @@ class model_vt (object):
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
                                 verbose=1,
-                                callbacks=[],
+                                callbacks=[self._lr_schedule,],
                                 validation_data=valid_generator,
                                 nb_val_samples=nb_valid_samples,
-                                class_weight=None)
+                                )
 
-        # TODO more sophisticated filename
-        self._mdl.save_weights("weights", False)
+        time_now = datetime.datetime.now()
+        time_now = "_{0}_{1}_{2}_{3}_{4}_{5}".format(time_now.year, time_now.month, time_now.day,
+                                                     time_now.hour, time_now.minute, time_now.second)
+        logging.info("save model Voxnet weights as weights_{0}.h5".format(time_now))
+        self._mdl.save_weights("weights_{0}.h5".format(time_now), False)
 
     # for testing only
     def _fit(self, X_train, y_train, batch_size=32, nb_epoch=80):
@@ -151,7 +153,8 @@ class model_vt (object):
                       nb_epoch=nb_epoch,
                       batch_size=batch_size,
                       shuffle=True,
-                      verbose=1)
+                      verbose=1,
+                      )
 
         self._mdl.save_weights("weights", overwrite=False)
 
@@ -176,21 +179,20 @@ class model_vt (object):
     score = property(get_score)
 
 
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
-    v = model_vt()
-    loader = lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
-                                     set_type= "train",
-                                     batch_size= 12,
-                                     shuffle=True,
-                                     valid_split=0.15,
-                                     mode="train")
-    v.fit(generator=loader.train_generator(),
-          samples_per_epoch=loader.return_num_train_samples(),
-          nb_epoch=2,
-          valid_generator= loader.valid_generator(),
-          nb_valid_samples = loader.return_num_valid_samples())
-    # v.load_weights("weightsm")
-
-    v.evaluate(evaluation_generator = loader.evaluate_generator(),
-               num_eval_samples=loader.return_num_evaluation_samples())
+# if __name__ == "__main__":
+#     logging.basicConfig(level=logging.DEBUG)
+#     v = model_vt()
+#     loader = lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
+#                                      batch_size= 12,
+#                                      shuffle=True,
+#                                      valid_split=0.15,
+#                                      mode="train")
+#     v.fit(generator=loader.train_generator(),
+#           samples_per_epoch=loader.return_num_train_samples(),
+#           nb_epoch=2,
+#           valid_generator= loader.valid_generator(),
+#           nb_valid_samples = loader.return_num_valid_samples())
+#     # v.load_weights("weightsm")
+#
+#     v.evaluate(evaluation_generator = loader.evaluate_generator(),
+#                num_eval_samples=loader.return_num_evaluation_samples())
