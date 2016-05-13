@@ -10,14 +10,16 @@ tic = time.time()
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-loader = lib_IO_hdf5.Loader_hdf5_Convert_Np("data/modelnet40.hdf5",
+dataset_name = "modelnet10"
+
+loader = lib_IO_hdf5.Loader_hdf5_Convert_Np("data/" + dataset_name + ".hdf5",
                                             batch_size= 32,
                                             shuffle=True,
                                             has_rot= False,
-                                            valid_split=0.15,
+                                            valid_split=0.12,
                                             )
 
-voxnet = model_keras.model_vt(nb_classes=loader.return_nb_classes())
+voxnet = model_keras.model_vt(nb_classes=loader.return_nb_classes(), dataset_name=dataset_name)
 
 voxnet.fit(generator=loader.train_generator(),
           samples_per_epoch=loader.return_num_train_samples(),

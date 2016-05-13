@@ -11,7 +11,7 @@ from keras.layers import Convolution3D, MaxPooling3D
 from keras.layers.core import Activation, Dense, Dropout, Flatten
 from keras.layers.advanced_activations import LeakyReLU
 from keras.regularizers import l2
-from keras.callbacks import LearningRateScheduler
+from keras.callbacks import LearningRateScheduler, ModelCheckpoint
 from keras.engine.training import batch_shuffle
 
 from keras.optimizers import SGD
@@ -34,7 +34,7 @@ def learningRateSchedule(epoch):
         return 0.001
 
 class model_vt (object):
-    def __init__(self,nb_classes):
+    def __init__(self,nb_classes,dataset_name):
         """initiate Model according to voxnet paper"""
         # Stochastic Gradient Decent (SGD) with momentum
         # lr=0.01 for LiDar dataset
@@ -43,6 +43,8 @@ class model_vt (object):
         # use callbacks learingrate_schedule instead
         self._optimizer = SGD(lr=0.001, momentum=0.9, decay=0.0, nesterov=False)
         self._lr_schedule = LearningRateScheduler(learningRateSchedule)
+        self._mdl_checkpoint = ModelCheckpoint("data/" + dataset_name + "/weights.{epoch:02d}-{val_acc:.2f}.hdf5",
+                                               monitor='val_acc', verbose=0, save_best_only=False, mode='auto')
 
         # init model
         self._mdl = Sequential()
@@ -136,7 +138,7 @@ class model_vt (object):
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
                                 verbose=1,
-                                callbacks=[self._lr_schedule,],
+                                callbacks=[self._lr_schedule,self._mdl_checkpoint],
                                 validation_data=valid_generator,
                                 nb_val_samples=nb_valid_samples,
                                 )
@@ -147,17 +149,17 @@ class model_vt (object):
         logging.info("save model Voxnet weights as weights_{0}.h5".format(time_now))
         self._mdl.save_weights("weights_{0}.h5".format(time_now), False)
 
-    # for testing only
-    def _fit(self, X_train, y_train, batch_size=32, nb_epoch=80):
-        self._mdl.fit(X_train=X_train,
-                      y_train=y_train,
-                      nb_epoch=nb_epoch,
-                      batch_size=batch_size,
-                      shuffle=True,
-                      verbose=1,
-                      )
-
-        self._mdl.save_weights("weights", overwrite=False)
+    # # for testing only
+    # def _fit(self, X_train, y_train, batch_size=32, nb_epoch=80):
+    #     self._mdl.fit(X_train=X_train,
+    #                   y_train=y_train,
+    #                   nb_epoch=nb_epoch,
+    #                   batch_size=batch_size,
+    #                   shuffle=True,
+    #                   verbose=1,
+    #                   )
+    #
+    #     self._mdl.save_weights("weights", overwrite=False)
 
     def evaluate(self, evaluation_generator, num_eval_samples):
         self._score = self._mdl.evaluate_generator(
