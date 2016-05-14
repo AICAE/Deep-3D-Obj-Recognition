@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from __future__ import print_function
 import numpy as np
 import scipy.io
@@ -51,9 +53,9 @@ def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
                 if pos1 is -1:
                     continue
 
-                #some classes carry _ in name
+                # some classes carry _ in name
                 try:
-                    int(fname[pos1+1])
+                    int(fname[pos1 + 1])
                 except ValueError:
                     pos1 = fname.find('_', pos1 + 1)
 
@@ -89,9 +91,9 @@ def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
 
                 if pos1 is -1:
                     continue
-                #some classes carry _ in anme
+                # some classes carry _ in anme
                 try:
-                    int(fname[pos1+1])
+                    int(fname[pos1 + 1])
                 except ValueError:
                     pos1 = fname.find('_', pos1 + 1)
 
@@ -132,7 +134,7 @@ def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
     logging.info("extracted {0} train datasets and {1} test datasets".format(lab_train.shape[0], lab_test.shape[0]))
 
     # create hdf5 dataset storage and iterate through all files and save them. FileSize Reason
-    openfile = h5py.File(fname_save,'w')
+    openfile = h5py.File(fname_save, 'w')
     train = openfile.create_group("train")
     train.create_dataset("features_train", [train_size, 1, 32, 32, 32],
                          dtype=np.uint8,
@@ -177,10 +179,11 @@ class Loader_hdf5_Convert_Np:
         This class needs more RAM but will be a lot faster.
 
     """
+
     def __init__(self, fname,
                  batch_size=128,
                  num_batches=None,
-                 has_rot = False,
+                 has_rot=False,
                  shuffle=False,
                  valid_split=None,
                  mode="train"):
@@ -265,7 +268,7 @@ class Loader_hdf5_Convert_Np:
         self._num_rot = None
 
         self._classes = np.unique(self._labels)
-        self._num_classes =  self._classes.shape[0]
+        self._num_classes = self._classes.shape[0]
         logging.info("found {0} classes: \n {1}".format(self._num_classes, self._classes))
 
         self.sort_by_rotations()
@@ -430,10 +433,10 @@ class Loader_hdf5_Convert_Np:
 
             assert features.shape[0] == self._batch_size, \
                 "in Train Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(features.shape[0], self._batch_size, self._pos_train, self._max_pos_train)
+                format(features.shape[0], self._batch_size, self._pos_train, self._max_pos_train)
             assert labels_binary.shape[0] == self._batch_size, \
                 "in Train Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(labels.shape[0], self._batch_size, self._pos_train, self._max_pos_train)
+                format(labels.shape[0], self._batch_size, self._pos_train, self._max_pos_train)
 
             yield features, labels_binary
 
@@ -480,10 +483,10 @@ class Loader_hdf5_Convert_Np:
 
             assert features.shape[0] == self._batch_size,\
                 "in Valid Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(features.shape[0], self._batch_size, self._pos_valid, self._max_pos_valid)
+                format(features.shape[0], self._batch_size, self._pos_valid, self._max_pos_valid)
             assert labels_binary.shape[0] == self._batch_size,\
                 "in Valid Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(labels_binary.shape[0], self._pos_valid, self._batch_size, self._max_pos_valid)
+                format(labels_binary.shape[0], self._pos_valid, self._batch_size, self._max_pos_valid)
 
             yield features, labels_binary
 
@@ -529,10 +532,10 @@ class Loader_hdf5_Convert_Np:
 
             assert features.shape[0] == self._batch_size, \
                 "in Evaluation Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(features.shape[0], self._batch_size, self._pos_test, self._max_pos_test)
+                format(features.shape[0], self._batch_size, self._pos_test, self._max_pos_test)
             assert labels_binary.shape[0] == self._batch_size, \
                 "in Evaluation Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(labels_binary.shape[0], self._batch_size, self._pos_test, self._max_pos_test)
+                format(labels_binary.shape[0], self._batch_size, self._pos_test, self._max_pos_test)
 
             yield features, labels_binary
 
@@ -586,8 +589,8 @@ class Loader_hdf5_Convert_Np:
         """
         return self._num_classes
 
-    ##-----------------------------------------------------------
-    ## Activate this if loader should be iterable class
+    # -----------------------------------------------------------
+    # Activate this if loader should be iterable class
     ##
     # def __iter__(self):
     #     return self
@@ -614,9 +617,7 @@ class Loader_hdf5_Convert_Np:
     #         raise StopIteration
     #
     #     return features, labels
-    ##-----------------------------------------------------------
-
-
+    # -----------------------------------------------------------
 
 
 class Loader_hdf5:
@@ -628,10 +629,11 @@ class Loader_hdf5:
     This class should use less RAM but will be a lot slower
 
     """
+
     def __init__(self, fname,
                  batch_size=128,
                  num_batches=None,
-                 has_rot = False,
+                 has_rot=False,
                  shuffle=False,
                  valid_split=None,
                  ):
@@ -705,7 +707,7 @@ class Loader_hdf5:
         self.define_max_pos()
 
         self._classes = np.unique(self._labels)
-        self._num_classes =  self._classes.shape[0]
+        self._num_classes = self._classes.shape[0]
         logging.info("found {0} classes : \n {1}".format(self._num_classes, self._classes))
 
         self.sort_by_rotations()
@@ -791,7 +793,8 @@ class Loader_hdf5:
                     self._pos_train_indizes[fy_j::-1], self._pos_train_indizes[fy_i:fy_i - self._num_rot:-1]
             else:
                 self._pos_train_indizes[fy_i:fy_i - self._num_rot:-1], self._pos_train_indizes[fy_j:fy_j - self._num_rot:-1] =\
-                    self._pos_train_indizes[fy_j:fy_j - self._num_rot:-1], self._pos_train_indizes[fy_i:fy_i - self._num_rot:-1]
+                    self._pos_train_indizes[
+                        fy_j:fy_j - self._num_rot:-1], self._pos_train_indizes[fy_i:fy_i - self._num_rot:-1]
 
     def validation_split(self):
         """
@@ -836,17 +839,17 @@ class Loader_hdf5:
         self.validation_split()
         self._pos_train = 0
         #shp_features = list(self._features.shape[1:])
-        #shp_features.insert(0,self._batch_size)
+        # shp_features.insert(0,self._batch_size)
         #features_tmp = np.zeros(shp_features, dtype=np.uint8)
         #shp_labels = list(self._labels.shape[1:])
-        #shp_labels.insert(0,self._batch_size)
+        # shp_labels.insert(0,self._batch_size)
         #labels_tmp = np.zeros(shp_labels, dtype=np.uint32)
         while 1:
 
             features_tmp = self._features[sorted(self._pos_train_indizes[
-                                  self._pos_train:self._pos_train + self._batch_size])]
+                self._pos_train:self._pos_train + self._batch_size])]
             labels_tmp = self._labels[sorted(self._pos_train_indizes[
-                                self._pos_train:self._pos_train + self._batch_size])]
+                self._pos_train:self._pos_train + self._batch_size])]
 
             labels_binary = label_binarize(labels_tmp, self._classes)
 
@@ -857,10 +860,10 @@ class Loader_hdf5:
 
             assert features_tmp.shape[0] == self._batch_size, \
                 "in Train Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(features_tmp.shape[0], self._batch_size, self._pos_train, self._max_pos_train)
+                format(features_tmp.shape[0], self._batch_size, self._pos_train, self._max_pos_train)
             assert labels_binary.shape[0] == self._batch_size, \
                 "in Train Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(labels_binary.shape[0], self._batch_size, self._pos_train, self._max_pos_train)
+                format(labels_binary.shape[0], self._batch_size, self._pos_train, self._max_pos_train)
 
             yield features_tmp, labels_binary
 
@@ -895,17 +898,17 @@ class Loader_hdf5:
         self.shuffle_data()
         self.validation_split()
         #shp_features = list(self._features.shape[1:])
-        #shp_features.insert(0,self._batch_size)
+        # shp_features.insert(0,self._batch_size)
         #features_tmp = np.zeros(shp_features, dtype=np.uint8)
         #shp_labels = list(self._labels.shape[1:])
-        #shp_labels.insert(0,self._batch_size)
+        # shp_labels.insert(0,self._batch_size)
         #labels_tmp = np.zeros(shp_labels, dtype=np.uint32)
         while 1:
             features_tmp = self._features[sorted(self._pos_train_indizes[
-                                  self._pos_valid:self._pos_valid + self._batch_size])]
+                self._pos_valid:self._pos_valid + self._batch_size])]
 
             labels_tmp = self._labels[sorted(self._pos_train_indizes[
-                                self._pos_valid:self._pos_valid + self._batch_size])]
+                self._pos_valid:self._pos_valid + self._batch_size])]
 
             labels_binary = label_binarize(labels_tmp, self._classes)
 
@@ -915,13 +918,13 @@ class Loader_hdf5:
 
             assert features_tmp.shape[0] == self._batch_size,\
                 "in Valid Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(features_tmp.shape[0], self._batch_size,
-                           self._pos_valid - self._min_pos_valid,
-                           self._max_pos_valid - self._min_pos_valid)
+                format(features_tmp.shape[0], self._batch_size,
+                       self._pos_valid - self._min_pos_valid,
+                       self._max_pos_valid - self._min_pos_valid)
             assert labels_binary.shape[0] == self._batch_size,\
                 "in Valid Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(labels_binary.shape[0], self._pos_valid - self._min_pos_valid,
-                           self._batch_size, self._max_pos_valid - self._min_pos_valid)
+                format(labels_binary.shape[0], self._pos_valid - self._min_pos_valid,
+                       self._batch_size, self._max_pos_valid - self._min_pos_valid)
 
             yield features_tmp, labels_binary
 
@@ -954,10 +957,10 @@ class Loader_hdf5:
         """
         self.define_max_pos()
         #shp_features = list(self._features_test.shape[1:])
-        #shp_features.insert(0,self._batch_size)
+        # shp_features.insert(0,self._batch_size)
         #features_tmp = np.zeros(shp_features, dtype=np.uint8)
         #shp_labels = list(self._labels_test.shape[1:])
-        #shp_labels.insert(0,self._batch_size)
+        # shp_labels.insert(0,self._batch_size)
         #labels_tmp = np.zeros(shp_labels, dtype=np.uint32)
         while 1:
             features_tmp = self._features_test[self._pos_test:self._pos_test + self._batch_size]
@@ -972,10 +975,10 @@ class Loader_hdf5:
 
             assert features_tmp.shape[0] == self._batch_size, \
                 "in Evaluation Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(features_tmp.shape[0], self._batch_size, self._pos_test, self._max_pos_test)
+                format(features_tmp.shape[0], self._batch_size, self._pos_test, self._max_pos_test)
             assert labels_binary.shape[0] == self._batch_size, \
                 "in Evaluation Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                    format(labels_binary.shape[0], self._batch_size, self._pos_test, self._max_pos_test)
+                format(labels_binary.shape[0], self._batch_size, self._pos_test, self._max_pos_test)
 
             yield features_tmp, labels_binary
 
@@ -990,8 +993,8 @@ class Loader_hdf5:
         self.define_max_pos()
         return self._max_pos_test
 
-    ##-----------------------------------------------------------
-    ## Activate this if loader should be iterable class
+    # -----------------------------------------------------------
+    # Activate this if loader should be iterable class
     ##
     # def __iter__(self):
     #     return self
@@ -1018,7 +1021,7 @@ class Loader_hdf5:
     #         raise StopIteration
     #
     #     return features, labels
-    ##-----------------------------------------------------------
+    # -----------------------------------------------------------
 
     def change_batch_size(self, batch_size):
         self._batch_size = batch_size

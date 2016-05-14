@@ -1,2 +1,2 @@
 #!/bin/bash
-THEANO_FLAGS='device=gpu' ./model_keras.py
+THEANO_FLAGS='device=gpu' ./run_voxnet_keras.py
