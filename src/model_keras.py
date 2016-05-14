@@ -20,7 +20,7 @@ import lib_IO_hdf5
 
 import logging
 import datetime
-
+import os
 
 
 def learningRateSchedule(epoch):
@@ -33,8 +33,10 @@ def learningRateSchedule(epoch):
     else:
         return 0.001
 
+
 class model_vt (object):
-    def __init__(self,nb_classes,dataset_name):
+
+    def __init__(self, nb_classes, dataset_name):
         """initiate Model according to voxnet paper"""
         # Stochastic Gradient Decent (SGD) with momentum
         # lr=0.01 for LiDar dataset
@@ -42,9 +44,14 @@ class model_vt (object):
         # decay of 0.00016667 approx the same as learning schedule (0:0.001,60000:0.0001,600000:0.00001)
         # use callbacks learingrate_schedule instead
         self._optimizer = SGD(lr=0.001, momentum=0.9, decay=0.0, nesterov=False)
+
         self._lr_schedule = LearningRateScheduler(learningRateSchedule)
-        self._mdl_checkpoint = ModelCheckpoint("data/" + dataset_name + "/weights.{epoch:02d}-{val_acc:.2f}.hdf5",
-                                               monitor='val_acc', verbose=0, save_best_only=False, mode='auto')
+        self._mdl_checkpoint = ModelCheckpoint("weights/" + dataset_name + "_{epoch:02d}_{val_acc:.2f}.hdf5",
+                                               monitor="val_acc", verbose=0, save_best_only=False, mode="auto")
+
+        # create directory if necessary
+        if not os.path.exists("weights/"):
+            os.makedirs("weights/")
 
         # init model
         self._mdl = Sequential()
@@ -138,7 +145,7 @@ class model_vt (object):
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
                                 verbose=1,
-                                callbacks=[self._lr_schedule,self._mdl_checkpoint],
+                                callbacks=[self._lr_schedule, self._mdl_checkpoint],
                                 validation_data=valid_generator,
                                 nb_val_samples=nb_valid_samples,
                                 )
@@ -163,8 +170,8 @@ class model_vt (object):
 
     def evaluate(self, evaluation_generator, num_eval_samples):
         self._score = self._mdl.evaluate_generator(
-                                         generator=evaluation_generator,
-                                         val_samples=num_eval_samples)
+            generator=evaluation_generator,
+            val_samples=num_eval_samples)
         print("Test score:", self._score)
 
     def load_weights(self, file):
