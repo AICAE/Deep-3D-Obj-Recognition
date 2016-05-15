@@ -12,17 +12,6 @@ import os
 
 import argparse
 
-# TODO
-# Note: How to install python3 module readline
-# sudo apt-get install python3-pip libncurses5-dev
-# sudo -H pip3 install readline
-
-# if sys.platform.startswith("linux"):
-#     try:
-#         import readline
-#     except ImportError:
-#         pass
-
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 
@@ -64,39 +53,58 @@ def main():
     # start recording time
     tic = time.time()
 
-    loader = lib_IO_hdf5.Loader_hdf5_Convert_Np(args.dataset,
-                                                batch_size=args.batch_size,
-                                                shuffle=args.shuffle,
-                                                has_rot=args.has_rot,
-                                                valid_split=args.valid_split)
+    # if something crashes, start interpreter shell
+    try:
+        loader = lib_IO_hdf5.Loader_hdf5_Convert_Np(args.dataset,
+                                                    batch_size=args.batch_size,
+                                                    shuffle=args.shuffle,
+                                                    has_rot=args.has_rot,
+                                                    valid_split=args.valid_split)
 
-    # find dataset name
-    dataset_name = os.path.splitext(os.path.basename(args.dataset))[0]
+        # find dataset name
+        dataset_name = os.path.splitext(os.path.basename(args.dataset))[0]
 
-    # create the model
-    voxnet = model_keras.model_vt(nb_classes=loader.return_nb_classes(), dataset_name=dataset_name)
+        # create the model
+        voxnet = model_keras.model_vt(nb_classes=loader.return_nb_classes(), dataset_name=dataset_name)
 
-    # train it
-    if args.weights_file is None:
-        voxnet.fit(generator=loader.train_generator(),
-                   samples_per_epoch=loader.return_num_train_samples(),
-                   nb_epoch=args.nb_epoch,
-                   valid_generator=loader.valid_generator(),
-                   nb_valid_samples=loader.return_num_valid_samples())
-    else:
-        if not os.path.exists(args.weights_file):
-            logging.ERROR("[!] File does not exist '{0}'".format(args.weights_file))
-            sys.exit(-2)
+        # train it
+        if args.weights_file is None:
+            voxnet.fit(generator=loader.train_generator(),
+                       samples_per_epoch=loader.return_num_train_samples(),
+                       nb_epoch=args.nb_epoch,
+                       valid_generator=loader.valid_generator(),
+                       nb_valid_samples=loader.return_num_valid_samples())
+        else:
+            if not os.path.exists(args.weights_file):
+                logging.ERROR("[!] File does not exist '{0}'".format(args.weights_file))
+                sys.exit(-2)
 
-        voxnet.continue_fit(weights_file=args.weights_file,
-                            generator=loader.train_generator(),
-                            samples_per_epoch=loader.return_num_train_samples(),
-                            nb_epoch=args.nb_epoch,
-                            valid_generator=loader.valid_generator(),
-                            nb_valid_samples=loader.return_num_valid_samples())
+            voxnet.continue_fit(weights_file=args.weights_file,
+                                generator=loader.train_generator(),
+                                samples_per_epoch=loader.return_num_train_samples(),
+                                nb_epoch=args.nb_epoch,
+                                valid_generator=loader.valid_generator(),
+                                nb_valid_samples=loader.return_num_valid_samples())
 
-    voxnet.evaluate(evaluation_generator=loader.evaluate_generator(),
-                    num_eval_samples=loader.return_num_evaluation_samples())
+        voxnet.evaluate(evaluation_generator=loader.evaluate_generator(),
+                        num_eval_samples=loader.return_num_evaluation_samples())
+
+    except:
+        import code
+
+        if sys.platform.startswith("linux"):
+            try:
+                # Note: How to install python3 module readline
+                # sudo apt-get install python3-pip libncurses5-dev
+                # sudo -H pip3 install readline
+                import readline
+            except ImportError:
+                pass
+
+        vars_ = globals().copy()
+        vars_.update(locals())
+        shell = code.InteractiveConsole(vars_)
+        shell.interact()
 
     tictoc = time.time() - tic
     print("the run_keras with Conversion to Numpy took {0} seconds".format(tictoc))
@@ -105,11 +113,7 @@ def main():
 
 
 if __name__ == "__main__":
-    # if something crashes, start interpreter shell
-    try:
-        main()
-    except:
-        pass
+    main()
 
 
 # logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
