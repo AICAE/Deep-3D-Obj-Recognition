@@ -156,6 +156,12 @@ class model_vt (object):
         logging.info("save model Voxnet weights as weights_{0}.h5".format(time_now))
         self._mdl.save_weights("weights_{0}.h5".format(time_now), False)
 
+    def continue_fit(self, weights_file, generator, samples_per_epoch,
+                     nb_epoch, valid_generator, nb_valid_samples):
+        self.load_weights(weights_file)
+        # TODO calc remaining nb_epoch from weights_file name
+        self.fit(generator, samples_per_epoch, nb_epoch, valid_generator, nb_valid_samples)
+
     # # for testing only
     # def _fit(self, X_train, y_train, batch_size=32, nb_epoch=80):
     #     self._mdl.fit(X_train=X_train,

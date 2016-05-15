@@ -11,6 +11,7 @@ import os
 
 import argparse
 
+# TODO
 # Note: How to install python3 module readline
 # sudo apt-get install python3-pip libncurses5-dev
 # sudo -H pip3 install readline
@@ -21,16 +22,19 @@ import argparse
 #     except ImportError:
 #         pass
 
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-def p():
+
+def main():
     parser = argparse.ArgumentParser(description="Run voxnex with keras")
+
     parser.add_argument("dataset",
                         help="dataset for training in hdf5 format")
 
     parser.add_argument("-b", "--batch", metavar="size", type=int, default=12,
                         dest="batch_size", help="batch size")
 
-    parser.add_argument("-e", "--epoches", metavar="num", type=int, default=80,
+    parser.add_argument("-e", "--epochs", metavar="epochs", type=int, default=80,
                         dest="nb_epoch", help="number of epoches")
 
     parser.add_argument("-s", "--shuffle", action="store_false",
@@ -39,43 +43,56 @@ def p():
     parser.add_argument("-r", "--rotation", action="store_true",
                         dest="has_rot", help="decides if the code chould  search for rotations, requires an info file")
 
-    parser.add_argument("-v", "--validate", metavar="ratio", type=float, default=None,
+    parser.add_argument("-v", "--validate", metavar="ratio", type=float, default=0.12,
                         dest="valid_split", help="ratio of training data that should be used for validation, float in range (0,1)")
+
+    parser.add_argument("-c", "--continue", metavar="weights",
+                        dest="weights_file", help="continue training, start from given weights file")
 
 #     parser.add_argument("-m", "--mode",default="train", choices=["train", "valid", "test"],
 #                         help="set to be returned")
 
+    # parse args
     args = parser.parse_args()
 
     if not os.path.exists(args.dataset):
         # TODO replace with logging
-        print("error file does not exist '{0}'".format(args.dataset))
+        logging.error("[!] File does not exist '{0}'".format(args.dataset))
+        sys.exit(-1)
 
-    print(args)
-    print(args.shuffle)
-
-
-def main():
+    # start recording time
     tic = time.time()
 
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+    loader = lib_IO_hdf5.Loader_hdf5_Convert_Np(args.dataset,
+                                                batch_size=args.batch_size,
+                                                shuffle=args.shuffle,
+                                                has_rot=args.has_rot,
+                                                valid_split=args.valid_split)
 
-    dataset_name = "modelnet10"
+    # find dataset name
+    dataset_name = os.path.splitext(os.path.basename(args.dataset))[0]
 
-    loader = lib_IO_hdf5.Loader_hdf5_Convert_Np("data/" + dataset_name + ".hdf5",
-                                                batch_size=12,
-                                                shuffle=True,
-                                                has_rot=False,
-                                                valid_split=0.12,
-                                                )
-
+    # create the model
     voxnet = model_keras.model_vt(nb_classes=loader.return_nb_classes(), dataset_name=dataset_name)
 
-    voxnet.fit(generator=loader.train_generator(),
-               samples_per_epoch=loader.return_num_train_samples(),
-               nb_epoch=80,
-               valid_generator=loader.valid_generator(),
-               nb_valid_samples=loader.return_num_valid_samples())
+    # train it
+    if args.weights_file is None:
+        voxnet.fit(generator=loader.train_generator(),
+                   samples_per_epoch=loader.return_num_train_samples(),
+                   nb_epoch=args.nb_epoch,
+                   valid_generator=loader.valid_generator(),
+                   nb_valid_samples=loader.return_num_valid_samples())
+    else:
+        if not os.path.exists(args.weights_file):
+            logging.ERROR("[!] File does not exist '{0}'".format(args.weights_file))
+            sys.exit(-2)
+
+        voxnet.continue_fit(weights_file=args.weights_file,
+                            generator=loader.train_generator(),
+                            samples_per_epoch=loader.return_num_train_samples(),
+                            nb_epoch=args.nb_epoch,
+                            valid_generator=loader.valid_generator(),
+                            nb_valid_samples=loader.return_num_valid_samples())
 
     voxnet.evaluate(evaluation_generator=loader.evaluate_generator(),
                     num_eval_samples=loader.return_num_evaluation_samples())
@@ -87,7 +104,6 @@ def main():
 
 
 if __name__ == "__main__":
-    # p()
     main()
 
 
