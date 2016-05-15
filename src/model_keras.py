@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 
 import keras
 assert keras.__version__ == "1.0.0", "keras version not supported"

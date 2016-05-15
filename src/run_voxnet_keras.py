@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 
 import lib_IO_hdf5
 from config import model_cfg
@@ -104,7 +105,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # if something crashes, start interpreter shell
+    try:
+        main()
+    except:
+        pass
 
 
 # logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
