@@ -147,7 +147,7 @@ class model_vt (object):
         self._mdl.fit_generator(generator=generator,
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
-                                verbose=1,
+                                verbose=2,
                                 callbacks=[self._lr_schedule, self._mdl_checkpoint],
                                 validation_data=valid_generator,
                                 nb_val_samples=nb_valid_samples,
