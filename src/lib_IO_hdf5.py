@@ -6,10 +6,12 @@ import numpy as np
 import scipy.io
 import os
 import h5py
+import sys
 from sklearn.preprocessing import label_binarize
 
 import logging
 
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 def save_dataset_as_hdf5(dirname_data, fname_save, class_name_to_id):
     """ 

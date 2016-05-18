@@ -22,7 +22,9 @@ import lib_IO_hdf5
 import logging
 import datetime
 import os
+import sys
 
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 def learningRateSchedule(epoch):
     if epoch >= 60000:
