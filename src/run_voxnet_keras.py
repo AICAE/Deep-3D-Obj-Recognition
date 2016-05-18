@@ -43,7 +43,7 @@ def main():
 #                         help="set to be returned")
 
     parser.add_argument("-C", "--convert",action="store_true",
-                        dest="use_conversion", help="if argument is given conversion of HDF5 to Numpy will be used (Fast but Memory Intensive)")
+                        dest="use_conversion", help="if argument is given conversion of HDF5 to Numpy will be used")
 
     # parse args
     args = parser.parse_args()
@@ -58,8 +58,9 @@ def main():
 
     # if something crashes, start interpreter shell
     try:
+
         if args.use_conversion == True:
-            logging.DEBUG("Using Conversion Method to load HDF5 Data")
+            logging.debug("Using Conversion Method to load HDF5 Data")
             loader = lib_IO_hdf5.Loader_hdf5_Convert_Np(args.dataset,
                                                         batch_size=args.batch_size,
                                                         shuffle=args.shuffle,
@@ -95,7 +96,7 @@ def main():
                             num_eval_samples=loader.return_num_evaluation_samples())
 
         else:
-            logging.DEBUG("Using Indexing Method to load HDF5 Data")
+            logging.debug("Using Indexing Method to load HDF5 Data")
             with lib_IO_hdf5.Loader_hdf5(args.dataset,
                                          batch_size=args.batch_size,
                                          shuffle=args.shuffle,
