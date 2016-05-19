@@ -142,12 +142,12 @@ class model_vt (object):
         return K.categorical_crossentropy(y_pred, y_true)
 
     def fit(self, generator, samples_per_epoch,
-            nb_epoch, valid_generator, nb_valid_samples):
+            nb_epoch, valid_generator, nb_valid_samples, verbosity):
         logging.info("Start training")
         self._mdl.fit_generator(generator=generator,
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
-                                verbose=2,
+                                verbose=verbosity,
                                 callbacks=[self._lr_schedule, self._mdl_checkpoint],
                                 validation_data=valid_generator,
                                 nb_val_samples=nb_valid_samples,

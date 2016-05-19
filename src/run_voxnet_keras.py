@@ -48,6 +48,8 @@ def main():
     parser.add_argument("-i", "--interactive_fail",action="store_true",
                         dest="interactive_fail", help="on training fail interactive python console will be launched")
 
+    parser.add_argument("-V", "--verbosity",type=int, default=2,
+                        dest="verbosity", help="verbosity setting for training {0,1,2}")
 
     # parse args
     args = parser.parse_args()
@@ -83,7 +85,8 @@ def main():
                            samples_per_epoch=loader.return_num_train_samples(),
                            nb_epoch=args.nb_epoch,
                            valid_generator=loader.valid_generator(),
-                           nb_valid_samples=loader.return_num_valid_samples())
+                           nb_valid_samples=loader.return_num_valid_samples(),
+                           verbosity=args.verbosity)
             else:
                 if not os.path.exists(args.weights_file):
                     logging.ERROR("[!] File does not exist '{0}'".format(args.weights_file))
