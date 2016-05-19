@@ -43,7 +43,11 @@ def main():
 #                         help="set to be returned")
 
     parser.add_argument("-C", "--convert",action="store_true",
-                        dest="use_conversion", help="if argument is given conversion of HDF5 to Numpy will be used")
+                        dest="use_conversion", help="conversion of HDF5 to Numpy will be used")
+
+    parser.add_argument("-i", "--interactive_fail",action="store_true",
+                        dest="interactive_fail", help="on training fail interactive python console will be launched")
+
 
     # parse args
     args = parser.parse_args()
@@ -131,22 +135,28 @@ def main():
                                 num_eval_samples=loader.return_num_evaluation_samples())
 
     except:
-        import code
+        logging.error("Error: Training failed")
+        if arg.interactive_fail == True:
+            logging.debug("Starting Interactive Python Console")
+            import code
 
-        if sys.platform.startswith("linux"):
-            try:
-                # Note: How to install python3 module readline
-                # sudo apt-get install python3-pip libncurses5-dev
-                # sudo -H pip3 install readline
-                # Note by Tobi: euryale running in virtualenv with python2 currently
-                import readline
-            except ImportError:
-                pass
+            if sys.platform.startswith("linux"):
+                try:
+                    # Note: How to install python3 module readline
+                    # sudo apt-get install python3-pip libncurses5-dev
+                    # sudo -H pip3 install readline
+                    # Note by Tobi: euryale running in virtualenv with python2 currently
+                    import readline
+                except ImportError:
+                    pass
 
-        vars_ = globals().copy()
-        vars_.update(locals())
-        shell = code.InteractiveConsole(vars_)
-        shell.interact()
+            vars_ = globals().copy()
+            vars_.update(locals())
+            shell = code.InteractiveConsole(vars_)
+            shell.interact()
+        else:
+            logging.debug("Shutting Program down")
+            sys.exit(-2)
 
     tictoc = time.time() - tic
     print("the run_keras with Conversion to Numpy took {0} seconds".format(tictoc))
