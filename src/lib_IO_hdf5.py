@@ -228,6 +228,8 @@ class Loader_hdf5_Convert_Np:
         self._features = np.zeros(feat.shape, dtype=np.uint8)
         feat.read_direct(self._features)
 
+        logging.info("Found Training Data of shape: {0}".format(feat.shape))
+
         try:
             info = openfile["train/info_train"]
             self._info = np.zeros(info.shape, dtype=np.uint32)
@@ -246,6 +248,8 @@ class Loader_hdf5_Convert_Np:
         feat_test = openfile["test/features_test"]
         self._features_test = np.zeros(feat_test.shape, dtype=np.uint8)
         feat_test.read_direct(self._features_test)
+
+        logging.info("Found Test Data of shape: {0}".format(feat_test.shape))
 
         try:
             info_test = openfile["test/info_test"]

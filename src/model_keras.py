@@ -12,7 +12,7 @@ from keras.layers import Convolution3D, MaxPooling3D
 from keras.layers.core import Activation, Dense, Dropout, Flatten
 from keras.layers.advanced_activations import LeakyReLU
 from keras.regularizers import l2
-from keras.callbacks import LearningRateScheduler, ModelCheckpoint
+from keras.callbacks import LearningRateScheduler, ModelCheckpoint, Callback
 from keras.engine.training import batch_shuffle
 
 from keras.optimizers import SGD
@@ -36,7 +36,6 @@ def learningRateSchedule(epoch):
     else:
         return 0.001
 
-
 class model_vt (object):
 
     def __init__(self, nb_classes, dataset_name):
@@ -51,6 +50,7 @@ class model_vt (object):
         self._lr_schedule = LearningRateScheduler(learningRateSchedule)
         self._mdl_checkpoint = ModelCheckpoint("weights/" + dataset_name + "_{epoch:02d}_{val_acc:.2f}.hdf5",
                                                monitor="val_acc", verbose=0, save_best_only=False, mode="auto")
+
 
         # create directory if necessary
         if not os.path.exists("weights/"):
