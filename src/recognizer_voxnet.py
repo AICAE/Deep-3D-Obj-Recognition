@@ -91,7 +91,7 @@ class recognizer_voxnet:
         p = 80
 
         max_dist = 0.0
-        for it in range[0,2]:
+        for it in range(0,2):
             # find min max & distance in current direction
             min = np.amin(np_pc[:,it], axis=0)
             max = np.amax(np_pc[:,it], axis=0)

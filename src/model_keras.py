@@ -27,15 +27,14 @@ import sys
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 def learningRateSchedule(epoch):
-    if epoch >= 60000:
+    if epoch >= 2:
         return 0.0001
-    elif epoch >= 400000:
+    elif epoch >= 5:
         return 0.00005,
-    elif epoch >= 600000:
+    elif epoch >= 15:
         return 0.00001
     else:
         return 0.001
-
 
 class model_vt (object):
 
@@ -77,7 +76,7 @@ class model_vt (object):
         self._mdl.add(Activation(LeakyReLU(alpha=0.1)))
 
         # dropout 1
-        self._mdl.add(Dropout(p=0.2))
+        self._mdl.add(Dropout(p=0.3))
 
         # convolution 2
         self._mdl.add(Convolution3D(nb_filter=32,
@@ -104,7 +103,7 @@ class model_vt (object):
         logging.debug("Layer4:MaxPool3D shape={0}".format(self._mdl.output_shape))
 
         # dropout 2
-        self._mdl.add(Dropout(p=0.3))
+        self._mdl.add(Dropout(p=0.4))
 
         # dense 1 (fully connected layer)
         self._mdl.add(Flatten())
@@ -120,7 +119,7 @@ class model_vt (object):
         logging.debug("Layer6:Dense shape={0}".format(self._mdl.output_shape))
 
         # dropout 3
-        self._mdl.add(Dropout(p=0.4))
+        self._mdl.add(Dropout(p=0.5))
 
         # dense 2 (fully connected layer)
         self._mdl.add(Dense(output_dim=nb_classes,
