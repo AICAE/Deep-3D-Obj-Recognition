@@ -43,7 +43,13 @@ def main():
 #                         help="set to be returned")
 
     parser.add_argument("-C", "--convert",action="store_true",
-                        dest="use_conversion", help="if argument is given conversion of HDF5 to Numpy will be used (Fast but Memory Intensive)")
+                        dest="use_conversion", help="conversion of HDF5 to Numpy will be used")
+
+    parser.add_argument("-i", "--interactive_fail",action="store_true",
+                        dest="interactive_fail", help="on training fail interactive python console will be launched")
+
+    parser.add_argument("-V", "--verbosity",type=int, default=2,
+                        dest="verbosity", help="verbosity setting for training {0,1,2}")
 
     # parse args
     args = parser.parse_args()
@@ -58,8 +64,9 @@ def main():
 
     # if something crashes, start interpreter shell
     try:
+
         if args.use_conversion == True:
-            logging.DEBUG("Using Conversion Method to load HDF5 Data")
+            logging.debug("Using Conversion Method to load HDF5 Data")
             loader = lib_IO_hdf5.Loader_hdf5_Convert_Np(args.dataset,
                                                         batch_size=args.batch_size,
                                                         shuffle=args.shuffle,
@@ -78,7 +85,8 @@ def main():
                            samples_per_epoch=loader.return_num_train_samples(),
                            nb_epoch=args.nb_epoch,
                            valid_generator=loader.valid_generator(),
-                           nb_valid_samples=loader.return_num_valid_samples())
+                           nb_valid_samples=loader.return_num_valid_samples(),
+                           verbosity=args.verbosity)
             else:
                 if not os.path.exists(args.weights_file):
                     logging.ERROR("[!] File does not exist '{0}'".format(args.weights_file))
@@ -95,7 +103,7 @@ def main():
                             num_eval_samples=loader.return_num_evaluation_samples())
 
         else:
-            logging.DEBUG("Using Indexing Method to load HDF5 Data")
+            logging.debug("Using Indexing Method to load HDF5 Data")
             with lib_IO_hdf5.Loader_hdf5(args.dataset,
                                          batch_size=args.batch_size,
                                          shuffle=args.shuffle,
@@ -130,22 +138,28 @@ def main():
                                 num_eval_samples=loader.return_num_evaluation_samples())
 
     except:
-        import code
+        logging.error("Error: Training failed")
+        if arg.interactive_fail == True:
+            logging.debug("Starting Interactive Python Console")
+            import code
 
-        if sys.platform.startswith("linux"):
-            try:
-                # Note: How to install python3 module readline
-                # sudo apt-get install python3-pip libncurses5-dev
-                # sudo -H pip3 install readline
-                # Note by Tobi: euryale running in virtualenv with python2 currently
-                import readline
-            except ImportError:
-                pass
+            if sys.platform.startswith("linux"):
+                try:
+                    # Note: How to install python3 module readline
+                    # sudo apt-get install python3-pip libncurses5-dev
+                    # sudo -H pip3 install readline
+                    # Note by Tobi: euryale running in virtualenv with python2 currently
+                    import readline
+                except ImportError:
+                    pass
 
-        vars_ = globals().copy()
-        vars_.update(locals())
-        shell = code.InteractiveConsole(vars_)
-        shell.interact()
+            vars_ = globals().copy()
+            vars_.update(locals())
+            shell = code.InteractiveConsole(vars_)
+            shell.interact()
+        else:
+            logging.debug("Shutting Program down")
+            sys.exit(-2)
 
     tictoc = time.time() - tic
     print("the run_keras with Conversion to Numpy took {0} seconds".format(tictoc))
