@@ -48,8 +48,8 @@ class model_vt (object):
         self._optimizer = SGD(lr=0.001, momentum=0.9, decay=0.0, nesterov=False)
 
         self._lr_schedule = LearningRateScheduler(learningRateSchedule)
-        self._mdl_checkpoint = ModelCheckpoint("weights/" + dataset_name + "_{epoch:02d}_{val_acc:.2f}.hdf5",
-                                               monitor="val_acc", verbose=0, save_best_only=False, mode="auto")
+        self._mdl_checkpoint = ModelCheckpoint("weights/" + dataset_name + "_{epoch:02d}_{acc:.2f}.hdf5",
+                                               monitor="acc", verbose=0, save_best_only=False, mode="auto")
 
 
         # create directory if necessary

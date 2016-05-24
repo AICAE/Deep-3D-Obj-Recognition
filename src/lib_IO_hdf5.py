@@ -283,10 +283,11 @@ class Loader_hdf5_Convert_Np:
         if shuffle is True:
             self.shuffle_data()
 
-        if valid_split is not None:
+        if isinstance(valid_split,float) and valid_split > 0.0:
             self._valid_size = valid_split
             self.validation_split()
         else:
+            self._valid_size = 0.0
             self._features_train = self._features
             self._labels_train = self._labels
 
@@ -474,28 +475,31 @@ class Loader_hdf5_Convert_Np:
                 if the maximum position of the iterator is reached reset iterator to 0
 
         """
-        logging.info("Initialize Valid Generator")
-        self.define_max_pos()
-        self._pos_valid = 0
-        while 1:
+        if self._valid_size > 0.0:
+            logging.info("Initialize Valid Generator")
+            self.define_max_pos()
+            self._pos_valid = 0
+            while 1:
 
-            features = self._features_valid[self._pos_valid:self._pos_valid + self._batch_size]
-            labels = self._labels_valid[self._pos_valid:self._pos_valid + self._batch_size]
+                features = self._features_valid[self._pos_valid:self._pos_valid + self._batch_size]
+                labels = self._labels_valid[self._pos_valid:self._pos_valid + self._batch_size]
 
-            labels_binary = label_binarize(labels, self._classes)
+                labels_binary = label_binarize(labels, self._classes)
 
-            self._pos_valid += self._batch_size
-            if self._pos_valid >= self._max_pos_valid:
-                self._pos_valid = 0
+                self._pos_valid += self._batch_size
+                if self._pos_valid >= self._max_pos_valid:
+                    self._pos_valid = 0
 
-            assert features.shape[0] == self._batch_size,\
-                "in Valid Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                format(features.shape[0], self._batch_size, self._pos_valid, self._max_pos_valid)
-            assert labels_binary.shape[0] == self._batch_size,\
-                "in Valid Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
-                format(labels_binary.shape[0], self._pos_valid, self._batch_size, self._max_pos_valid)
+                assert features.shape[0] == self._batch_size,\
+                    "in Valid Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
+                    format(features.shape[0], self._batch_size, self._pos_valid, self._max_pos_valid)
+                assert labels_binary.shape[0] == self._batch_size,\
+                    "in Valid Generator features of wrong shape is {0} should be {1} at pos {2} of max_pos {3}".\
+                    format(labels_binary.shape[0], self._pos_valid, self._batch_size, self._max_pos_valid)
 
-            yield features, labels_binary
+                yield features, labels_binary
+        else:
+            return None
 
     def return_num_valid_samples(self):
         """
@@ -505,8 +509,12 @@ class Loader_hdf5_Convert_Np:
             by the generator in one run
 
         """
-        self.define_max_pos()
-        return self._max_pos_valid
+        if self._valid_size > 0.0:
+            self.define_max_pos()
+            return self._max_pos_valid
+        else:
+            return None
+
 
     def evaluate_generator(self):
         """
