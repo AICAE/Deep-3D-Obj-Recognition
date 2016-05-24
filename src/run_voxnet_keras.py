@@ -83,8 +83,6 @@ def main():
 
             if args.eval_weights_file is not None:
                 voxnet.load_weights(args.eval_weights_file)
-                voxnet.evaluate(evaluation_generator=loader.evaluate_generator(),
-                            num_eval_samples=loader.return_num_evaluation_samples())
             # train it
             elif args.weights_file is None:
                 voxnet.fit(generator=loader.train_generator(),
