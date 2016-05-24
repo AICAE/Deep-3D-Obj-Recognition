@@ -398,11 +398,12 @@ class Loader_hdf5_Convert_Np:
         else:
             self._max_pos_train = shape - shape % self._batch_size
 
-        shape = self._labels_valid.shape[0]
-        if self._num_batches is not None and self._num_batches * self._batch_size < shape:
-            self._max_pos_valid = self._num_batches * self._batch_size
-        else:
-            self._max_pos_valid = shape - shape % self._batch_size
+        if self._valid_size > 0.0:
+            shape = self._labels_valid.shape[0]
+            if self._num_batches is not None and self._num_batches * self._batch_size < shape:
+                self._max_pos_valid = self._num_batches * self._batch_size
+            else:
+                self._max_pos_valid = shape - shape % self._batch_size
 
         shape = self._labels_test.shape[0]
         if self._num_batches is not None and self._num_batches * self._batch_size < shape:
