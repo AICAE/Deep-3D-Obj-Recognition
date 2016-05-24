@@ -51,6 +51,9 @@ def main():
     parser.add_argument("-V", "--verbosity",type=int, default=2, choices=[0, 1, 2],
                         dest="verbosity", help="verbosity setting for training {0,1,2}")
 
+    parser.add_argument("-E", "--evaluate", metavar="eval_weights",
+                        dest="eval_weights_file", help="evaluate weights file, start from given weights file")
+
     # parse args
     args = parser.parse_args()
 
@@ -78,8 +81,12 @@ def main():
             # create the model
             voxnet = model_keras.model_vt(nb_classes=loader.return_nb_classes(), dataset_name=dataset_name)
 
+            if args.eval_weights_file is not None:
+                voxnet.load_weights(args.eval_weights_file)
+                voxnet.evaluate(evaluation_generator=loader.evaluate_generator(),
+                            num_eval_samples=loader.return_num_evaluation_samples())
             # train it
-            if args.weights_file is None:
+            elif args.weights_file is None:
                 voxnet.fit(generator=loader.train_generator(),
                            samples_per_epoch=loader.return_num_train_samples(),
                            nb_epoch=args.nb_epoch,
@@ -119,6 +126,7 @@ def main():
                     voxnet.fit(generator=loader.train_generator(),
                                samples_per_epoch=loader.return_num_train_samples(),
                                nb_epoch=args.nb_epoch,
+                               verbosity=args.verbosity,
                                valid_generator=loader.valid_generator(),
                                nb_valid_samples=loader.return_num_valid_samples())
                 else:
@@ -138,7 +146,7 @@ def main():
 
     except:
         logging.error("Error: Training failed")
-        if arg.interactive_fail == True:
+        if args.interactive_fail == True:
             logging.debug("Starting Interactive Python Console")
             import code
 
