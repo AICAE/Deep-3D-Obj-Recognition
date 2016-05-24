@@ -48,14 +48,13 @@ def main():
     parser.add_argument("-i", "--interactive_fail",action="store_true",
                         dest="interactive_fail", help="on training fail interactive python console will be launched")
 
-    parser.add_argument("-V", "--verbosity",type=int, default=2,
+    parser.add_argument("-V", "--verbosity",type=int, default=2, choices=[0, 1, 2],
                         dest="verbosity", help="verbosity setting for training {0,1,2}")
 
     # parse args
     args = parser.parse_args()
 
     if not os.path.exists(args.dataset):
-        # TODO replace with logging
         logging.error("[!] File does not exist '{0}'".format(args.dataset))
         sys.exit(-1)
 
@@ -89,7 +88,7 @@ def main():
                            verbosity=args.verbosity)
             else:
                 if not os.path.exists(args.weights_file):
-                    logging.ERROR("[!] File does not exist '{0}'".format(args.weights_file))
+                    logging.error("[!] File does not exist '{0}'".format(args.weights_file))
                     sys.exit(-2)
 
                 voxnet.continue_fit(weights_file=args.weights_file,
@@ -124,7 +123,7 @@ def main():
                                nb_valid_samples=loader.return_num_valid_samples())
                 else:
                     if not os.path.exists(args.weights_file):
-                        logging.ERROR("[!] File does not exist '{0}'".format(args.weights_file))
+                        logging.error("[!] File does not exist '{0}'".format(args.weights_file))
                         sys.exit(-2)
 
                     voxnet.continue_fit(weights_file=args.weights_file,
