@@ -45,9 +45,9 @@ class model_vt (object):
         # lr=0.001 for other datasets
         # decay of 0.00016667 approx the same as learning schedule (0:0.001,60000:0.0001,600000:0.00001)
         # use callbacks learingrate_schedule instead
-        self._optimizer = SGD(lr=0.001, momentum=0.9, decay=0.0, nesterov=False)
+        self._optimizer = SGD(lr=0.01, momentum=0.9, decay=0.00016667, nesterov=False)
 
-        self._lr_schedule = LearningRateScheduler(learningRateSchedule)
+        #self._lr_schedule = LearningRateScheduler(learningRateSchedule)
         self._mdl_checkpoint = ModelCheckpoint("weights/" + dataset_name + "_{epoch:02d}_{acc:.2f}.hdf5",
                                                monitor="acc", verbose=0, save_best_only=False, mode="auto")
 
@@ -148,7 +148,8 @@ class model_vt (object):
                                 samples_per_epoch=samples_per_epoch,
                                 nb_epoch=nb_epoch,
                                 verbose=verbosity,
-                                callbacks=[self._lr_schedule, self._mdl_checkpoint],
+                                callbacks=[ #self._lr_schedule,
+                                        self._mdl_checkpoint,],
                                 validation_data=valid_generator,
                                 nb_val_samples=nb_valid_samples,
                                 )
