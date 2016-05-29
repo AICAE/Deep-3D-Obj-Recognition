@@ -12,7 +12,7 @@ mlab.points3d(np_pc[:,0], np_pc[:,1], np_pc[:,2])
 mlab.show()
 
 tic = time.time()
-np_vox = voxilize(np_pc)
+np_vox = obj_det.voxilize(np_pc)
 tictoc = time.time() - tic
 print("Voxelizing took {0} for {1} points".format(tictoc, np_pc.shape[0]))
 
