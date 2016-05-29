@@ -190,7 +190,7 @@ class model_vt (object):
 
     def predict(self, X_predict):
         # TODO add prediction from PointCloud
-        self._mdl.predict(X_predict)
+        return self._mdl.predict(X_predict)
 
     def get_score(self):
         # TODO might change to tuble(self._score), not sure it's tuple
