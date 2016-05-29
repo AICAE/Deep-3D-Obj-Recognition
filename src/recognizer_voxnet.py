@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import model_keras
-import vtk
 import lib_IO_hdf5
 from config import model_cfg
 import model_keras
@@ -46,22 +45,53 @@ def main():
     np_pc = np.asarray(pc)
 
 class display():
-    """
 
-    use mayavi for point cloud
-
-    """
     def __init__(self):
         #TODO
         mlab.show()
 
     def display_pc(self,np_pc):
+        """
+
+        Display point CLoud
+
+        Args:
+            np_dm: point cloud data
+
+        Returns:
+            display 3d scatter plot object
+
+
+        """
         self.disp_pc = mlab.points3d(np_pc[:,0], np_pc[:,1], np_pc[:,2])
 
+    def display_dm(self, np_dm):
+        """
+
+        Display Depthmap Data
+
+        Args:
+            np_dm: depthmap data
+
+        Returns:
+            contour plot object
+
+        """
+        self.disp_dm = mlab.contour_surf()
+
     def display_vox(self, np_vox):
+        """
 
+        Display Voxel Data
 
-        self.disp_vox = mlab.points3d(vox_x, vox_y, vox_z, mode='cube')
+        Args:
+            np_vox: voxel data
+
+        Returns:
+            scatter plot object
+
+        """
+        self.disp_vox = mlab.points3d(np_vox[:,0], np_vox[:,1], np_vox[:,3], mode='cube')
 
     def display_wait(self):
         #TODO
