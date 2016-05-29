@@ -1,130 +1,44 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 
+
 import model_keras
-import lib_IO_hdf5
-from config import model_cfg
-import model_keras
-import logging
+from config.model_cfg import class_id_to_name_modelnet40
 import numpy as np
-import sys
-import time
-import os
-import argparse
-from mayavi import mlab
-import pcl
 import random
+from scipy.io import loadmat
 
+def load_pc(fname):
+    f = loadmat(fname)
+    data = f['data'].astype(np.float32)
+    return data
 
-def main():
-    parser = argparse.ArgumentParser(description="Run voxnet object recognizer")
-
-    parser.add_argument("file",
-                        help="file, which holds object that should be recognized")
-
-    parser.add_argument("-pc", "--is_point_cloud", action="store_true",
-                        dest="is_point_cloud", help="boolean option for is point cloud")
-
-    parser.add_argument("-w", "--weights", metavar="weights",
-                        dest="weights_file", help="use given weights file")
-
-    parser.add_argument("-c", "--num_classes", type=int, default=39,
-                        dest="num_classes", help="use given weights file")
-
-    # parse args
-    args = parser.parse_args()
-
-    if not os.path.exists(args.dataset):
-        # TODO replace with logging
-        logging.error("[!] File does not exist '{0}'".format(args.dataset))
-        sys.exit(-1)
-
-
-    #load Point cloud file
-    pc = pcl.load(args.file)
-    np_pc = np.asarray(pc)
-
-class display():
-
-    def __init__(self):
-        #TODO
-        mlab.show()
-
-    def display_pc(self,np_pc):
-        """
-
-        Display point CLoud
-
-        Args:
-            np_dm: point cloud data
-
-        Returns:
-            display 3d scatter plot object
-
-
-        """
-        self.disp_pc = mlab.points3d(np_pc[:,0], np_pc[:,1], np_pc[:,2])
-
-    def display_dm(self, np_dm):
-        """
-
-        Display Depthmap Data
-
-        Args:
-            np_dm: depthmap data
-
-        Returns:
-            contour plot object
-
-        """
-        self.disp_dm = mlab.contour_surf()
-
-    def display_vox(self, np_vox):
-        """
-
-        Display Voxel Data
-
-        Args:
-            np_vox: voxel data
-
-        Returns:
-            scatter plot object
-
-        """
-        self.disp_vox = mlab.points3d(np_vox[:,0], np_vox[:,1], np_vox[:,3], mode='cube')
-
-    def display_wait(self):
-        #TODO
-
-    def display_label(self):
-        #TODO
-
-
-
-class recognizer_voxnet:
+class detector_voxnet:
     """
 
     use model_voxnet predict
 
     """
-    def __init__(self, weights, nb_classes):
-        self.mdl = model_keras.model_vt(nb_classes=nb_classes, dataset_name="zzz")
+    def __init__(self, weights, nb_classes = 39):
+        self.mdl = model_keras.model_vt(nb_classes=nb_classes, dataset_name="modelnet")
         self.mdl.load_weights(weights)
 
     def predict(self, X_pred, is_pc = False):
         if is_pc == True:
             X_pred = self.voxilize(X_pred)
-        return self.mdl.predict(X_pred)
+        label =  self.mdl.predict(X_pred)
+        label = class_id_to_name_modelnet40(label)
+        return label
 
-    def voxilize(self, np_pc, cam_pos = None):
+    def voxilize(self, np_pc, rot = None):
         # chance to fill voxel
         p = 80
 
         max_dist = 0.0
-        for it in range(0,2):
+        for it in range(0,3):
             # find min max & distance in current direction
-            min = np.amin(np_pc[:,it], axis=0)
-            max = np.amax(np_pc[:,it], axis=0)
+            min = np.amin(np_pc[:,it])
+            max = np.amax(np_pc[:,it])
             dist = max-min
 
             #find maximum distance
@@ -132,13 +46,16 @@ class recognizer_voxnet:
                 max_dist = dist
 
             #set middle to 0,0,0
-            np_pc[:,it] = np_pc[:,it] - dist/2
+            np_pc[:,it] = np_pc[:,it] - dist/2 - min
 
-        #find voxel edge size
-        vox_sz = max_dist/30
+            #find voxel edge size
+            vox_sz = dist/29
 
-        #render pc to size 30x30x30 from middle
-        np_pc = np_pc()/vox_sz + max_dist/2
+            #render pc to size 30x30x30 from middle
+            np_pc[:,it] = np_pc[:,it]/vox_sz
+
+        for it in range(0,3):
+            np_pc[:,it] = np_pc[:,it] + 14.5
 
         #round to integer array
         np_pc = np.rint(np_pc).astype(np.uint32)
@@ -149,14 +66,16 @@ class recognizer_voxnet:
             if random.randint(0,100) < 80:
                 vox[pc_x, pc_y, pc_z] = 1
 
-        if cam_pos is None:
+        if rot is None:
+            a = 1
             #TODO fill space between voxels
-
         else:
+            a = 1
+            #TODO extra: create 12 rotations with unknown space and pool decision
             #TODO estimate unknown space
 
-        return vox
+        #TODO create boundary
+        np_vox = np.zeros([1,32,32,32])
+        np_vox[0, 1:-1, 1:-1, 1:-1] = vox
 
-
-if __name__ == "__main__":
-    main()
+        return np_vox
