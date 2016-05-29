@@ -2,6 +2,8 @@
 
 from recognizer_voxnet import load_pc, detector_voxnet
 import time
+import numpy as np
+
 #from mayavi import mlab
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -20,9 +22,9 @@ def main():
 	tictoc = time.time() - tic
 	print("loading the Detector took {0}".format(tictoc))
 
-	np_pc = load_pc("data/chair.mat")
-	#mlab.points3d(np_pc[:,0], np_pc[:,1], np_pc[:,2])
-	#mlab.show()
+np_pc = load_pc("data/chairXYZ.mat")
+#mlab.points3d(np_pc[:,0], np_pc[:,1], np_pc[:,2])
+#mlab.show()
 
 
 	tic = time.time()
@@ -33,9 +35,12 @@ def main():
 	#mlab.points3d(np_vox[:,0], np_vox[:,1], np_vox[:,3], mode='cube')
 	#mlab.show
 
-	tic = time.time()
-	label = obj_det.predict(X_pred=np_vox)
-	tictoc = time.time() - tic
+tic = time.time()
+proba = obj_det.predict(X_pred=np_vox)
+#we trained from two on, so 0 is equal to class two
+label = str(np.argmax(proba) + 2)
+
+tictoc = time.time() - tic
 
 	print("Detection took {0}".format(tictoc))
 	print("Wuee a " + label + " was detected")

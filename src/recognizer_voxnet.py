@@ -3,7 +3,7 @@
 
 
 import model_keras
-from config.model_cfg import class_id_to_name_modelnet40
+from config.model_cfg import class_name_to_id_modelnet40, class_id_to_name_modelnet40
 import numpy as np
 import random
 from scipy.io import loadmat
@@ -26,9 +26,13 @@ class detector_voxnet:
     def predict(self, X_pred, is_pc = False):
         if is_pc == True:
             X_pred = self.voxilize(X_pred)
-        label =  self.mdl.predict(X_pred)
-        print("label {0}".format(label))
-        #label = class_id_to_name_modelnet40(str(label))
+        proba =  self.mdl.predict(X_pred)
+        #indices 0 is equal to class 2
+        label = str(np.argmax(proba) + 2)
+        #print(class_id_to_name_modelnet40('3'))
+        #print(class_name_to_id_modelnet40('3'))
+        label = class_name_to_id_modelnet40(label)
+
         return label
 
     def voxilize(self, np_pc, rot = None):
@@ -49,14 +53,17 @@ class detector_voxnet:
             #set middle to 0,0,0
             np_pc[:,it] = np_pc[:,it] - dist/2 - min
 
+            #covered cells
+            cls = 29
+
             #find voxel edge size
-            vox_sz = dist/29
+            vox_sz = dist/(cls-1)
 
             #render pc to size 30x30x30 from middle
             np_pc[:,it] = np_pc[:,it]/vox_sz
 
         for it in range(0,3):
-            np_pc[:,it] = np_pc[:,it] + 14.5
+            np_pc[:,it] = np_pc[:,it] + (cls-1)/2
 
         #round to integer array
         np_pc = np.rint(np_pc).astype(np.uint32)
