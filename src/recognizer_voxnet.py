@@ -27,7 +27,8 @@ class detector_voxnet:
         if is_pc == True:
             X_pred = self.voxilize(X_pred)
         label =  self.mdl.predict(X_pred)
-        label = class_id_to_name_modelnet40(label)
+        print("label {0}".format(label))
+        #label = class_id_to_name_modelnet40(str(label))
         return label
 
     def voxilize(self, np_pc, rot = None):

@@ -7,7 +7,7 @@ obj_det = detector_voxnet("data/weights_modelnet40_acc0-8234_2016-5-20-3-47.h5")
 tictoc = time.time() - tic
 print("loading the Detector took {0}".format(tictoc))
 
-np_pc = load_pc("data/chairXYZ.mat")
+np_pc = load_pc("data/deskXYZ.mat")
 #mlab.points3d(np_pc[:,0], np_pc[:,1], np_pc[:,2])
 #mlab.show()
 
