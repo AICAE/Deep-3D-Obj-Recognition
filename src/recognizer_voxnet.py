@@ -75,7 +75,7 @@ class detector_voxnet:
             #TODO estimate unknown space
 
         #TODO create boundary
-        np_vox = np.zeros([1,32,32,32])
-        np_vox[0, 1:-1, 1:-1, 1:-1] = vox
+        np_vox = np.zeros([1,1,32,32,32])
+        np_vox[0, 0, 1:-1, 1:-1, 1:-1] = vox
 
         return np_vox
