@@ -90,7 +90,8 @@ def main():
                            nb_epoch=args.nb_epoch,
                            valid_generator=loader.valid_generator(),
                            nb_valid_samples=loader.return_num_valid_samples(),
-                           verbosity=args.verbosity)
+                           verbosity=args.verbosity,
+                           )
             else:
                 if not os.path.exists(args.weights_file):
                     logging.error("[!] File does not exist '{0}'".format(args.weights_file))
