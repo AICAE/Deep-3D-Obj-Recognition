@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: paper.aux
+The style file: ieee.bst
+Database file #1: bib.bib
+Name 1 in "A. S. Razavian, H. Azizpour, J. Sullivan, and S. Carlsson" has a comma at the end for entry cnn
+while executing---line 2145 of file ieee.bst
+Warning--to sort, need author or key in udacity
+Warning--to sort, need author or key in sun
+Warning--to sort, need author or key in mature
+Name 1 in "A. S. Razavian, H. Azizpour, J. Sullivan, and S. Carlsson" has a comma at the end for entry cnn
+while executing---line 2231 of file ieee.bst
+You've used 6 entries,
+            2120 wiz_defined-function locations,
+            521 strings with 4364 characters,
+and the built_in function-call counts, 1469 in all, are:
+= -- 124
+> -- 67
+< -- 0
++ -- 28
+- -- 22
+* -- 78
+:= -- 225
+add.period$ -- 15
+call.type$ -- 6
+change.case$ -- 29
+chr.to.int$ -- 0
+cite$ -- 9
+duplicate$ -- 63
+empty$ -- 154
+format.name$ -- 22
+if$ -- 323
+int.to.chr$ -- 0
+int.to.str$ -- 6
+missing$ -- 3
+newline$ -- 30
+num.names$ -- 6
+pop$ -- 56
+preamble$ -- 1
+purify$ -- 23
+quote$ -- 0
+skip$ -- 47
+stack$ -- 0
+substring$ -- 30
+swap$ -- 9
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 24
+warning$ -- 3
+while$ -- 6
+width$ -- 7
+write$ -- 53
+(There were 2 error messages)

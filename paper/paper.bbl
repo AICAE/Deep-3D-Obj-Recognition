@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}\itemsep=-1pt
+
+\bibitem{mature}
+D. maturana website.
+\newblock \url{http://www.dimatura.net/pages/3dcnn.html}.
+
+\bibitem{sun}
+Sun database.
+\newblock \url{http://sun.cs.princeton.edu/}.
+
+\bibitem{udacity}
+Udacity deep learning.
+\newblock \url{https://www.udacity.com/course/deep-learning--ud730}.
+
+\bibitem{cnn}
+J.~S. A.~S.~Razavian, H.~Azizpour and S.~Carlsson.
+\newblock {CNN features off-the-shelf: an astounding baseline for recognition}.
+\newblock In {\em {CoRR, vol. abs/1403.6382}}, 2014.
+
+\bibitem{maturana_iros_2015}
+D.~Maturana and S.~Scherer.
+\newblock {VoxNet: A 3D Convolutional Neural Network for Real-Time Object
+  Recognition}.
+\newblock In {\em {IROS}}, 2015.
+
+\bibitem{shape}
+Z.~Wu, S.~Song, A.~Khosla, F.~Yu, L.~Zhang, X.~Tang, and J.~Xiao.
+\newblock {3D ShapeNets: A Deep Representation for Volumetric Shapes}.
+\newblock In {\em {CVPR}}, 2015.
+
+\end{thebibliography}
