@@ -42,24 +42,52 @@ Tobias Grundmann\\
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}
-   The increasing amount of LiDAR and RGBD cameras in e.g. mobile devices
-   and robotic systems provide us with new information which can aid in various task including object recognition. In this paper we will discribe 3D Convolutional Deep Neural Networks and  how they are trained to recognize voxelized point cloud data from common objects.
+ 
+ %The increasing amount of LiDAR and RGBD cameras in e.g. mobile devices
+ %  and robotic systems provide us with new information which can aid in various task including object
+ %  recognition. In this paper we will discribe 3D Convolutional Deep Neural Networks and  how they are
+ %  trained to recognize voxelized point cloud data from common objects.
+   
+  We implement 3D object recognition using a Convolutional Neural Network (CNN) approach. We adopt the network structure 
+  outlined in \cite{voxnet} and implement it in Python using the Keras framework. We compare our trained CNN
+  with the original paper and achieve similar positive results.
+
 \end{abstract}
 %%%%%%%%% BODY TEXT
 
 \section{Introduction}
 
-One of the crucial tasks of computer systems based on visual information e.g. self-driving cars, autonomous robots, virtual enviroments ( Figure \ref{fig:obj_rec}) is to get a semantic understanding of the enviroment. Depth data has already proved its usability in obstacle avoidance or mapping but we want to investigate its potential to improve object recognition.
+%One of the crucial tasks of computer systems based on visual information e.g. self-driving cars, autonomous robots, virtual
+%enviroments ( Figure \ref{fig:obj_rec}) is to get a semantic understanding of the enviroment. Depth data has already proved its
+%usability in obstacle avoidance or mapping but we want to investigate its potential to improve object recognition.
 
-%% include figure of udacity
+%Since Deep Learning dramatically improved state of the art object recognition \cite{cnn}, we will use Neural Networks to
+%recognize objects from given point clouds. Especially the idea behind convolution in 2D Object recognition will be translated to our 
+%3D data, resulting in a fast and accurate detector. 
 
-Since Deep Learning dramatically improved state of the art object recognition \cite{cnn}, we will use Neural Networks to recognize objects from given point clouds. Especially the idea behind convolution in 2D Object recognition will be translated to our 3D data, resulting in a fast and accurate detector. 
+Autonomous robotic systems like self-driving cars or drones operating in real world environments strongly depend on robust object recognition
+in order to get a semantic understanding of the immediate surroundings.
+Meanwhile, inexpensive depth data has become available with active range sensor such as LiDAR and RGBG cameras (e.g Google Tango). 
+This information can aid in a wide range of tasks. While it is commonly used for obstacle avoidance and mapping, it is not fully 
+utilized in the task of object recognition.
+
+
+Machine learning approaches (Fig. \ref{fig:obj_rec}) in the form of Convolutional Neural Networks (CNN) dramatically improved state 
+of the art image recognition \cite{krizhevsky2012imagenet}. Such networks learn the feature and classifiers from given training data.
+While it is simple to extend this basic approach to volumetric data, it is not obvious what network structures will yield good performance.
+VoxNet \cite{voxnet} is a fast basic 3D CNN architecture that makes use of the available depth information and achieves high object detection accuracy for 
+3D point clouds.
+
+%random thoughts
+%In order to perform well, the training data needs to be sufficently large, only recenetly the case\ref{shape}
+
 
 \begin{figure}[h]
 	\label{fig:obj_rec}
 	\centering
 	\includegraphics[width=0.45\textwidth]{figures/obj_rec}
-	\caption{Example of object recognitions. Source: \cite{udacity}}
+	\caption{Example of object recognitions: Detection as binary classification problem (pedestrian vs no pedestrian). Slide over all possible locations in the image and classify patches. 
+	  (Image source: \cite{udacity})}
 \end{figure}
 
 %-------------------------------------------------------------------------
@@ -120,7 +148,7 @@ The data on which we train our Deep Network was build by \cite{shape}. After a l
 common object categories in the world was compiled from Princtons SUN database \cite{sun}, 3D CAD models were collected through online 
 search engines. To verify the object assigment to each category, human workers on Amazon Mechanical Turk were hired to validate manually. We trained our neural network on one smaller and one larger dataset containing 10 respectivally 40 categories which each ?XXXX? objects.
 
-\section{Reimplementing: VoxNet \cite{maturana_iros_2015}}
+\section{Reimplementing: VoxNet \cite{voxnet}}
 
 \textit{In the following, parts contributed by Author 1/2/3 will be labeled 
 as A1/A2/A3.}
@@ -166,7 +194,7 @@ This is due ... \textbf{TODO: Mehr \& Warum?} \\
  \hline
  Algorithm & ModelNet10 Classification Accuracy  & ModelNet40 Classification Accuracy \\
  \hline
- VoxNet \cite{maturana_iros_2015}   & 83\% & 92\% \\
+ VoxNet \cite{voxnet}   & 83\% & 92\% \\
  3DShapeNets  \cite{shape}   & 77 \% & 83.5\% \\
 \textbf{ETH VoxNet}    & \textbf{81.8\%}   & \textbf{82.3 \%}  \\
  \hline
