@@ -109,7 +109,7 @@ Additionally, 3D CNNs already proved there usability in video analysis ([23], [2
 
 At the core of a neural network is a logistic classifier. 
 For given data, we train weights and bias of a linear equation which will then be transformed into 
-probabilites by using a softmax function. Figure \ref{fig:classifier}.
+probabilities by using a softmax function. Figure \ref{fig:classifier}.
 
 \begin{figure}[h]
 	\label{fig:classifier}
@@ -119,17 +119,19 @@ probabilites by using a softmax function. Figure \ref{fig:classifier}.
 \end{figure}
 
 Linear models are limited and therefore we deepen the network in our case through convolutions and max pooling.
-For convolutions, we run small neural networks with given output size/ depth on a patch which walks through our 3D Data. When leaving out /jumping voxels (striding), the spatial dimension is squeezed while extracting local features of the given object. 
-Through repeating this procedure we arrive at an output depth which coresponds to the semantic complexity of our object recognition task. 
+For convolutions, we run small neural networks with given output size/ depth on a patch which walks through our 3D Data. When leaving out /jumping voxels (striding),
+the spatial dimension is squeezed while extracting local features of the given object. 
+Through repeating this procedure we arrive at an output depth which corresponds to the semantic complexity of our object recognition task. 
 
 \begin{figure}[h]
 	\label{fig:convolution}
 	\includegraphics[width=0.2\textwidth]{figures/conv}
 	\includegraphics[width=0.3\textwidth]{figures/pyra}
-	\caption{Left: Patch with stride 2 \quad Right: Multiple Covolutions. Source: \cite{udacity}}
+	\caption{Left: Patch with stride 2 \quad Right: Multiple Convolutions. Source: \cite{udacity}}
 \end{figure}
 
-The second technique to deepen our network is pooling. Instead of striding to sqeeze our dimension, we can extract e.g. the maximum of a patch and therefore reduce spatial dimension. See detailed discribition of model used in our approach in Figure \ref{fig:model}.
+The second technique to deepen our network is pooling. Instead of striding to squeeze our dimension, we can extract e.g. the maximum of a patch and therefore reduce spatial dimension. 
+See detailed description of model used in our approach in Figure \ref{fig:model}.
 
 \begin{figure}[h]
 	\label{fig:pooling}
@@ -148,7 +150,7 @@ Irgendwas zu batch size, epochen, mehr details erzählen}
 
 The data on which we train our Deep Network was build by \cite{shape}. After a list of the most
 common object categories in the world was compiled from Princtons SUN database \cite{sun}, 3D CAD models were collected through online 
-search engines. To verify the object assigment to each category, human workers on Amazon Mechanical Turk were hired to validate manually. We trained our neural network on one smaller and one larger dataset containing 10 respectivally 40 categories which each ?XXXX? objects.
+search engines. To verify the object assignment to each category, human workers on Amazon Mechanical Turk were hired to validate manually. We trained our neural network on one smaller and one larger dataset containing 10 respectivally 40 categories which each ?XXXX? objects.
 
 \section{Reimplementing: VoxNet \cite{voxnet}}
 
