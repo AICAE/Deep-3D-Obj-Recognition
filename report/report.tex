@@ -95,7 +95,7 @@ VoxNet \cite{voxnet} is a fast basic 3D CNN architecture that makes use of the a
 
 \section{Related Work}
 
-On the one hand, There is a large body of work of object recognition using 3D point clouds but not making use of Neural Networks. 
+On the one hand, there is a large body of work of object recognition using 3D point clouds but not making use of Neural Networks. 
 Mostly methods combine hand-crafted features or descriptors with a machine learning classifier ([10], [11], [12]). 
 Similiar methods are seen with semantic segmentation, with structured output classifiers instead of single output classifiers ([14], [15], [16]).
 
@@ -109,7 +109,7 @@ Additionally, 3D CNNs already proved there usability in video analysis ([23], [2
 
 At the core of a neural network is a logistic classifier. 
 For given data, we train weights and bias of a linear equation which will then be transformed into 
-probabilites by using a softmax function. 
+probabilites by using a softmax function. Figure \ref{fig:classifier}.
 
 \begin{figure}[h]
 	\label{fig:classifier}
@@ -119,8 +119,8 @@ probabilites by using a softmax function.
 \end{figure}
 
 Linear models are limited and therefore we deepen the network in our case through convolutions and max pooling.
-For convolution we define a patch which then walks through our 3D Data and runs a small neural network on this patch with given output size / depth. When leaving out /jumping voxels (striding), the spatial dimension is squeezed while extracting local features of the given object. 
-Through repeating this procedure we arrive at an output depth which coresponds to a similiar semantic complexity of our representation. 
+For convolutions, we run small neural networks with given output size/ depth on a patch which walks through our 3D Data. When leaving out /jumping voxels (striding), the spatial dimension is squeezed while extracting local features of the given object. 
+Through repeating this procedure we arrive at an output depth which coresponds to the semantic complexity of our object recognition task. 
 
 \begin{figure}[h]
 	\label{fig:convolution}
@@ -139,9 +139,10 @@ The second technique to deepen our network is pooling. Instead of striding to sq
 \end{figure}
 
 In order to train our model, we have to test how well it is doing during and after training. 
-Testing the model on the data we trained it with does not work since the model remembers input data so we split the data into test- and training set which gives us accurate results how well the classifier is doing on unknown data. This common phenomenon, that a complex model fits a given dataset but fails to generalizes on new data, is called \textit{overfitting}.
+Validating the model on training data does not work since the model remembers all its input. Therefore we split the data into test- and training set which enables us to check how accurate the classifier is doing on unknown input, the test set. This common phenomenon, that a complex model fits a given dataset but fails to generalizes on new data, is called \textit{overfitting}.
 
-\textbf{TODO: Irgendwas zu batch size, epochen, mehr details erzählen}
+\textbf{TODO: Overftting hier drin, weil das der Grund ist für die nicht so guten Ergebnisse von uns?
+Irgendwas zu batch size, epochen, mehr details erzählen}
 
 \section{Data: Princeton ModelNet}
 
@@ -164,7 +165,7 @@ Overall Goal is to classify an object from a given point cloud. After voxilizing
 \end{figure}
 
 Princetons ModelNet delivers every object with views from 12 different angles in .mat files; we train on all rotations to enhance recognition from 
-different viwes. The data is already voxilized to 32x32x32 occupancy grids.
+different views. The data is already voxilized to 32x32x32 occupancy grids.
 This data was transformed by A3 into a .hdf5 format and split into test and training set. Hdf5 compresses the set size dramatically and enables simple access.
 Two methods were implemented by A1/A3 to deal with loading the data from .hdf5 files. One opens the .hdf5 and loads pieces which are passed during iterations of the generator resulting in a slower but RAM saving loader. The other, used for the final training, converts the hdf5 entirely to a numpy array providing us with a RAM expensive but much faster access to the data.
 
@@ -177,7 +178,7 @@ After preparing the data and its access, the VoxNet convolutional neural network
 	\caption{VoxNet Convolution Model. Source: \cite{mature}}
 \end{figure}
 
-A training enviroment was set up by A1/A2/A3.
+A training enviroment was set up and used by A1/A2/A3.
 
 \section{Experiments}
 
