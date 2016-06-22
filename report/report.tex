@@ -7,6 +7,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{url}
+\RequirePackage{framed}
 
 % Include other packages here, before hyperref.
 
@@ -21,7 +22,7 @@
 \def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
 
 % Pages are numbered in submission mode, and unnumbered in camera-ready
-\setcounter{page}{4321}
+\setcounter{page}{1}
 \begin{document}
 
 %%%%%%%%% TITLE
@@ -85,7 +86,7 @@ VoxNet \cite{voxnet} is a fast basic 3D CNN architecture that makes use of the a
 \begin{figure}[h]
 	\label{fig:obj_rec}
 	\centering
-	\includegraphics[width=0.45\textwidth]{figures/obj_rec}
+	\frame{\includegraphics[width=0.45\textwidth]{figures/obj_rec}}
 	\caption{Example of object recognitions: Detection as binary classification problem (pedestrian vs no pedestrian). Slide over all possible locations in the image and classify patches. 
 	  (Image source: \cite{udacity})}
 \end{figure}
@@ -199,6 +200,31 @@ This is due ... \textbf{TODO: Mehr \& Warum?} \\
 \textbf{ETH VoxNet}    & \textbf{81.8\%}   & \textbf{82.3 \%}  \\
  \hline
 \end{tabular}
+
+
+We also tested the network on data aquired with google tango. The point clouds were first voxelized
+and shaped into the right format to feed itto the network. We feed voxels of 3 different objects/scenes, chair, 
+stool (Fig \ref{fig:voxel_stool}) and a desk scene. the Chair was recognized with a very high accuracy of ?? and the stool with  ??.
+
+%TODO image ränder abschneiden (weniger weiss)
+\begin{figure}[h]
+	\label{fig:voxel_stool}
+	\centering
+	\includegraphics[width=0.42\textwidth]{figures/tango_voxel_stool}
+	\caption{Voxaliced stool source ????? martin ?}
+\end{figure}
+
+
+\begin{figure}[h]
+	\label{fig:voxel_desk}
+	\centering
+	\includegraphics[width=0.42\textwidth]{figures/tango_voxel_desk_scene}
+	\caption{Stool source ????? martin ?}
+\end{figure}
+
+Problem 80 percent thinkgs bed, but desk, didnt train on scene contaning more then one object.
+
+
 
 \section{Conclusion}
 
