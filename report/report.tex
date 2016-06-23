@@ -79,9 +79,6 @@ While it is simple to extend this basic approach to volumetric data, it is not o
 VoxNet \cite{voxnet} is a fast basic 3D CNN architecture that makes use of the available depth information and achieves high object detection accuracy for 
 3D point clouds.
 
-%random thoughts
-%In order to perform well, the training data needs to be sufficently large, only recenetly the case\ref{shape}
-
 
 \begin{figure}[h]
 	\label{fig:obj_rec}
@@ -95,27 +92,55 @@ VoxNet \cite{voxnet} is a fast basic 3D CNN architecture that makes use of the a
 
 \section{Related Work}
 
-On the one hand, there is a large body of work of object recognition using 3D point clouds but not making use of Neural Networks. 
-Mostly methods combine hand-crafted features or descriptors with a machine learning classifier ([10], [11], [12]). 
-Similiar methods are seen with semantic segmentation, with structured output classifiers instead of single output classifiers ([14], [15], [16]).
+%On the one hand, there is a large body of work of object recognition using 3D point clouds but not making use of Neural Networks. 
+%Mostly methods combine hand-crafted features or descriptors with a machine learning classifier ([10], [11], [12]). 
+%Similiar methods are seen with semantic segmentation, with structured output classifiers instead of single output classifiers ([14], [15], [16]).
 
-On the other hand 2.5D CNNs were used for object recognition but fail to make full use of geometric information in the data. Their approaches simply treat the depth channel as an additional channel, along with the RGB channels. ([17], [18], [19], [20]) 
+%On the other hand 2.5D CNNs were used for object recognition but fail to make full use of geometric information in the data. T
+%heir approaches simply treat the depth channel as an additional channel, along with the RGB channels. ([17], [18], [19], [20]) 
 
-Additionally, 3D CNNs already proved there usability in video analysis ([23], [24]). In this case, time acts as the third dimension but algorithmically, these architectures work the same as ours, but the nature of the data is very different.
+%Additionally, 3D CNNs already proved there usability in video analysis ([23], [24]). In this case, time acts as the third dimension but algorithmically, 
+%these architectures work the same as ours, but the nature of the data is very different.
 
-\textbf{TODO: Das so machen? ist quasi kopiert von VoxNet. Finde ich ok, mir egal}
+
+
+\subsection{Object Recogintion with Point Cloud Data}
+Various publications on both semantic segmentation \cite{koppula2011semantic} and object recognition 
+(\cite{teichman2011towards}, \cite{golovinskiy2009shape}) using 3D point clouds from LiDAR or RGBD sensors are available. 
+Most of this work uses a pipeline combining various hand-crafted features or descriptors with a machine learning classifier.
+The VoxNet architecture on the other hand learns to extract features and classify objects from the raw volumetric data.
+
+
+\subsection{3D  Convolutional Neural Networks}
+RBG image object recognition has been dramatically improved by Convolutional Neural Networks.
+Building on that success, several authors have extended that basic approach to RBGD, simply treating the depth as 
+an additional channel (\cite{socher2012convolutional} \cite{hoft2014fast}). While straightforward, this approach does not
+make full use of the geometric information available in the data. 
+The approach described in \cite{voxnet} differs from this as they 
+use a fully volumetric representation. This representation is richer as it also distinguishes free space from unknown space.
+
+Additionally, CNN architectures with volumetric convolutions have already proven their usability in video analysis \cite{ji20133d}. In this
+case time acts as the third dimension.
+
+
+
+In the RBGD domain, \cite{shape} proposes a generative 3D constitutional model of shap and apply it to RGBD object recognition
+
 
 \section{Convolutional Neural Networks}
 
 At the core of a neural network is a logistic classifier. 
-For given data, we train weights and bias of a linear equation which will then be transformed into 
-probabilities by using a softmax function. Figure \ref{fig:classifier}.
+%For given data, we train weights and bias of a linear equation which will then be transformed into 
+%probabilities by using a softmax function. Figure \ref{fig:classifier}.
+Weights and bias of a linear equation are trained on provided data. Given an input to the system the output is
+transformed into probabilities by using a softmax function. See Figure \ref{fig:classifier}.
+
 
 \begin{figure}[h]
 	\label{fig:classifier}
 	\centering
 	\includegraphics[width=0.4\textwidth]{figures/classifier}
-	\caption{Weight and bias (W,b) get trained to classify input A. Source: \cite{udacity}}
+	\caption{Weights W and bias b are trained to classify an input. If the letter 'A' is feed to the network, it is classified as an 'a' with a certainty of 0.7. (Image source: \cite{udacity})}
 \end{figure}
 
 Linear models are limited and therefore we deepen the network in our case through convolutions and max pooling.
@@ -150,14 +175,17 @@ Irgendwas zu batch size, epochen, mehr details erzählen}
 
 The data on which we train our Deep Network was build by \cite{shape}. After a list of the most
 common object categories in the world was compiled from Princtons SUN database \cite{sun}, 3D CAD models were collected through online 
-search engines. To verify the object assignment to each category, human workers on Amazon Mechanical Turk were hired to validate manually. We trained our neural network on one smaller and one larger dataset containing 10 respectivally 40 categories which each ?XXXX? objects.
+search engines. To verify the object assignment to each category, human workers on Amazon Mechanical Turk were hired to validate manually. 
+e trained our neural network on one smaller and one larger dataset containing 10 respectivally 40 categories which each ?XXXX? objects.
 
-\section{Reimplementing: VoxNet \cite{voxnet}}
+In order to perform well, the training data needs to be sufficently large, only recenetly available\ref{shape}
 
-\textit{In the following, parts contributed by Author 1/2/3 will be labeled 
+\section{Implementation: VoxNet \cite{voxnet}}
+
+\textit{In the following, parts contributed by Author Adrian/Johannes/Tobias will be labeled 
 as A1/A2/A3.}
 
-Overall Goal is to classify an object from a given point cloud. After voxilizing to format 32x32x32, we train our CNN on these occupancy grids, Figure \ref{fig:algo}.
+Overall Goal is to classify an object from a given 3D point cloud. After voxilizing to format 32x32x32, we train our CNN on these occupancy grids, Figure \ref{fig:algo}.
 
 \begin{figure}[h]
 	\label{fig:algo}
@@ -169,7 +197,8 @@ Overall Goal is to classify an object from a given point cloud. After voxilizing
 Princetons ModelNet delivers every object with views from 12 different angles in .mat files; we train on all rotations to enhance recognition from 
 different views. The data is already voxilized to 32x32x32 occupancy grids.
 This data was transformed by A3 into a .hdf5 format and split into test and training set. Hdf5 compresses the set size dramatically and enables simple access.
-Two methods were implemented by A1/A3 to deal with loading the data from .hdf5 files. One opens the .hdf5 and loads pieces which are passed during iterations of the generator resulting in a slower but RAM saving loader. The other, used for the final training, converts the hdf5 entirely to a numpy array providing us with a RAM expensive but much faster access to the data.
+Two methods were implemented by A2/A3 to deal with loading the data from .hdf5 files. One opens the .hdf5 and loads pieces which are passed during iterations of the generator resulting 
+in a slower but RAM saving loader. The other, used for the final training, converts the hdf5 entirely to a numpy array providing us with a RAM expensive but much faster access to the data.
 
 After preparing the data and its access, the VoxNet convolutional neural network model (~900.000 Parameters) is created, Figure \ref{fig:model}. For this, A1/A2 used the \textit{Python} deep learning library \textit{Keras} which runs on top of \textit{Theano}. \textit{Keras} supports 3D convolutional and max-pooling layers. 
 
