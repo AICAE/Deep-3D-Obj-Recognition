@@ -1,32 +1,47 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import keras
-assert keras.__version__ == "1.0.0", "keras version not supported"
-
-from keras import backend as K
-
-from keras.models import Sequential
-
-from keras.layers import Convolution3D, MaxPooling3D
-from keras.layers.core import Activation, Dense, Dropout, Flatten
-from keras.layers.advanced_activations import LeakyReLU
-from keras.regularizers import l2
-from keras.callbacks import LearningRateScheduler, ModelCheckpoint, Callback
-from keras.engine.training import batch_shuffle
-
-from keras.optimizers import SGD
-
-import lib_IO_hdf5
-
+#internal modules
 import logging
 import datetime
 import os
 import sys
 
+#third party modules
+import keras
+assert keras.__version__ == "1.0.0", "keras version not supported"
+from keras import backend as K
+from keras.models import Sequential
+from keras.layers import Convolution3D, MaxPooling3D
+from keras.layers.core import Activation, Dense, Dropout, Flatten
+from keras.layers.advanced_activations import LeakyReLU
+from keras.regularizers import l2
+from keras.callbacks import LearningRateScheduler, ModelCheckpoint
+from keras.optimizers import SGD
+
+#Information
+__author__ = "Tobias Grundmann, Adrian Schneuwly, Johannes Oswald"
+__copyright__ = "Copyright 2016, 3D Vision, ETH Zurich, CVP Group"
+__credits__ = ["Martin Oswald", "Pablo Speciale"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__status__ = "Finished"
+
+#set logging level DEBUG and output to stdout
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 def learningRateSchedule(epoch):
+    """
+
+    Args:
+        epoch: current epoche, int
+
+    Returns:
+        learning rate based on epoche
+
+    Learning Rate Schedule which returns changing learning rates based on the epoche
+
+    """
     if epoch >= 2:
         return 0.0001
     elif epoch >= 5:
@@ -37,20 +52,46 @@ def learningRateSchedule(epoch):
         return 0.001
 
 class model_vt (object):
+    """
 
+    Reimplementation of the voxnet by dimatura
+
+    """
     def __init__(self, nb_classes, dataset_name):
-        """initiate Model according to voxnet paper"""
+        """
+
+        Args:
+            nb_classes: number of classes the model is going to learn, int
+            dataset_name: name of the dataset {modelnet40, modelnet10} just used to save weights every epoche
+
+        initializes voxnet based on keras framework
+
+        layers:
+            3D Convolution
+            Leaky ReLu
+            Dropout
+            3d Convolution
+            Leaky ReLu
+            MaxPool
+            Dropout
+            Dense
+            Dropout
+            Dense
+
+        """
+
         # Stochastic Gradient Decent (SGD) with momentum
         # lr=0.01 for LiDar dataset
         # lr=0.001 for other datasets
         # decay of 0.00016667 approx the same as learning schedule (0:0.001,60000:0.0001,600000:0.00001)
-        # use callbacks learingrate_schedule instead
         self._optimizer = SGD(lr=0.01, momentum=0.9, decay=0.00016667, nesterov=False)
 
-        #self._lr_schedule = LearningRateScheduler(learningRateSchedule)
+        # use callbacks learingrate_schedule as alternative to learning_rate decay
+        #   self._lr_schedule = LearningRateScheduler(learningRateSchedule)
+
+        # save weights after every epoche
         self._mdl_checkpoint = ModelCheckpoint("weights/" + dataset_name + "_{epoch:02d}_{acc:.2f}.hdf5",
                                                monitor="acc", verbose=0, save_best_only=False, mode="auto")
-
 
         # create directory if necessary
         if not os.path.exists("weights/"):
@@ -74,6 +115,7 @@ class model_vt (object):
                                     ))
 
         logging.debug("Layer1:Conv3D shape={0}".format(self._mdl.output_shape))
+        #Activation Leaky ReLu
         self._mdl.add(Activation(LeakyReLU(alpha=0.1)))
 
         # dropout 1
@@ -91,8 +133,9 @@ class model_vt (object):
                                     W_regularizer=l2(0.001),
                                     b_regularizer=l2(0.001),
                                     ))
-
         logging.debug("Layer3:Conv3D shape={0}".format(self._mdl.output_shape))
+
+        #Activation Leaky ReLu
         self._mdl.add(Activation(LeakyReLU(alpha=0.1)))
 
         # max pool 1
@@ -100,7 +143,6 @@ class model_vt (object):
                                    strides=None,
                                    border_mode='valid',
                                    dim_ordering='th'))
-
         logging.debug("Layer4:MaxPool3D shape={0}".format(self._mdl.output_shape))
 
         # dropout 2
@@ -116,7 +158,6 @@ class model_vt (object):
                             W_regularizer=l2(0.001),
                             b_regularizer=l2(0.001),
                             ))
-
         logging.debug("Layer6:Dense shape={0}".format(self._mdl.output_shape))
 
         # dropout 3
@@ -129,20 +170,28 @@ class model_vt (object):
                             W_regularizer=l2(0.001),
                             b_regularizer=l2(0.001),
                             ))
-
         logging.debug("Layer8:Dense shape={0}".format(self._mdl.output_shape))
 
+        #Activation Softmax
         self._mdl.add(Activation("softmax"))
 
         # compile model
-        self._mdl.compile(loss=self._objective, optimizer=self._optimizer, metrics=["accuracy"])
+        self._mdl.compile(loss='categorical_crossentropy', optimizer=self._optimizer, metrics=["accuracy"])
         logging.info("Model compiled!")
-
-    def _objective(self, y_true, y_pred):
-        return K.categorical_crossentropy(y_pred, y_true)
 
     def fit(self, generator, samples_per_epoch,
             nb_epoch, valid_generator, nb_valid_samples, verbosity):
+        """
+
+        Args:
+            generator: training sample generator from loader.train_generator
+            samples_per_epoch: number of train sample per epoche from loader.return_train_samples
+            nb_epoch: number of epochs to repeat traininf on full set
+            valid_generator: validation sample generator from loader.valid_generator or NONE else
+            nb_valid_samples: number of validation samples per epoche from loader.return_valid_samples
+            verbosity: 0 (no output), 1 (full output), 2 (output only after epoche)
+
+        """
         logging.info("Start training")
         self._mdl.fit_generator(generator=generator,
                                 samples_per_epoch=samples_per_epoch,
@@ -161,58 +210,61 @@ class model_vt (object):
         self._mdl.save_weights("weights_{0}.h5".format(time_now), False)
 
     def continue_fit(self, weights_file, generator, samples_per_epoch,
-                     nb_epoch, valid_generator, nb_valid_samples):
-        self.load_weights(weights_file)
-        # TODO calc remaining nb_epoch from weights_file name
-        self.fit(generator, samples_per_epoch, nb_epoch, valid_generator, nb_valid_samples)
+                     nb_epoch, valid_generator, nb_valid_samples, verbosity):
+        """
 
-    # # for testing only
-    # def _fit(self, X_train, y_train, batch_size=32, nb_epoch=80):
-    #     self._mdl.fit(X_train=X_train,
-    #                   y_train=y_train,
-    #                   nb_epoch=nb_epoch,
-    #                   batch_size=batch_size,
-    #                   shuffle=True,
-    #                   verbose=1,
-    #                   )
-    #
-    #     self._mdl.save_weights("weights", overwrite=False)
+        Args:
+            weights_file: filename and adress of weights file .hdf5
+            generator: training sample generator from loader.train_generator
+            samples_per_epoch: number of train sample per epoche from loader.return_train_samples
+            nb_epoch: number of epochs to repeat traininf on full set
+            valid_generator: validation sample generator from loader.valid_generator or NONE else
+            nb_valid_samples: number of validation samples per epoche from loader.return_valid_samples
+            verbosity: 0 (no output), 1 (full output), 2 (output only after epoche)
+
+        """
+        self.load_weights(weights_file)
+        self._mdl.fit_generator(generator=generator,
+                            samples_per_epoch=samples_per_epoch,
+                            nb_epoch=nb_epoch,
+                            verbose=verbosity,
+                            callbacks=[ #self._lr_schedule,
+                                    self._mdl_checkpoint,],
+                            validation_data=valid_generator,
+                            nb_val_samples=nb_valid_samples,
+                            )
 
     def evaluate(self, evaluation_generator, num_eval_samples):
+        """
+
+        Args:
+            evaluation_generator: evaluation sample generator from loader.eval_generator
+            num_eval_samples: number of train sample per epoche from loader.return_eval_samples
+
+        """
         self._score = self._mdl.evaluate_generator(
             generator=evaluation_generator,
             val_samples=num_eval_samples)
         print("Test score:", self._score)
 
     def load_weights(self, file):
+        """
+
+        Args:
+            file: filename and adress of weights file .hdf5
+
+        """
         logging.info("Loading model weights from file '{0}'".format(file))
         self._mdl.load_weights(file)
 
     def predict(self, X_predict):
-        # TODO add prediction from PointCloud
+        """
+
+        Args:
+            X_predict: Features to use to predict labels, numpy ndarray shape [~,1,32,32,32]
+
+        returns:
+            Probability for every label
+
+        """
         return self._mdl.predict_proba(X_predict, verbose=0)
-
-    def get_score(self):
-        # TODO might change to tuble(self._score), not sure it's tuple
-        return self._score
-
-    score = property(get_score)
-
-
-# if __name__ == "__main__":
-#     logging.basicConfig(level=logging.DEBUG)
-#     v = model_vt()
-#     loader = lib_IO_hdf5.Loader_hdf5("data/testing.hdf5",
-#                                      batch_size= 12,
-#                                      shuffle=True,
-#                                      valid_split=0.15,
-#                                      mode="train")
-#     v.fit(generator=loader.train_generator(),
-#           samples_per_epoch=loader.return_num_train_samples(),
-#           nb_epoch=2,
-#           valid_generator= loader.valid_generator(),
-#           nb_valid_samples = loader.return_num_valid_samples())
-#     # v.load_weights("weightsm")
-#
-#     v.evaluate(evaluation_generator = loader.evaluate_generator(),
-#                num_eval_samples=loader.return_num_evaluation_samples())
