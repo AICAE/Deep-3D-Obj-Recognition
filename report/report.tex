@@ -126,7 +126,6 @@ Their model can jointly recognize and reconstruct objects from a single view. In
 3D CAD model dataset called ModelNet (see section \ref{data:modelnet}).
 
 
-
 \section{Convolutional Neural Networks}
 
 At the core of a neural network is a logistic classifier. 
@@ -144,7 +143,7 @@ transformed into probabilities by using a softmax function. See Figure \ref{fig:
 	it is classified as an 'a' with a certainty of 0.7. (Image source: \cite{udacity})}
 \end{figure}
 
-Linear models are limited and therefore we deepen the network in our case through convolutions and max pooling.
+Linear Neural Networks are limited and therefore CNNs are advanced by non-linear feature maps which \textit{deepen} when successively applied. The deep neural network of \cite{voxnet} uses convolutions and max pooling.
 For convolutions, we run small neural networks with given output size/ depth on a patch which walks through our 3D Data. When leaving out /jumping voxels (striding),
 the spatial dimension is squeezed while extracting local features of the given object. 
 Through repeating this procedure we arrive at an output depth which corresponds to the semantic complexity of our object recognition task. 
@@ -213,7 +212,6 @@ Figure \ref{fig:model}. For this, A1/A2 used the \textit{Python} deep learning l
 After the conversion to a voxel grid of format 32x32x32, we train our CNN on these occupancy grids, Figure \ref{fig:algo}.
 
 
-
 \begin{figure}[h]
 	\label{fig:model}
 	\centering
@@ -225,15 +223,24 @@ A training enviroment was set up and used by A1/A2/A3.
 
 \section{Training}
 
+<<<<<<< Updated upstream
 The training process takes around 9 to 20 hours on a NVIDIA GTX 980TI (6GB) GPU, using cuda 7.5 and cudnn 5, depending on the choice of the dataset(ModelNet10/40). Any methods to improve the score by further data augmentation, such as the random augmentation and multi resolution where not implemented as the amount of gpu time available was very limited. This might affect the results of the score. 
 The implementation does not make use of early stopping as we are using droupout and weight regulizers, thus avoiding overfitting by the use of early stopping, would not show any improvements. This was tested and proven to be true. Any attampts of improving the score by Tuning the learning rate have not show to be successful.
 Common to best practice weights are saved after every epoche of training to avoid loss of data. \textbf{TODO: Mehr \& Warum?} \\ 
+=======
+ModelNet40 contains 151,128 3D models, ModelNet10 a subset with 10 categories, which is augmented by 12 rotations.
+Our training process takes around 9 to 20 hours on a NVIDIA GTX 980TI (6GB) GPU depending on the choice of the dataset (ModelNet10/40).
+During training, improved weights are saved to ensure efficiency when training crashes. \textbf{TODO: Mehr \& Warum?} \\ 
+>>>>>>> Stashed changes
 
 \section{Results}
 
 The papers implementation achieved verg good results for the small data set but failed to achieve the excellent score of the 
-original VoxNet implementation on the larger ModelNet40. 
-This is due ... \textbf{TODO: Mehr \& Warum?} \\ 
+original VoxNet implementation on the larger ModelNet40. One possible explanation could be the slightly different setup due 
+to different libraries used in our implementation. \textbf{Tobi: genauer} Another detailed missed reimplemenation of the data 
+augementation done by \cite{voxnet} where there randomly added pertubed copies of instances during training to enhance versatility of the data.
+Additionally, more time to finetune sizes of test/training set could have improved overfitting.
+
 \begin{center}
 \begin{tabular}{ |p{2.3cm}||p{2.3cm}|p{2.3cm}|  }
  \hline
@@ -244,37 +251,40 @@ This is due ... \textbf{TODO: Mehr \& Warum?} \\
 \textbf{ETH VoxNet}    & \textbf{81.8\%}   & \textbf{82.3 \%}  \\
  \hline
 \end{tabular}
-\end{center}{center}
+\end{center}
 
 \vspace{0.3cm}
 A1/A2/A3 also tested the network on data aquired with google tango. The point clouds were first voxelized
 and shaped into the right format to feed into the network. We feed voxels of 3 different objects/scenes, chair, 
-stool (Fig. \ref{fig:voxel_stool}) and a desk scene. Single objects e.g. chair, stool get recognized with very high accuracies of 98\% or more.
+stool (Fig. \ref{fig:voxel_stool}) and a desk scene (Fig. \ref{fig:desk}). Single objects e.g. chair, stool get recognized with very high accuracies of 98\% or more.
 
 %TODO image ränder abschneiden (weniger weiss)
 \begin{figure}[h]
 	\label{fig:voxel_stool}
 	\centering
 	\includegraphics[width=0.42\textwidth]{figures/tango_voxel_stool}
-	\caption{Voxaliced stool \textbf{ source ????? martin ?}}
+	\caption{Voxalized stool \textbf{ source ????? martin ?}}
 \end{figure}
-
 
 \begin{figure}[h]
-	\label{fig:voxel_desk}
+	\label{fig:desk}
 	\centering
 	\includegraphics[width=0.42\textwidth]{figures/tango_voxel_desk_scene}
-	\caption{Voxaliced desk \textbf{source ????? martin ?}}
+	\caption{Voxalized desk \textbf{source ????? martin ?}}
 \end{figure}
 
-Not surprisingly, the systems is designed to distinguish between single object and therefore recognizes a bed with high accuracy when
-tested on the desk scene (chair, desk, display, etc.).
+The systems is designed to distinguish between single object and therefore not surprisingly fails when
+tested on e.g. a desk scene includuing multiple objects e.g. chair, desk, display (Fig. \ref{fig:desk}).
 
 \section{Conclusion}
 
 The team successfully reimplemented a very clean and working VoxNet with comparable results.
-Improvements of results 
-\textbf{TODO: Mehr...}
+After voxalizing point cloud data from e.g. LiDAR or RGBD, the system is capable of efficient and accurate object classification in real time. 
+
+\section{Outline}
+Due to fine tuning and implementation of the data augementation used by \cite{voxnet}, same results even on the larger ModelNet40 
+should be achieve quickly. One failure of the system is the difficulty when working with multi object inputs., Fig. \ref{fig:desk}. 
+When implementing the system on e.g. Google Tango, one would first need a object extraction from the scene and additionally rescaling into the used voxel grid size to use the implemented classifier. 
 
 {\small
 \bibliographystyle{ieee}
