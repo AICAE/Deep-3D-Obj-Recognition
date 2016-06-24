@@ -214,16 +214,15 @@ A training enviroment was set up and used by A1/A2/A3.
 \section{Experiments}
 
 The training process takes around 9 to 20 hours on a NVIDIA GTX 980TI (6GB) GPU depending on the choice of the dataset (ModelNet10/40).
-
-\textbf{TODO: Mehr...}
+During training, improved weights are saved to ensure information ... \textbf{TODO: Mehr \& Warum?} \\ 
 
 \section{Results}
 
-The papers implementation achieved verg good results for the small data set but failed to achieve the excelent score of the 
+The papers implementation achieved verg good results for the small data set but failed to achieve the excellent score of the 
 original VoxNet implementation on the larger ModelNet40. 
 This is due ... \textbf{TODO: Mehr \& Warum?} \\ 
-
-\begin{tabular}{ |p{2.5cm}||p{2.5cm}|p{2.5cm}|  }
+\begin{center}
+\begin{tabular}{ |p{2.3cm}||p{2.3cm}|p{2.3cm}|  }
  \hline
  Algorithm & ModelNet10 Classification Accuracy  & ModelNet40 Classification Accuracy \\
  \hline
@@ -232,18 +231,19 @@ This is due ... \textbf{TODO: Mehr \& Warum?} \\
 \textbf{ETH VoxNet}    & \textbf{81.8\%}   & \textbf{82.3 \%}  \\
  \hline
 \end{tabular}
+\end{center}{center}
 
-
-We also tested the network on data aquired with google tango. The point clouds were first voxelized
-and shaped into the right format to feed itto the network. We feed voxels of 3 different objects/scenes, chair, 
-stool (Fig \ref{fig:voxel_stool}) and a desk scene. the Chair was recognized with a very high accuracy of ?? and the stool with  ??.
+\vspace{0.3cm}
+A1/A2/A3 also tested the network on data aquired with google tango. The point clouds were first voxelized
+and shaped into the right format to feed into the network. We feed voxels of 3 different objects/scenes, chair, 
+stool (Fig. \ref{fig:voxel_stool}) and a desk scene. Single objects e.g. chair, stool get recognized with very high accuracies of 98\% or more.
 
 %TODO image ränder abschneiden (weniger weiss)
 \begin{figure}[h]
 	\label{fig:voxel_stool}
 	\centering
 	\includegraphics[width=0.42\textwidth]{figures/tango_voxel_stool}
-	\caption{Voxaliced stool source ????? martin ?}
+	\caption{Voxaliced stool \textbf{ source ????? martin ?}}
 \end{figure}
 
 
@@ -251,16 +251,16 @@ stool (Fig \ref{fig:voxel_stool}) and a desk scene. the Chair was recognized wit
 	\label{fig:voxel_desk}
 	\centering
 	\includegraphics[width=0.42\textwidth]{figures/tango_voxel_desk_scene}
-	\caption{Stool source ????? martin ?}
+	\caption{Voxaliced desk \textbf{source ????? martin ?}}
 \end{figure}
 
-Problem 80 percent thinkgs bed, but desk, didnt train on scene contaning more then one object.
-
-
+Not surprisingly, the systems is designed to distinguish between single object and therefore recognizes a bed with high accuracy when
+tested on the desk scene (chair, desk, display, etc.).
 
 \section{Conclusion}
 
 The team successfully reimplemented a very clean and working VoxNet with comparable results.
+Improvements of results 
 \textbf{TODO: Mehr...}
 
 {\small
