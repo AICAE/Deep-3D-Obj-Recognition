@@ -228,17 +228,23 @@ The training environment was set up and used by all the authors.
  
 \section{Training}
 
-The training process takes around 9 to 20 hours on a NVIDIA GTX 980TI (6GB) GPU, using cuda 7.5 and cudnn 5, depending on the choice of the dataset(ModelNet10/40). Any methods to improve the score by further data augmentation, such as the random augmentation and multi resolution where not implemented as the amount of gpu time available was very limited. This might affect the results of the score. 
-The implementation does not make use of early stopping as we are using droupout and weight regulizers, thus avoiding overfitting by the use of early stopping, would not show any improvements. This was tested and proven to be true. Any attampts of improving the score by Tuning the learning rate have not show to be successful.
-Common to best practice weights are saved after every epoche of training to avoid loss of data. \textbf{TODO: Mehr \& Warum?} \\ 
+The training process takes around 9 to 20 hours on a NVIDIA GTX 980TI (6GB) GPU, using CUDA 7.5 and cuDNN 5, 
+depending on the choice of the dataset (ModelNet10/40). Any methods to improve the score by further data augmentation,
+such as the random augmentation and multi resolution where not implemented as the amount of GPU time available
+was very limited. This might affect the results of the score. 
+The implementation does not make use of early stopping as we are using dropout and weight regulizers,
+thus avoiding overfitting by the use of early stopping, would not show any improvements.
+This was tested and proven to be true. Any attempts of improving the score by tuning the learning rate have not show to be successful.
+Common to best practice weights are saved after every epoch of training to avoid loss of data.
 
 \section{Results}
 
-The papers implementation achieved verg good results for the small data set but failed to achieve the excellent score of the 
+Our implementation achieved very good results for the small data set but failed to achieve the excellent score of the 
 original VoxNet implementation on the larger ModelNet40. One possible explanation could be the slightly different setup due 
-to different libraries used in our implementation. \textbf{Tobi: genauer} Another detailed missed reimplemenation of the data 
-augementation done by \cite{voxnet} where there randomly added pertubed copies of instances during training to enhance versatility of the data.
-Additionally, more time to finetune sizes of test/training set could have improved overfitting.
+to different libraries used in our implementation. 
+A detail missed in the reimplemenation is the data augmentation done by \cite{voxnet}. 
+They randomly added perturbed copies of instances during the training to enhance versatility of the data.
+Additionally, more time to fine tune sizes of test/training set could have improved the performance and reduced overfitting.
 
 \begin{center}
 \begin{tabular}{ |p{2.3cm}||p{2.3cm}|p{2.3cm}|  }
@@ -253,23 +259,24 @@ Additionally, more time to finetune sizes of test/training set could have improv
 \end{center}
 
 \vspace{0.3cm}
-A1/A2/A3 also tested the network on data aquired with google tango. The point clouds were first voxelized
-and shaped into the right format to feed into the network. We feed voxels of 3 different objects/scenes, chair, 
-stool (Fig. \ref{fig:voxel_stool}) and a desk scene (Fig. \ref{fig:desk}). Single objects e.g. chair, stool get recognized with very high accuracies of 98\% or more.
+The trained network was also tested on data acquired with Google Tango. The point clouds were first voxelized
+and shaped into the right format to feed into the network. We feed voxels of 3 different objects/scenes: Chair, 
+stool (Figure \ref{fig:voxel_stool}) and a desk scene (Figure \ref{fig:desk}). Both single objects (chair, 
+stool) get recognized with very high accuracy of over 98\%.
 
 %TODO image ränder abschneiden (weniger weiss)
 \begin{figure}[h]
 	\label{fig:voxel_stool}
 	\centering
 	\includegraphics[width=0.42\textwidth]{figures/tango_voxel_stool}
-	\caption{Voxalized stool \textbf{ source ????? martin ?}}
+	\caption{Voxelized stool}
 \end{figure}
 
 \begin{figure}[h]
 	\label{fig:desk}
 	\centering
 	\includegraphics[width=0.42\textwidth]{figures/tango_voxel_desk_scene}
-	\caption{Voxalized desk \textbf{source ????? martin ?}}
+	\caption{Voxelized desk \textbf{source ????? martin ?}}
 \end{figure}
 
 The systems is designed to distinguish between single object and therefore not surprisingly fails when
@@ -278,7 +285,7 @@ tested on e.g. a desk scene includuing multiple objects e.g. chair, desk, displa
 \section{Conclusion}
 
 The team successfully reimplemented a very clean and working VoxNet with comparable results.
-After voxalizing point cloud data from e.g. LiDAR or RGBD, the system is capable of efficient and accurate object classification in real time. 
+After voxelizing point cloud data from e.g. LiDAR or RGBD, the system is capable of efficient and accurate object classification in real time. 
 
 \section{Outline}
 Due to fine tuning and implementation of the data augementation used by \cite{voxnet}, same results even on the larger ModelNet40 
