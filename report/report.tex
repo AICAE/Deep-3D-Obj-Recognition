@@ -178,7 +178,7 @@ to manually validate the class labels assigned to each object.
 
 The subset ModelNet40 is a collection of the 40 most common object categories with 100 unique CAD models each. The data is further augmented
 by rotating each model by 30 degrees along the gravity direction (12 poses per model). 
-The ModelNet40 data is available online in a voxelized version.  The grid size is 30x30x30 with 1 extra cell of padding in both directions.
+The ModelNet40 data is available online in a voxelized version. The grid size is 30x30x30 with 1 extra cell of padding in both directions.
 
 \section{Implementation: VoxNet \cite{voxnet}}
 
@@ -193,53 +193,35 @@ the required pipeline.
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/algo}
 	\caption{ Depth and point cloud are converted to voxels and then feed to the network 
-	for classification  (Source: \cite{shape})}
+	for classification. (source: \cite{shape})}
 \end{figure}
 
-The voxelized version of ModelNet40 is provided in the form of Matlabs (.mat) files, where every single CAD model is stored 
+The voxelized version of ModelNet40 is provided in the form of Matlab (.mat) files, where every single CAD model is stored 
 in a separate file.
 
 In a first step, A3 converted the data to the hdf5 format and stored all the model data in a single file in order to overcome 
-the cumbersome character of the file structure. The Hdf5 format not only compresses the data size dramatically, but also enables
+the cumbersome character of the provided file structure. The hdf5 format not only compresses the data size dramatically, but also enables
 very simple data access. 
 Next, A2/A3 implemented (in Python) a model data handling library, which can load the voxel grids from the hdf5. Generally, during the loading 
-process the model set was split into two parts, a training and validation set. The responsibility of the library is to prepare 
-the voxels arrays for the CNN, including shuffling the data and spliting it into batches.
+process the model set is split into two parts, a training and validation set. The responsibility of the library is to prepare 
+the voxel arrays for the CNN, including shuffling and splitting the data into batches.
 
-
-%Two methods were implemented by A2/A3 to deal with loading the data from .hdf5 files.
-%One opens the .hdf5 and loads pieces which are passed during iterations of the generator resulting 
-%in a slower but RAM saving loader. The other, used for the final training, converts the hdf5 entirely to a numpy array 
-%providing us with a RAM expensive but much faster access to the data.
-
-The second important part, is the Convolutinal Neural Network itself, which was implemented by A1/A2. in Python
-using the highly modular deep learning library \textit{Keras} on top of Theano.
-
-Tensorflow, which at this point does not support 3D convolutions.
-
-
-Figure \ref{fig:model}. For this, which runs on top of \textit{Theano}. 
-\textit{Keras} supports 3D convolutional and max-pooling layers. 
-
-After the conversion to a voxel grid of format 32x32x32, we train our CNN on these occupancy grids, Figure \ref{fig:algo}.
-
-
-
-
+The second part is the Convolutional Neural Network (Figure \ref{fig:voxnet_structure}) itself, which was implemented (in Python) by A1/A2.
+In a first attempt the TensorFlow framework is used, until we realized that at this point in time the framework 
+did not support 3D convolutions. As an alternative the highly modular deep learning library Keras on top of Theano
+was chosen for the implementation.
 
 \begin{figure}[h]
-	\label{fig:model}
+	\label{fig:voxnet_structure}
 	\centering
-	\includegraphics[width=0.42\textwidth]{figures/model}
-	\caption{VoxNet Convolution Model. (Source: \cite{mature}}
+	\includegraphics[width=0.45\textwidth]{figures/model}
+	\caption{VoxNet layer architecture. Two successive convolutions followed by 
+	max-pooling and fully connected layers (source: \cite{mature})}
 \end{figure}
 
-A training enviroment was set up and used by A1/A2/A3. and training
-we restrict
+The training environment was set up and used by all the authors. 
 
-For our experiments we mostly done/trained with modelnet40.
-
-
+ 
 \section{Training}
 
 The training process takes around 9 to 20 hours on a NVIDIA GTX 980TI (6GB) GPU, using cuda 7.5 and cudnn 5, depending on the choice of the dataset(ModelNet10/40). Any methods to improve the score by further data augmentation, such as the random augmentation and multi resolution where not implemented as the amount of gpu time available was very limited. This might affect the results of the score. 
