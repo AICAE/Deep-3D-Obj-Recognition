@@ -92,6 +92,7 @@ VoxNet \cite{voxnet} is a fast basic 3D CNN architecture that makes use of the a
 
 \section{Related Work}
 
+This section is strongly based on the 'Related Work' section of VoxNet paper \cite{voxnet}.
 %On the one hand, there is a large body of work of object recognition using 3D point clouds but not making use of Neural Networks. 
 %Mostly methods combine hand-crafted features or descriptors with a machine learning classifier ([10], [11], [12]). 
 %Similiar methods are seen with semantic segmentation, with structured output classifiers instead of single output classifiers ([14], [15], [16]).
@@ -103,28 +104,27 @@ VoxNet \cite{voxnet} is a fast basic 3D CNN architecture that makes use of the a
 %these architectures work the same as ours, but the nature of the data is very different.
 
 
-
-\subsection{Object Recogintion with Point Cloud Data}
+\subsection{Object Recognition with Point Cloud Data}
 Various publications on both semantic segmentation \cite{koppula2011semantic} and object recognition 
 (\cite{teichman2011towards}, \cite{golovinskiy2009shape}) using 3D point clouds from LiDAR or RGBD sensors are available. 
-Most of this work uses a pipeline combining various hand-crafted features or descriptors with a machine learning classifier.
+Most of this work uses a pipeline combining hand-crafted features or descriptors with a machine learning classifier.
 The VoxNet architecture on the other hand learns to extract features and classify objects from the raw volumetric data.
 
 
 \subsection{3D  Convolutional Neural Networks}
 RBG image object recognition has been dramatically improved by Convolutional Neural Networks.
 Building on that success, several authors have extended that basic approach to RBGD, simply treating the depth as 
-an additional channel (\cite{socher2012convolutional} \cite{hoft2014fast}). While straightforward, this approach does not
-make full use of the geometric information available in the data. 
-The approach described in \cite{voxnet} differs from this as they 
-use a fully volumetric representation. This representation is richer as it also distinguishes free space from unknown space.
+an additional channel (\cite{hoft2014fast}, \cite{socher2012convolutional}). While straightforward, this approach does not
+make full use of the geometric information available in the data.
+In contrast, the fully volumetric representation described in \cite{voxnet} takes advantage of that information.
+This volumetric representation is richer as it also distinguishes free space from unknown space.
 
-Additionally, CNN architectures with volumetric convolutions have already proven their usability in video analysis \cite{ji20133d}. In this
-case time acts as the third dimension.
+Additionally, CNN architectures with volumetric (3D) convolutions have already proven their usability in video analysis \cite{ji20133d}. In this
+case time acts as the third dimension. 
+In the RBGD domain, \cite{shape} proposes ``a convolutional deep belief network to represent geometric 3D shape as a probability distribution of binary variables on a 3D voxel grid.''
+Their model can jointly recognize and reconstruct objects from a single view. In order to train the deep belief network the authors constructed the 
+3D CAD model dataset called ModelNet (see section \ref{data:modelnet}).
 
-
-
-In the RBGD domain, \cite{shape} proposes a generative 3D constitutional model of shap and apply it to RGBD object recognition
 
 
 \section{Convolutional Neural Networks}
@@ -172,6 +172,7 @@ Validating the model on training data does not work since the model remembers al
 Irgendwas zu batch size, epochen, mehr details erzählen}
 
 \section{Data: Princeton ModelNet}
+\label{data:modelnet}
 
 The data on which we train our Deep Network was build by \cite{shape}. After a list of the most
 common object categories in the world was compiled from Princtons SUN database \cite{sun}, 3D CAD models were collected through online 
