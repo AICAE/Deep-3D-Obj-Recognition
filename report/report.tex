@@ -223,10 +223,11 @@ After the conversion to a voxel grid of format 32x32x32, we train our CNN on the
 
 A training enviroment was set up and used by A1/A2/A3.
 
-\section{Experiments}
+\section{Training}
 
-The training process takes around 9 to 20 hours on a NVIDIA GTX 980TI (6GB) GPU depending on the choice of the dataset (ModelNet10/40).
-During training, improved weights are saved to ensure information ... \textbf{TODO: Mehr \& Warum?} \\ 
+The training process takes around 9 to 20 hours on a NVIDIA GTX 980TI (6GB) GPU, using cuda 7.5 and cudnn 5, depending on the choice of the dataset(ModelNet10/40). Any methods to improve the score by further data augmentation, such as the random augmentation and multi resolution where not implemented as the amount of gpu time available was very limited. This might affect the results of the score. 
+The implementation does not make use of early stopping as we are using droupout and weight regulizers, thus avoiding overfitting by the use of early stopping, would not show any improvements. This was tested and proven to be true. Any attampts of improving the score by Tuning the learning rate have not show to be successful.
+Common to best practice weights are saved after every epoche of training to avoid loss of data. \textbf{TODO: Mehr \& Warum?} \\ 
 
 \section{Results}
 
