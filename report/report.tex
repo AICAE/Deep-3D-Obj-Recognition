@@ -177,7 +177,7 @@ by collecting 3D CAD models through online search engines. Human workers on Amaz
 to manually validate the class labels assigned to each object.
 
 The subset ModelNet40 is a collection of the 40 most common object categories with 100 unique CAD models each. The data is further augmented
-by rotating each model by 30 degrees along the gravity direction. 
+by rotating each model by 30 degrees along the gravity direction (12 poses per model). 
 The ModelNet40 data is available online in a voxelized version.  The grid size is 30x30x30 with 1 extra cell of padding in both directions.
 
 \section{Implementation: VoxNet \cite{voxnet}}
@@ -192,25 +192,38 @@ the required pipeline.
 	\label{fig:algo}
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/algo}
-	\caption{ TODO (source: \cite{shape})}
+	\caption{ Depth and point cloud are converted to voxels and then feed to the network 
+	for classification  (Source: \cite{shape})}
 \end{figure}
 
+The voxelized version of ModelNet40 is provided in the form of Matlabs (.mat) files, where every single CAD model is stored 
+in a separate file.
 
-For our experiments we mostly done/trained with modelnet40.
-The files were provided in Matlab format (.mat files) a single file for each model.
+In a first step, A3 converted the data to the hdf5 format and stored all the model data in a single file in order to overcome 
+the cumbersome character of the file structure. The Hdf5 format not only compresses the data size dramatically, but also enables
+very simple data access. 
+Next, A2/A3 implemented (in Python) a model data handling library, which can load the voxel grids from the hdf5. Generally, during the loading 
+process the model set was split into two parts, a training and validation set. The responsibility of the library is to prepare 
+the voxels arrays for the CNN, including shuffling the data and spliting it into batches.
 
-This data was transformed by A3 into a .hdf5 format and split into test and training set. 
-Hdf5 compresses the set size dramatically and enables simple access.
-Two methods were implemented by A2/A3 to deal with loading the data from .hdf5 files.
-One opens the .hdf5 and loads pieces which are passed during iterations of the generator resulting 
-in a slower but RAM saving loader. The other, used for the final training, converts the hdf5 entirely to a numpy array 
-providing us with a RAM expensive but much faster access to the data.
 
-After preparing the data and its access, the VoxNet convolutional neural network model (~900.000 Parameters) is created, 
-Figure \ref{fig:model}. For this, A1/A2 used the \textit{Python} deep learning library \textit{Keras} which runs on top of \textit{Theano}. 
+%Two methods were implemented by A2/A3 to deal with loading the data from .hdf5 files.
+%One opens the .hdf5 and loads pieces which are passed during iterations of the generator resulting 
+%in a slower but RAM saving loader. The other, used for the final training, converts the hdf5 entirely to a numpy array 
+%providing us with a RAM expensive but much faster access to the data.
+
+The second important part, is the Convolutinal Neural Network itself, which was implemented by A1/A2. in Python
+using the highly modular deep learning library \textit{Keras} on top of Theano.
+
+Tensorflow, which at this point does not support 3D convolutions.
+
+
+Figure \ref{fig:model}. For this, which runs on top of \textit{Theano}. 
 \textit{Keras} supports 3D convolutional and max-pooling layers. 
 
 After the conversion to a voxel grid of format 32x32x32, we train our CNN on these occupancy grids, Figure \ref{fig:algo}.
+
+
 
 
 
@@ -218,10 +231,14 @@ After the conversion to a voxel grid of format 32x32x32, we train our CNN on the
 	\label{fig:model}
 	\centering
 	\includegraphics[width=0.42\textwidth]{figures/model}
-	\caption{VoxNet Convolution Model. Source: \cite{mature}}
+	\caption{VoxNet Convolution Model. (Source: \cite{mature}}
 \end{figure}
 
-A training enviroment was set up and used by A1/A2/A3.
+A training enviroment was set up and used by A1/A2/A3. and training
+we restrict
+
+For our experiments we mostly done/trained with modelnet40.
+
 
 \section{Training}
 
