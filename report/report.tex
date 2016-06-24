@@ -81,11 +81,11 @@ VoxNet \cite{voxnet} is a fast basic 3D CNN architecture that makes use of the a
 
 
 \begin{figure}[h]
-	\label{fig:obj_rec}
 	\centering
 	\frame{\includegraphics[width=0.45\textwidth]{figures/obj_rec}}
 	\caption{Example of object recognitions: Detection as binary classification problem (pedestrian vs no pedestrian). Slide over all possible locations in the image and classify patches. 
 	  (Image source: \cite{udacity})}
+	\label{fig:obj_rec}
 \end{figure}
 
 %-------------------------------------------------------------------------
@@ -135,11 +135,11 @@ Weights and bias of a linear equation are trained on provided data. Inserting an
 transformed into probabilities by using a softmax function. See Figure \ref{fig:classifier}.
 
 \begin{figure}[h]
-	\label{fig:classifier}
 	\centering
 	\includegraphics[width=0.45\textwidth]{figures/classifier}
 	\caption{Weights W and bias b are trained to classify an input. If the letter 'A' is feed to the network,
 	it is classified as an 'A' with a certainty of 0.7. (image source: \cite{udacity})}
+	\label{fig:classifier}
 \end{figure}
 
 Linear Neural Networks are limited and therefore CNNs are advanced by non-linear feature maps which \textit{deepen} 
@@ -150,9 +150,9 @@ the spatial dimension is squeezed while extracting local features of the given o
 Through repeating this procedure we arrive at an output depth which corresponds to the semantic complexity of the object recognition task. 
 
 \begin{figure}[h]
-	\label{fig:convolution}
 	\includegraphics[width=0.45\textwidth]{figures/conv}
 	\caption{(a) patch with stride 2 (b) multiple convolutions. (image source: \cite{udacity})}
+	\label{fig:convolution}
 \end{figure}
 
 The second technique to deepen a network is pooling. Instead of striding to squeeze the dimension, 
@@ -160,10 +160,10 @@ we can extract for example the maximum of a patch and thereby reduce the spatial
 See Figure \ref{fig:voxnet_structure} for a detailed description of the model used in our approach.
 
 \begin{figure}[h]
-	\label{fig:pooling}
 	\includegraphics[width=0.25\textwidth]{figures/con_max}
 	\includegraphics[width=0.16\textwidth]{figures/max}
 	\caption{left: stride 2 vs. stride 1 + Pooling \quad right: max-pooling (image source: \cite{udacity})}
+	\label{fig:pooling}
 \end{figure}
 
 In order to train our model, we also have to test how well it is doing during and after training. 
@@ -193,11 +193,11 @@ The overall goal of the project is to classify an object from a given 3D point c
 the required pipeline.
 
 \begin{figure}[h]
-	\label{fig:algo}
 	\centering
 	\includegraphics[width=0.5\textwidth]{figures/algo}
 	\caption{ Depth and point cloud are converted to voxels and then feed to the network 
 	for classification. (source: \cite{shape})}
+	\label{fig:algo}
 \end{figure}
 
 The voxelized version of ModelNet40 is provided in the form of Matlab (.mat) files, where every single CAD model is stored 
@@ -216,11 +216,11 @@ did not support 3D convolutions. As an alternative the highly modular deep learn
 was chosen for the implementation.
 
 \begin{figure}[h]
-	\label{fig:voxnet_structure}
 	\centering
 	\includegraphics[width=0.45\textwidth]{figures/model}
 	\caption{VoxNet layer architecture. Two successive convolutions followed by 
 	max-pooling and fully connected layers (source: \cite{mature})}
+	\label{fig:voxnet_structure}
 \end{figure}
 
 The training environment was set up and used by all the authors. 
@@ -266,18 +266,18 @@ stool) get recognized with very high accuracy of over 98\%.
 
 %TODO image ränder abschneiden (weniger weiss)
 \begin{figure}[h]
-	\label{fig:voxel_stool}
 	\centering
 	\includegraphics[width=0.45\textwidth]{figures/tango_voxel_stool}
 	\caption{Voxelized stool, acquired with Google Tango.}
+	\label{fig:voxel_stool}
 \end{figure}
 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.45\textwidth]{figures/tango_voxel_desk_scene}
-	\label{fig:voxel_desk}
 	\caption{Voxelized desk scene (multiple objects), acquired with Google Tango.}
+	 \label{fig:voxel_desk}
 \end{figure}
 
 The system  is designed to distinguish between single object only. Therefore it is surprise that it fails when
