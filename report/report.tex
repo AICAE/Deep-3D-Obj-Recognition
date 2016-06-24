@@ -261,36 +261,37 @@ Additionally, more time to fine tune sizes of test/training set could have impro
 \vspace{0.3cm}
 The trained network was also tested on data acquired with Google Tango. The point clouds were first voxelized
 and shaped into the right format to feed into the network. We feed voxels of 3 different objects/scenes: Chair, 
-stool (Figure \ref{fig:voxel_stool}) and a desk scene (Figure \ref{fig:desk}). Both single objects (chair, 
+stool (Figure \ref{fig:voxel_stool}) and a desk scene (Figure \ref{fig:voxel_desk}). Both single objects (chair, 
 stool) get recognized with very high accuracy of over 98\%.
 
 %TODO image ränder abschneiden (weniger weiss)
 \begin{figure}[h]
 	\label{fig:voxel_stool}
 	\centering
-	\includegraphics[width=0.42\textwidth]{figures/tango_voxel_stool}
-	\caption{Voxelized stool}
+	\includegraphics[width=0.45\textwidth]{figures/tango_voxel_stool}
+	\caption{Voxelized stool, acquired with Google Tango.}
 \end{figure}
 
 \begin{figure}[h]
-	\label{fig:desk}
+	\label{fig:voxel_desk}
 	\centering
-	\includegraphics[width=0.42\textwidth]{figures/tango_voxel_desk_scene}
-	\caption{Voxelized desk \textbf{source ????? martin ?}}
+	\includegraphics[width=0.45\textwidth]{figures/tango_voxel_desk_scene}
+	\caption{Voxelized desk scene (multiple objects), acquired with Google Tango.}
 \end{figure}
 
-The systems is designed to distinguish between single object and therefore not surprisingly fails when
-tested on e.g. a desk scene includuing multiple objects e.g. chair, desk, display (Fig. \ref{fig:desk}).
+The system  is designed to distinguish between single object only. Therefore it is surprise that it fails when
+tested on a desk scene including multiple objects (Fig. \ref{fig:voxel_desk}). Interesting is the fact, that the network 
+recognizes the scene as a bed with a rather high accuracy of 83\%.
 
-\section{Conclusion}
+\section{Conclusion and Outlook}
 
 The team successfully reimplemented a very clean and working VoxNet with comparable results.
 After voxelizing point cloud data from e.g. LiDAR or RGBD, the system is capable of efficient and accurate object classification in real time. 
 
-\section{Outline}
-Due to fine tuning and implementation of the data augementation used by \cite{voxnet}, same results even on the larger ModelNet40 
-should be achieve quickly. One failure of the system is the difficulty when working with multi object inputs., Fig. \ref{fig:desk}. 
-When implementing the system on e.g. Google Tango, one would first need a object extraction from the scene and additionally rescaling into the used voxel grid size to use the implemented classifier. 
+Due to fine tuning and implementation of the data augmentation used by \cite{voxnet}, same results even on the larger ModelNet40 
+should be achievable. One failure of the system is the difficulty when working with multi object inputs., Fig. \ref{fig:voxel_desk}. 
+When implementing the system on e.g. Google Tango, one would first need a object extraction from the scene and 
+additionally rescaling into the used voxel grid size to use the implemented classifier. 
 
 {\small
 \bibliographystyle{ieee}
