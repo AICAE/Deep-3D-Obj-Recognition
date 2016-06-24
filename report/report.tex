@@ -131,41 +131,46 @@ Their model can jointly recognize and reconstruct objects from a single view. In
 At the core of a neural network is a logistic classifier. 
 %For given data, we train weights and bias of a linear equation which will then be transformed into 
 %probabilities by using a softmax function. Figure \ref{fig:classifier}.
-Weights and bias of a linear equation are trained on provided data. Given an input to the system the output is
+Weights and bias of a linear equation are trained on provided data. Inserting an input to the system yields an output, which is
 transformed into probabilities by using a softmax function. See Figure \ref{fig:classifier}.
-
 
 \begin{figure}[h]
 	\label{fig:classifier}
 	\centering
 	\includegraphics[width=0.45\textwidth]{figures/classifier}
 	\caption{Weights W and bias b are trained to classify an input. If the letter 'A' is feed to the network,
-	it is classified as an 'a' with a certainty of 0.7. (Image source: \cite{udacity})}
+	it is classified as an 'A' with a certainty of 0.7. (image source: \cite{udacity})}
 \end{figure}
 
-Linear Neural Networks are limited and therefore CNNs are advanced by non-linear feature maps which \textit{deepen} when successively applied. The deep neural network of \cite{voxnet} uses convolutions and max pooling.
-For convolutions, we run small neural networks with given output size/ depth on a patch which walks through our 3D Data. When leaving out /jumping voxels (striding),
+Linear Neural Networks are limited and therefore CNNs are advanced by non-linear feature maps which \textit{deepen} 
+when successively applied. The deep neural network of \cite{voxnet} uses convolutions and max-pooling.
+For convolutions, we run small neural networks with given output size / depth on a patch which walks through the 3D data. 
+When leaving out / jumping voxels (striding),
 the spatial dimension is squeezed while extracting local features of the given object. 
-Through repeating this procedure we arrive at an output depth which corresponds to the semantic complexity of our object recognition task. 
+Through repeating this procedure we arrive at an output depth which corresponds to the semantic complexity of the object recognition task. 
 
 \begin{figure}[h]
 	\label{fig:convolution}
 	\includegraphics[width=0.45\textwidth]{figures/conv}
-	\caption{(a): Patch with stride 2 (b): Multiple Convolutions. (Image source: \cite{udacity})}
+	\caption{(a) patch with stride 2 (b) multiple convolutions. (image source: \cite{udacity})}
 \end{figure}
 
-The second technique to deepen our network is pooling. Instead of striding to squeeze our dimension, we can extract e.g. the maximum of a patch and therefore reduce spatial dimension. 
-See detailed description of model used in our approach in Figure \ref{fig:model}.
+The second technique to deepen a network is pooling. Instead of striding to squeeze the dimension, 
+we can extract for example the maximum of a patch and thereby reduce the spatial dimension. 
+See Figure \ref{fig:voxnet_structure} for a detailed description of the model used in our approach.
 
 \begin{figure}[h]
 	\label{fig:pooling}
 	\includegraphics[width=0.25\textwidth]{figures/con_max}
 	\includegraphics[width=0.16\textwidth]{figures/max}
-	\caption{Left: Stride 2 vs. Stride 1 + Pooling \quad Right: Max-Pooling. Source: \cite{udacity}}
+	\caption{left: stride 2 vs. stride 1 + Pooling \quad right: max-pooling (image source: \cite{udacity})}
 \end{figure}
 
-In order to train our model, we have to test how well it is doing during and after training. 
-Validating the model on training data does not work since the model remembers all its input. Therefore we split the data into test- and training set which enables us to check how accurate the classifier is doing on unknown input, the test set. This common phenomenon, that a complex model fits a given dataset but fails to generalizes on new data, is called \textit{overfitting}.
+In order to train our model, we also have to test how well it is doing during and after training. 
+Validating the model on training data does not work since the model remembers all its input. 
+Therefore we split the original data into a test and training set which enables us to check how well the 
+classifier performs on unknown data. It is common phenomenon that a complex model fits a given 
+dataset, but fails to generalize on new data. This is called \textit{overfitting}.
 
 \section{Datasets}
 \label{data:modelnet}
@@ -206,7 +211,7 @@ process the model set is split into two parts, a training and validation set. Th
 the voxel arrays for the CNN, including shuffling and splitting the data into batches.
 
 The second part is the Convolutional Neural Network (Figure \ref{fig:voxnet_structure}) itself, which was implemented (in Python) by A1/A2.
-In a first attempt the TensorFlow framework is used, until we realized that at this point in time the framework 
+In a first attempt the TensorFlow framework was used, until we realized that at this point in time the framework 
 did not support 3D convolutions. As an alternative the highly modular deep learning library Keras on top of Theano
 was chosen for the implementation.
 
