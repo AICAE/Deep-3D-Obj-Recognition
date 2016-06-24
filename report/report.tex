@@ -175,9 +175,9 @@ In order for a CNN to perform well, the amount of training data needs to be suff
 ModelNet \cite{shape}. The dataset was constructed by querying common object categories from the SUN database \cite{sun} and 
 by collecting 3D CAD models through online search engines. Human workers on Amazon Mechanical Turk were hired 
 to manually validate the class labels assigned to each object.
+
 The subset ModelNet40 is a collection of the 40 most common object categories with 100 unique CAD models each. The data is further augmented
 by rotating each model by 30 degrees along the gravity direction. 
-
 The ModelNet40 data is available online in a voxelized version.  The grid size is 30x30x30 with 1 extra cell of padding in both directions.
 
 \section{Implementation: VoxNet \cite{voxnet}}
@@ -195,14 +195,13 @@ the required pipeline.
 	\caption{ TODO (source: \cite{shape})}
 \end{figure}
 
-For our experiments we mostly dont on modelnet40
 
-The files were provided in Matlab format (.mat files)
-we train on all rotations to enhance recognition from 
-different views. The data is already voxilized to 32x32x32 occupancy grids.
+For our experiments we mostly done/trained with modelnet40.
+The files were provided in Matlab format (.mat files) a single file for each model.
+
 This data was transformed by A3 into a .hdf5 format and split into test and training set. 
 Hdf5 compresses the set size dramatically and enables simple access.
-Two methods were implemented by A2/A3 to deal with loading the data from .hdf5 files. 
+Two methods were implemented by A2/A3 to deal with loading the data from .hdf5 files.
 One opens the .hdf5 and loads pieces which are passed during iterations of the generator resulting 
 in a slower but RAM saving loader. The other, used for the final training, converts the hdf5 entirely to a numpy array 
 providing us with a RAM expensive but much faster access to the data.
